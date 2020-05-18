@@ -1,0 +1,14 @@
+﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
+  Waiting for 'git status' command to complete
+  Building firstproject_2Editor and ShaderCompileWorker...
+  Using Visual Studio 2017 14.16.27039 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Building 5 actions with 12 processes...
+    [1/5] Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27039 for x64
+    Copyright (C) Microsoft Corporation.  All rights reserved.
+    
+cl : Command line error D8022: cannot open 'C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\Dmap\Intermediate\Build\Win64\UE4Editor\Development\DmapAsset\Module.DmapAsset.cpp.obj.response'
+    [2/5] Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27039 for x64
+    Copyright (C) Microsoft Corporation.  All rights reserved.
+    
+cl : Command line error D8022: cannot open 'C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\Dmap\Intermediate\Build\Win64\UE4Editor\Development\DmapAsset\Module.DmapAsset.gen.cpp.obj.response'
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3075: The command "C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Build\BatchFiles\Build.bat -Target="firstproject_2Editor Win64 Development -Project=\"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\firstproject_2.uproject\"" -Target="ShaderCompileWorker Win64 Development -Quiet" -WaitMutex -FromMsBuild" exited with code 5. Please verify that you have sufficient rights to run this command.

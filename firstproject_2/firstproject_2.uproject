@@ -1,0 +1,16 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{89BA2919-4AE3-C12B-593E-87B080EB891D}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "firstproject_2",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	]
+}

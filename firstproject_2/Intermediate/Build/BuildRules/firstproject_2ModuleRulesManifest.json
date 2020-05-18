@@ -1,0 +1,9 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Source\\firstproject_2\\firstproject_2.Build.cs",
+		"C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Plugins\\Dmap\\Source\\DmapAsset.Build.cs",
+		"C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Source\\firstproject_2.Target.cs",
+		"C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Source\\firstproject_2Editor.Target.cs"
+	],
+	"EngineVersion": "4.24.3"
+}

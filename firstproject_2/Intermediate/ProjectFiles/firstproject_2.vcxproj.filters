@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\firstproject_2.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F54D1379-2F3F-4E84-9944-384A55EA2393}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\firstproject_2.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\firstproject_2Editor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{EEC39DF4-FBC5-4691-9725-C37184F5D3FB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\firstproject_2">
+      <UniqueIdentifier>{FAAE7B7F-FD1E-414A-BB26-313860B6538C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs">
+      <Filter>Source\firstproject_2</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\firstproject_2\firstproject_2.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\firstproject_2.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\firstproject_2\firstproject_2Character.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\firstproject_2Character.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\firstproject_2\firstproject_2GameMode.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\firstproject_2GameMode.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\firstproject_2\firstproject_2HUD.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\firstproject_2HUD.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\firstproject_2\firstproject_2Projectile.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\firstproject_2Projectile.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\firstproject_2\WarframeMapSpawner.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\firstproject_2\WarframeMapSpawner.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\firstproject_2\DMAPAsset.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\firstproject_2\DmapFactoryDragDrop.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\firstproject_2\DmapFactoryMenu.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\firstproject_2\DmapFactoryDragDrop.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\firstproject_2\DmapFactoryMenu.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
