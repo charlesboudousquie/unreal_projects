@@ -4,7 +4,7 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealInsightsCLI\UnrealInsightsCLI.Target.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealInsightsCLI\UnrealInsightsCLI.Build.cs" />
     <Filter Include="Private">
-      <UniqueIdentifier>{7BD3294C-B3D6-4BFE-91C0-B52E947E97BB}</UniqueIdentifier>
+      <UniqueIdentifier>{BCEB9141-86C2-4D84-A132-3451D69FCB31}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealInsightsCLI\Private\UnrealInsightsCLI.cpp">
       <Filter>Private</Filter>

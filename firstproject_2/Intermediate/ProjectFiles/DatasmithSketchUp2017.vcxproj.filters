@@ -7,7 +7,7 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\DatasmithSketchUp2019.Build.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\DatasmithSketchUpExporter.def" />
     <Filter Include="Installer">
-      <UniqueIdentifier>{A9761FB5-F153-4057-9D97-6803A8DD959D}</UniqueIdentifier>
+      <UniqueIdentifier>{AD34F5DE-F4CE-41E8-9524-9C08CA6B6911}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\CustomActions.wxs">
       <Filter>Installer</Filter>
@@ -37,13 +37,13 @@
       <Filter>Installer</Filter>
     </None>
     <Filter Include="Installer\Localization">
-      <UniqueIdentifier>{844C30FA-DD50-4C0D-B734-CBA47F5BFA8B}</UniqueIdentifier>
+      <UniqueIdentifier>{4460EB6E-9B07-4E2C-A99E-765DEF80E4A4}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\Localization\en-us.wxl">
       <Filter>Installer\Localization</Filter>
     </None>
     <Filter Include="Installer\Resources">
-      <UniqueIdentifier>{6EAADA8A-1DC2-4EFB-BC5A-679457EE9947}</UniqueIdentifier>
+      <UniqueIdentifier>{ECE68E14-D882-4291-99CF-38653E19D71D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\Resources\Banner.bmp">
       <Filter>Installer\Resources</Filter>
@@ -73,13 +73,13 @@
       <Filter>Installer\Resources</Filter>
     </None>
     <Filter Include="Installer\Resources\Images">
-      <UniqueIdentifier>{E77AB64B-CA69-40D1-8B9F-172404AD7A28}</UniqueIdentifier>
+      <UniqueIdentifier>{14706924-B604-4D5E-B72E-86779F21127E}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\Resources\Images\Epic_Games_logo.bmp">
       <Filter>Installer\Resources\Images</Filter>
     </None>
     <Filter Include="Installer\Resources\Images\Background">
-      <UniqueIdentifier>{50358CE5-5BF9-432A-BCBB-C6A291703597}</UniqueIdentifier>
+      <UniqueIdentifier>{3531452B-275E-4929-8BA6-2072A17E1E45}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\Resources\Images\Background\28190.bmp">
       <Filter>Installer\Resources\Images\Background</Filter>
@@ -97,7 +97,7 @@
       <Filter>Installer\Resources\Images\Background</Filter>
     </None>
     <Filter Include="Installer\Resources\Images\General">
-      <UniqueIdentifier>{93656722-6E63-40B4-AD63-0BB5A8110F96}</UniqueIdentifier>
+      <UniqueIdentifier>{279AAADC-3040-4E13-ACDF-E3C0EB3FCCB6}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Installer\Resources\Images\General\banner.bmp">
       <Filter>Installer\Resources\Images\General</Filter>
@@ -106,7 +106,7 @@
       <Filter>Installer\Resources\Images\General</Filter>
     </None>
     <Filter Include="Private">
-      <UniqueIdentifier>{CC2A2F4F-D9C4-4678-B771-26DF1CD81674}</UniqueIdentifier>
+      <UniqueIdentifier>{B1A4E1C0-16A3-48B9-B965-CFCECACAE02E}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Private\DatasmithSketchUpAFXDialogs.cpp">
       <Filter>Private</Filter>
@@ -190,10 +190,10 @@
       <Filter>Private</Filter>
     </ClInclude>
     <Filter Include="Resources">
-      <UniqueIdentifier>{42C7C528-2125-4E29-A968-ED5F3D65F50C}</UniqueIdentifier>
+      <UniqueIdentifier>{E5440EB0-8B88-42EC-ACE7-FF69A1063CDA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Windows">
-      <UniqueIdentifier>{AD6BD0B5-6F2B-4194-8953-C3D4A8CD1F77}</UniqueIdentifier>
+      <UniqueIdentifier>{2594B804-704F-4637-82F3-48B5955736E7}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSketchUpExporter\Resources\Windows\resource.h">
       <Filter>Resources\Windows</Filter>

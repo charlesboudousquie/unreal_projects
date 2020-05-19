@@ -4,34 +4,34 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\MinidumpDiagnostics.Target.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\MinidumpDiagnostics.Build.cs" />
     <Filter Include="Private">
-      <UniqueIdentifier>{8563C765-A691-4278-AD15-848D012CC6CB}</UniqueIdentifier>
+      <UniqueIdentifier>{EB42508C-418E-4950-A083-25B25C789438}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\Private\MinidumpDiagnosticsApp.cpp">
       <Filter>Private</Filter>
     </ClCompile>
     <Filter Include="Private\Mac">
-      <UniqueIdentifier>{EFFAD2C0-02EE-4AEC-8910-3B25B865C8F4}</UniqueIdentifier>
+      <UniqueIdentifier>{16ED1F38-ECCA-458F-BBF6-2C298BD0A4BC}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\Private\Mac\MinidumpDiagnosticsMainMac.cpp">
       <Filter>Private\Mac</Filter>
     </ClCompile>
     <Filter Include="Private\Windows">
-      <UniqueIdentifier>{A6A2A345-539B-48CE-9975-CD591686DB05}</UniqueIdentifier>
+      <UniqueIdentifier>{B3C1982E-02A7-4AC2-953E-A0E42DB65664}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\Private\Windows\MinidumpDiagnosticsMainWindows.cpp">
       <Filter>Private\Windows</Filter>
     </ClCompile>
     <Filter Include="Public">
-      <UniqueIdentifier>{F8DC4273-589D-4C3B-9725-BD39C50873F3}</UniqueIdentifier>
+      <UniqueIdentifier>{93BFC0B3-54E0-4297-B045-0558D315496D}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\Public\MinidumpDiagnosticsApp.h">
       <Filter>Public</Filter>
     </ClInclude>
     <Filter Include="Resources">
-      <UniqueIdentifier>{FE6B7EAC-47F6-45C9-B1A2-6E7C6E50EFDB}</UniqueIdentifier>
+      <UniqueIdentifier>{69C4359D-1A13-4370-A629-917F1EE95534}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Windows">
-      <UniqueIdentifier>{3C9418EA-0BFF-4B54-BEFA-E268ED05D90F}</UniqueIdentifier>
+      <UniqueIdentifier>{68774135-EB3E-4DC8-B2E7-9AF2E6D9D9B8}</UniqueIdentifier>
     </Filter>
     <Manifest Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\MinidumpDiagnostics\Resources\Windows\Debug-PCLaunch-Win32.manifest">
       <Filter>Resources\Windows</Filter>

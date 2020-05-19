@@ -1,0 +1,4 @@
+If you add a new module then you need to edit DeafultEngine.ini file
+and various other steps mentioned here: https://docs.unrealengine.com/en-US/Programming/Modules/Gameplay/index.html
+
+

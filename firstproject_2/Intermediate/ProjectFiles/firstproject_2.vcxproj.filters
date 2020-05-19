@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\firstproject_2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{F54D1379-2F3F-4E84-9944-384A55EA2393}</UniqueIdentifier>
+      <UniqueIdentifier>{9F0F878D-02B4-4FDC-9DA3-19F10C13EBB0}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{EEC39DF4-FBC5-4691-9725-C37184F5D3FB}</UniqueIdentifier>
+      <UniqueIdentifier>{9E478545-2B0B-4097-A54B-52D465486B8F}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -29,8 +29,44 @@
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{35A0925F-8810-4B05-97C8-2CD4DAB24752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\DmapModule">
+      <UniqueIdentifier>{BF875134-5477-476E-A26A-A77C3CB583E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\DmapModule\Source">
+      <UniqueIdentifier>{B0CDF6BA-0EBB-46D7-A026-72C0B6177CDD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\DmapModule\Source\DmapModule">
+      <UniqueIdentifier>{044224DD-613A-4CDF-BDD4-EB6F18F854B3}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\DmapModule\Source\DmapModule\DmapModule.Build.cs">
+      <Filter>Plugins\DmapModule\Source\DmapModule</Filter>
+    </None>
+    <Filter Include="Plugins\DmapModule\Source\DmapModule\Private">
+      <UniqueIdentifier>{43390898-C8D9-4425-A788-DC695975894E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapModule.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\DmapModule\Source\DmapModule\Public">
+      <UniqueIdentifier>{42FF7713-01AB-49D0-BB56-B0A4BE691246}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapModule.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <None Include="..\..\Plugins\DmapModule\DmapModule.uplugin">
+      <Filter>Plugins\DmapModule</Filter>
+    </None>
+    <Filter Include="Plugins\DmapModule\Resources">
+      <UniqueIdentifier>{AAFC230B-740B-4101-8730-1BBB1114A5AB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\DmapModule\Resources\Icon128.png">
+      <Filter>Plugins\DmapModule\Resources</Filter>
+    </None>
     <Filter Include="Source\firstproject_2">
-      <UniqueIdentifier>{FAAE7B7F-FD1E-414A-BB26-313860B6538C}</UniqueIdentifier>
+      <UniqueIdentifier>{AF396243-F14B-4569-BBD8-389E6A606D70}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs">
       <Filter>Source\firstproject_2</Filter>
@@ -65,30 +101,27 @@
     <ClInclude Include="..\..\Source\firstproject_2\firstproject_2Projectile.h">
       <Filter>Source\firstproject_2</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\firstproject_2\WarframeMapSpawner.cpp">
-      <Filter>Source\firstproject_2</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\firstproject_2\WarframeMapSpawner.h">
-      <Filter>Source\firstproject_2</Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapAsset.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapFactory.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapFactoryDragDrop.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\firstproject_2\DMAPAsset.h">
-      <Filter>Source\firstproject_2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\firstproject_2\DmapFactoryDragDrop.h">
-      <Filter>Source\firstproject_2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\firstproject_2\DmapFactoryMenu.h">
-      <Filter>Source\firstproject_2</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\firstproject_2\DmapFactoryDragDrop.cpp">
-      <Filter>Source\firstproject_2</Filter>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapAsset.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\firstproject_2\DmapFactoryMenu.cpp">
-      <Filter>Source\firstproject_2</Filter>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapFactory.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapFactoryDragDrop.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

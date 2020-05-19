@@ -1,14 +1,20 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
+  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Documents\Unreal Projects).
   Waiting for 'git status' command to complete
+  Parsing headers for firstproject_2Editor
+    Running UnrealHeaderTool "C:\Users\boudo\Documents\Unreal Projects\firstproject_2\firstproject_2.uproject" "C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\firstproject_2Editor\Development\firstproject_2Editor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors
+  Reflection code generated for firstproject_2Editor in 69.2729956 seconds
   Building firstproject_2Editor and ShaderCompileWorker...
   Using Visual Studio 2017 14.16.27039 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
   Building 5 actions with 12 processes...
-    [1/5] Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27039 for x64
-    Copyright (C) Microsoft Corporation.  All rights reserved.
-    
-cl : Command line error D8022: cannot open 'C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\Dmap\Intermediate\Build\Win64\UE4Editor\Development\DmapAsset\Module.DmapAsset.cpp.obj.response'
-    [2/5] Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27039 for x64
-    Copyright (C) Microsoft Corporation.  All rights reserved.
-    
-cl : Command line error D8022: cannot open 'C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\Dmap\Intermediate\Build\Win64\UE4Editor\Development\DmapAsset\Module.DmapAsset.gen.cpp.obj.response'
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3075: The command "C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Build\BatchFiles\Build.bat -Target="firstproject_2Editor Win64 Development -Project=\"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\firstproject_2.uproject\"" -Target="ShaderCompileWorker Win64 Development -Quiet" -WaitMutex -FromMsBuild" exited with code 5. Please verify that you have sufficient rights to run this command.
+    [1/5] Module.DmapModule.cpp
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapFactoryDragDrop.cpp(14): warning C4996: 'FEditorDelegates::OnAssetPreImport': Use the ImportSubsystem instead. GEditor->GetEditorSubsystem<UImportSubsystem>() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+    c:\users\boudo\desktop\unreal\unrealengine\engine\source\editor\unrealed\public\Editor.h(220): note: see declaration of 'FEditorDelegates::OnAssetPreImport'
+    [2/5] Module.DmapModule.gen.cpp
+    [3/5] UE4Editor-DmapModule.lib
+       Creating library C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.lib and object C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.exp
+    [4/5] UE4Editor-DmapModule.dll
+       Creating library C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.suppressed.lib and object C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.suppressed.exp
+    [5/5] firstproject_2Editor.target
+  Total time in Parallel executor: 2.45 seconds
+  Total execution time: 96.76 seconds
