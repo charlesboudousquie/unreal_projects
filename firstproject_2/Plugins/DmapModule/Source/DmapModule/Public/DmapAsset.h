@@ -5,6 +5,9 @@
 #include "UObject/Object.h"
 #include "UObject/ObjectMacros.h"
 #include "Containers/Array.h"
+#include <string>
+
+#include "Math/Vector.h"
 
 #include "DmapAsset.generated.h"
 
@@ -21,12 +24,16 @@ public:
 
 	void ParseData(FString p_file_data);
 
+	
+
 	UDmapAsset();
 	~UDmapAsset();
 
 protected:
 
+	FVector readLine(std::string p_input);
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="DmapAsset")
-	TArray<int32> m_data;
+	TArray<FVector> m_data;
 
 };

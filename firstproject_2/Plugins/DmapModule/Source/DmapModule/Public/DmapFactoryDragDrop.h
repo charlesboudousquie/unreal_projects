@@ -27,4 +27,13 @@ public:
 	UDmapFactoryDragDrop(class FObjectInitializer const &);
 
 
+	bool FactoryCanImport(const FString& Filename) override;
+
+	// todos
+
+	/*UObject* FactoryCreateNew(UClass* InClass, UObject* InParent, FName InName,
+		EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override;
+*/
+
+
 };

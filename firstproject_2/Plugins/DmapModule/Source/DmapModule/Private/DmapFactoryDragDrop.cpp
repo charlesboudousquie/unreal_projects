@@ -29,10 +29,17 @@ UObject * UDmapFactoryDragDrop::FactoryCreateBinary(
 UDmapFactoryDragDrop::UDmapFactoryDragDrop(class FObjectInitializer const &)
 {
 
-	Formats.Add(FString(TEXT("3dmap")) + 
-		NSLOCTEXT("UDmapFactoryDragDrop", "Format3dmap", "3D map").ToString());
+	Formats.Add(TEXT("3dmap; 3d Maps"));
 
 	SupportedClass = UDmapAsset::StaticClass();
-	bCreateNew = true;
+	//bCreateNew = true; // use create binary instead
 	bEditorImport = true;
+
 }
+
+bool UDmapFactoryDragDrop::FactoryCanImport(const FString & Filename)
+{
+	const FString Extension = FPaths::GetExtension(Filename);
+	return FPaths::GetExtension(Filename) == TEXT("3dmap");
+}
+

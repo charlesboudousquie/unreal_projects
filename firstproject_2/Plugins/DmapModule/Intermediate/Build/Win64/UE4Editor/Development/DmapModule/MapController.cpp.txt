@@ -1,0 +1,3 @@
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\Definitions.DmapModule.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\MapController.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\MapController.generated.h

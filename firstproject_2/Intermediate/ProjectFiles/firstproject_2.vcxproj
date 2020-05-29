@@ -1303,6 +1303,14 @@
     <NMakeOutput>..\..\Binaries\XXX\firstproject_2-XXX-Test.xexe</NMakeOutput>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Asteroid.cpp" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\MapController.cpp" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree.cpp" />
+    <ClCompile Include="..\..\Source\firstproject_2\SpawnMapButton.cpp" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\MapController.h" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Octree.h" />
+    <ClInclude Include="..\..\Source\firstproject_2\SpawnMapButton.h" />
     <None Include="..\..\firstproject_2.uproject" />
     <None Include="..\..\Source\firstproject_2.Target.cs" />
     <None Include="..\..\Source\firstproject_2Editor.Target.cs" />

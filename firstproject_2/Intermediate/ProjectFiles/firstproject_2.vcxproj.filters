@@ -112,6 +112,18 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapFactoryDragDrop.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\firstproject_2\SpawnMapButton.h">
+      <Filter>Source\firstproject_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\MapController.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Octree.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapAsset.cpp">
@@ -121,6 +133,18 @@
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapFactoryDragDrop.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\firstproject_2\SpawnMapButton.cpp">
+      <Filter>Source\firstproject_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Asteroid.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\MapController.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
   </ItemGroup>

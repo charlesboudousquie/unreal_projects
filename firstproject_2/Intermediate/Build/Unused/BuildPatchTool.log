@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Waiting for 'git status' command to complete
+  Creating makefile for BuildPatchTool (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 96.33 seconds
+  Total execution time: 86.18 seconds
