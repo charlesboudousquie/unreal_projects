@@ -722,3 +722,8 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2020.06.05-03.28.14:423][ 66]LogEditorActor: Deleted 1 Actors (0.055 secs)
 [2020.06.05-03.29.29:022][722]LogEditorViewport: Clicking on Actor (LMB): BP_Sky_Sphere_C (SkySphereBlueprint)
 [2020.06.05-03.29.29:631][757]LogEditorViewport: Clicking on Actor (LMB): AtmosphericFog (AtmosphericFog)
+[2020.06.05-03.37.13:368][839]LogSlate: Took 0.000203 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2020.06.05-03.37.22:512][866]LogUObjectHash: Compacting FUObjectHashTables data took   1.02ms
+[2020.06.05-03.37.22:739][866]LogSavePackage: Moving '../../../../../../Documents/Unreal Projects/firstproject_2/Saved/FirstPersonExampleMap_Auto136D67DE54F87EF76C55B7684980D309A.tmp' to '../../../../../../Documents/Unreal Projects/firstproject_2/Saved/Autosaves/Game/FirstPersonCPP/Maps/FirstPersonExampleMap_Auto1.umap'
+[2020.06.05-03.37.22:749][866]LogFileHelpers: Editor autosave (incl. sublevels) for '/Game/FirstPersonCPP/Maps/FirstPersonExampleMap' took 0.281
+[2020.06.05-03.37.22:749][866]LogFileHelpers: Editor autosave (incl. sublevels) for all levels took 0.281
