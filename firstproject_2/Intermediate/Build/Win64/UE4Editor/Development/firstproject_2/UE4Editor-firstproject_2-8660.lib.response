@@ -1,0 +1,24 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-firstproject_2-8660.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2Character.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2GameMode.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2HUD.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2Projectile.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\SpawnMapButton.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2.init.gen.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2Character.gen.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2GameMode.gen.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2HUD.gen.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\firstproject_2Projectile.gen.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\SpawnMapButton.gen.cpp.obj"
+"C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Development\Default.rc2.res"
+/OUT:"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\UE4Editor-firstproject_2-8660.lib"
+/INCLUDE:IMPLEMENT_MODULE_firstproject_2

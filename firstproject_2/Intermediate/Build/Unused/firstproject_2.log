@@ -1,17 +1,17 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
   Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Documents\Unreal Projects).
   Waiting for 'git status' command to complete
-  Deleted hot-reload file: C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Binaries\Win64\UE4Editor-DmapModule-0001.dll
-  Deleted hot-reload file: C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule-0001.lib
+  Deleted hot-reload file: C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Binaries\Win64\UE4Editor-DmapModule-0003.dll
+  Deleted hot-reload file: C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule-0003.lib
   Building firstproject_2Editor and ShaderCompileWorker...
   Using Visual Studio 2017 14.16.27039 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  [Adaptive unity build] Excluded from DmapModule unity file: DmapAsset.cpp, DmapFactoryDragDrop.cpp
-  [Adaptive unity build] Excluded from DmapModule.gen unity file: DmapAsset.gen.cpp, DmapModule.init.gen.cpp
+  [Adaptive unity build] Excluded from DmapModule unity file: Asteroid.cpp, DmapFactoryDragDrop.cpp
+  [Adaptive unity build] Excluded from DmapModule.gen unity file: Asteroid.gen.cpp, DmapModule.init.gen.cpp
   Building 3 actions with 12 processes...
     [1/3] UE4Editor-DmapModule.lib
        Creating library C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.lib and object C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.exp
     [2/3] UE4Editor-DmapModule.dll
        Creating library C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.suppressed.lib and object C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Development\DmapModule\UE4Editor-DmapModule.suppressed.exp
     [3/3] firstproject_2Editor.target
-  Total time in Parallel executor: 1.58 seconds
-  Total execution time: 6.24 seconds
+  Total time in Parallel executor: 1.55 seconds
+  Total execution time: 5.15 seconds

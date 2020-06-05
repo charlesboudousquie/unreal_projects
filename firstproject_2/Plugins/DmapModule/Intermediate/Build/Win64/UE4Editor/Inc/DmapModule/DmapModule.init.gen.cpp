@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeDmapModule_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xB60299B0,
+				0x95181B85,
 				0xD3D8466F,
 				METADATA_PARAMS(nullptr, 0)
 			};

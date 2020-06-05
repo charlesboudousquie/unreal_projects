@@ -12,8 +12,16 @@ class DMAPMODULE_API AAsteroid : public AActor
 	GENERATED_BODY()
 	
 public:	
+
+	AAsteroid(class FObjectInitializer const &);
+
+	void setPosition(FVector position);
+
 	// Sets default values for this actor's properties
-	AAsteroid();
+	//AAsteroid();
+
+	UPROPERTY(VisibleAnywhere)
+    class UStaticMeshComponent* m_mesh;
 
 protected:
 	// Called when the game starts or when spawned

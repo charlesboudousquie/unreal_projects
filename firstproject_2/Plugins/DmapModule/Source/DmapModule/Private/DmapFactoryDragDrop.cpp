@@ -4,6 +4,7 @@
 #include "DmapAsset.h"
 #include "Editor.h"
 #include "Misc/FileHelper.h"
+#include "Asteroid.h"
 
 UObject * UDmapFactoryDragDrop::FactoryCreateBinary(
 	UClass * Class, UObject * InParent, FName Name, 
@@ -20,6 +21,14 @@ UObject * UDmapFactoryDragDrop::FactoryCreateBinary(
 		UDmapAsset* newAsset = NewObject<UDmapAsset>(InParent, Class, Name, Flags);
 		newAsset->ParseData(file_text);
 	
+		const auto& data = newAsset->getFileData();
+
+		// spawn 1 asteroid for now
+		auto pos = data[0];
+
+		auto newAsteroid = GetWorld()->SpawnActor<AAsteroid>();
+		newAsteroid->setPosition(pos);
+
 		return newAsset;
 	}
 

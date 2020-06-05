@@ -29,6 +29,8 @@ public:
 	UDmapAsset();
 	~UDmapAsset();
 
+	const TArray<FVector>& getFileData() { return m_data; }
+
 protected:
 
 	FVector readLine(std::string p_input);

@@ -2,21 +2,21 @@
 	"RemapUnityFiles": 
 	{
 		"Module.DmapModule.cpp.obj": [
+			"DmapAsset.cpp.obj",
 			"DmapFactory.cpp.obj",
 			"DmapModule.cpp.obj",
-			"Asteroid.cpp.obj",
-			"DmapAsset.cpp.obj",
-			"DmapFactoryDragDrop.cpp.obj",
 			"MapController.cpp.obj",
-			"Octree.cpp.obj"
+			"Octree.cpp.obj",
+			"Asteroid.cpp.obj",
+			"DmapFactoryDragDrop.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
+			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
+			"MapController.gen.cpp.obj",
 			"Asteroid.gen.cpp.obj",
-			"DmapAsset.gen.cpp.obj",
-			"DmapModule.init.gen.cpp.obj",
-			"MapController.gen.cpp.obj"
+			"DmapModule.init.gen.cpp.obj"
 		]
 	}
 }

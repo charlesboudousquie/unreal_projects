@@ -36,7 +36,7 @@ public: \
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_Asteroid_h_12_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API AAsteroid(const FObjectInitializer& ObjectInitializer); \
+	NO_API AAsteroid(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AAsteroid) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AAsteroid); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAsteroid); \
@@ -55,7 +55,7 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AAsteroid); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAsteroid); \
-	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AAsteroid)
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AAsteroid)
 
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_Asteroid_h_12_PRIVATE_PROPERTY_OFFSET
