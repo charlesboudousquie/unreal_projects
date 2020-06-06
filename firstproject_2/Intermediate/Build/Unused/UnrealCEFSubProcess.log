@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealCEFSubProcess (UnrealBuildTool.exe is newer)
+  Creating makefile for UnrealCEFSubProcess (no existing makefile)
   Target is up to date
-  Total execution time: 27.27 seconds
+  Total execution time: 16.18 seconds

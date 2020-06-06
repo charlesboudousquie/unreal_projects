@@ -4,7 +4,7 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\SymbolDebugger.Target.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\SymbolDebugger.Build.cs" />
     <Filter Include="Private">
-      <UniqueIdentifier>{44DEA59A-D8EF-4D8A-9B3A-C63F4B0EC973}</UniqueIdentifier>
+      <UniqueIdentifier>{47E00422-BEF5-4A43-905C-E54CB568B63E}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\Private\SSymbolDebugger.cpp">
       <Filter>Private</Filter>
@@ -22,19 +22,19 @@
       <Filter>Private</Filter>
     </ClCompile>
     <Filter Include="Private\Mac">
-      <UniqueIdentifier>{337EC781-3241-47D0-89C4-69A2DAF0CE39}</UniqueIdentifier>
+      <UniqueIdentifier>{0A15349E-B59F-4715-973B-CCB98C8413CB}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\Private\Mac\SymbolDebuggerMainMac.cpp">
       <Filter>Private\Mac</Filter>
     </ClCompile>
     <Filter Include="Private\Windows">
-      <UniqueIdentifier>{37724735-F91E-49D0-A2EA-B5A4BBEFC5F2}</UniqueIdentifier>
+      <UniqueIdentifier>{C32C8F44-60E8-4312-856D-6F4763BF1743}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\Private\Windows\SymbolDebuggerMainWindows.cpp">
       <Filter>Private\Windows</Filter>
     </ClCompile>
     <Filter Include="Public">
-      <UniqueIdentifier>{9F662116-AF64-41D7-910E-C419BEB04C31}</UniqueIdentifier>
+      <UniqueIdentifier>{E31DCEA1-4F68-421A-A567-F56E9B151C12}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\SymbolDebugger\Public\SymbolDebuggerApp.h">
       <Filter>Public</Filter>

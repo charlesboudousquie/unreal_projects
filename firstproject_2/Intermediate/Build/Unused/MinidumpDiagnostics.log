@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for MinidumpDiagnostics (UnrealBuildTool.exe is newer)
+  Creating makefile for MinidumpDiagnostics (no existing makefile)
   Target is up to date
-  Total execution time: 15.15 seconds
+  Total execution time: 6.54 seconds

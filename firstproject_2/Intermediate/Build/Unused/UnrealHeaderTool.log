@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Waiting for 'git status' command to complete
+  Creating makefile for UnrealHeaderTool (no existing makefile)
   Target is up to date
-  Total execution time: 26.84 seconds
+  Total execution time: 19.57 seconds

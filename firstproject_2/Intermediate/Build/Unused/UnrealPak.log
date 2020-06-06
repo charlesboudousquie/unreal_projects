@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealPak (UnrealBuildTool.exe is newer)
+  Creating makefile for UnrealPak (no existing makefile)
   Target is up to date
-  Total execution time: 23.75 seconds
+  Total execution time: 21.47 seconds

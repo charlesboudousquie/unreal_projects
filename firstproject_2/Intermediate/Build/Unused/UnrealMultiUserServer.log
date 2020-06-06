@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealMultiUserServer (UnrealBuildTool.exe is newer)
+  Creating makefile for UnrealMultiUserServer (no existing makefile)
   Target is up to date
-  Total execution time: 26.71 seconds
+  Total execution time: 21.64 seconds

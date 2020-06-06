@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealInsights (UnrealBuildTool.exe is newer)
+  Creating makefile for UnrealInsights (no existing makefile)
   Target is up to date
-  Total execution time: 87.47 seconds
+  Total execution time: 57.00 seconds
