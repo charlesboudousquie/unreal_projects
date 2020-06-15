@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealFrontend (no existing makefile)
+  Creating makefile for UnrealFrontend (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 21.34 seconds
+  Total execution time: 17.69 seconds

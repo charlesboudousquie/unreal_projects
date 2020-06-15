@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for CrashReportClientEditor (no existing makefile)
+  Creating makefile for CrashReportClientEditor (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 57.37 seconds
+  Total execution time: 41.19 seconds

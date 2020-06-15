@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for BootstrapPackagedGame (no existing makefile)
+  Creating makefile for BootstrapPackagedGame (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 20.99 seconds
+  Total execution time: 22.47 seconds

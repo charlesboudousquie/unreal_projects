@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for UnrealWatchdog (no existing makefile)
+  Creating makefile for UnrealWatchdog (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 21.23 seconds
+  Total execution time: 22.83 seconds

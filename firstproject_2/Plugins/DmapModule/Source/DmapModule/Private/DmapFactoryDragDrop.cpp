@@ -21,13 +21,13 @@ UObject * UDmapFactoryDragDrop::FactoryCreateBinary(
 		UDmapAsset* newAsset = NewObject<UDmapAsset>(InParent, Class, Name, Flags);
 		newAsset->ParseData(file_text);
 	
-		const auto& data = newAsset->getFileData();
+		//const auto& data = newAsset->getFileData();
 
 		// spawn 1 asteroid for now
-		auto pos = data[0];
+		//auto pos = data[0];
 
-		auto newAsteroid = GetWorld()->SpawnActor<AAsteroid>();
-		newAsteroid->setPosition(pos);
+		//auto newAsteroid = GetWorld()->SpawnActor<AAsteroid>();
+		//newAsteroid->setPosition(pos);
 
 		return newAsset;
 	}

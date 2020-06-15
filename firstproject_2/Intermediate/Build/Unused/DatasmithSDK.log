@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for DatasmithSDK (no existing makefile)
+  Creating makefile for DatasmithSDK (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 57.31 seconds
+  Total execution time: 4.86 seconds
