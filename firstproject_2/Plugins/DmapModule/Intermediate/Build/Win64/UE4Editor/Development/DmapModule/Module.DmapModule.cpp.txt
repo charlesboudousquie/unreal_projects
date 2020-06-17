@@ -4,7 +4,9 @@ C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Sourc
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\Asteroid.generated.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Public\DrawDebugHelpers.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\UObject/ConstructorHelpers.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapAsset.cpp
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapFactory.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapFactory.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\DmapFactory.generated.h
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapAsset.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\string
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\istream
@@ -46,33 +48,16 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\share.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring_insert.h
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\DmapAsset.generated.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iostream
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\sstream
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
-C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Public\EngineUtils.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\ProfilingDebugging/ProfilingHelpers.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/WorldSettings.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/DamageType.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DamageType.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/Info.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Info.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Sound/AudioVolume.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/Volume.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Volume.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\AudioVolume.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\WorldSettings.generated.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapFactory.cpp
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapFactory.h
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\DmapFactory.generated.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapFactoryDragDrop.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapFactoryDragDrop.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\DmapFactoryDragDrop.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\Misc/FileHelper.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapModule.cpp
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapModule.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Octree.cpp
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\Octree.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\array
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iterator
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
-C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Get3dMapList.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\Get3dMapList.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\Get3dMapList.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\AssetRegistryModule.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\Misc/AssetRegistryInterface.h
+c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\assetregistry\public\IAssetRegistry.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AssetRegistry\IAssetRegistry.generated.h

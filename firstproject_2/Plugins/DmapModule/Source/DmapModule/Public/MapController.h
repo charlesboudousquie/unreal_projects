@@ -6,8 +6,13 @@
 #include "Components/ActorComponent.h"
 #include "Asteroid.h"
 #include "Containers/UnrealString.h"
+
+#include <memory>
+//class /*DMAPMODULE_API*/ Octree; 
+
 #include "MapController.generated.h"
 
+class Octree;
 
 // Description: This class can load in maps. 
 
@@ -16,11 +21,13 @@ class DMAPMODULE_API UMapController : public UActorComponent
 {
 	GENERATED_BODY()
 
-	TArray<AAsteroid> m_asteroids;
+    //std::unique_ptr<Octree> m_tree;
+	Octree* m_tree;
 
 public:	
 	// Sets default values for this component's properties
 	UMapController();
+	~UMapController();
 
 protected:
 	// Called when the game starts
@@ -33,4 +40,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "3d maps")
 	void LoadMap(FString p_map_name);
 
+    UPROPERTY(EditAnywhere)
+    float voxel_scalar;
+
+    UPROPERTY(EditAnywhere)
+    float debug_line_width;
+
+	// given an array of points, draw a box from said 8 points
+	void drawBox(const TArray<FVector>& p_points);
 };

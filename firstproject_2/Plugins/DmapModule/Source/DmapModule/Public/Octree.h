@@ -7,11 +7,14 @@
 #include <array>
 #include <cstddef>
 #include "Math/Vector.h"
+#include "Math/Box.h"
 
 #include "CoreMinimal.h"
 
 struct OctreeNode
 {
+
+	static FVector invalid_voxel;
 
 	// insert voxel into this node or its children if necessary
 	void addVoxel(FVector p_voxel);
@@ -20,6 +23,9 @@ struct OctreeNode
 	// is being inserted into this node
 	void createChildren();
 
+	// get all 8 points of bounding box
+	TArray<FVector> get8Points();
+
 	// set min, max, center, and half_extents
 	void setBoundingBox(FVector p_min, FVector p_max);
 
@@ -27,31 +33,43 @@ struct OctreeNode
 	// returns index of best child
 	int findBestChild(FVector p_voxel);
 
-	FVector m_voxel;
+	// check if voxel is within bounds
+	bool isInside(FVector p_voxel);
 
-	FVector m_min;
-	FVector m_max;
-	FVector m_center;
-	FVector m_half_extents;
+	// check if any children are alive, todo optimize
+	bool noChildrenActive();
+
+	FVector m_voxel = invalid_voxel;
+	bool m_empty = true;
+
+	FBox m_box;
+
+	//uint8_t m_children_in_use{0};
 	std::array<std::unique_ptr<OctreeNode>,8> m_children;
-	uint8_t m_children_in_use{0};
 };
 
 /**
  * 
  */
-class DMAPMODULE_API Octree
+class /*DMAPMODULE_API*/ Octree
 {
 
 	std::unique_ptr<OctreeNode> m_root;
 
+    void getLeavesRec(OctreeNode*, TArray<OctreeNode*>&);
+
 public:
 
 	Octree();
+	~Octree();
+
+    TArray<OctreeNode*> getLeaves();
+
+	// clears all nodes in tree
+	void clearTree();
 
 	// give world dimensions to octree.
 	// center will be p_world_dimensions / 2.
-
 	void setupDimensions(FVector p_world_dimensions);
 
 	void insertVoxel(FVector p_voxel);

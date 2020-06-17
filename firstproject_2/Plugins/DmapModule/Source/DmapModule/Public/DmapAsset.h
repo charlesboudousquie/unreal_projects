@@ -24,16 +24,18 @@ public:
 
 	void ParseData(FString p_file_data);
 
-	
-
 	UDmapAsset();
 	~UDmapAsset();
 
 	const TArray<FVector>& getFileData() { return m_data; }
+	const FVector& getDimensions() { return m_map_dimensions; }
 
 protected:
 
 	FVector readLine(std::string p_input);
+
+	UPROPERTY(BlueprintReadOnly)
+	FVector m_map_dimensions;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="DmapAsset")
 	TArray<FVector> m_data;

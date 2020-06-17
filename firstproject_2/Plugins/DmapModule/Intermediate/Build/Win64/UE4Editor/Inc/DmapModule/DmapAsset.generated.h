@@ -59,6 +59,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UDmapAsset); \
 
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_DmapAsset_h_21_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__m_map_dimensions() { return STRUCT_OFFSET(UDmapAsset, m_map_dimensions); } \
 	FORCEINLINE static uint32 __PPO__m_data() { return STRUCT_OFFSET(UDmapAsset, m_data); }
 
 

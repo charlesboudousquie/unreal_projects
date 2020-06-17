@@ -37,6 +37,10 @@ void EmptyLinkFunctionForGeneratedCodeDmapAsset() {}
 #endif
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_m_data;
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_m_data_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_map_dimensions_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_m_map_dimensions;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -62,9 +66,17 @@ void EmptyLinkFunctionForGeneratedCodeDmapAsset() {}
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data = { "m_data", nullptr, (EPropertyFlags)0x0020080000000015, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDmapAsset, m_data), METADATA_PARAMS(Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data_Inner = { "m_data", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_map_dimensions_MetaData[] = {
+		{ "Category", "DmapAsset" },
+		{ "ModuleRelativePath", "Public/DmapAsset.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_map_dimensions = { "m_map_dimensions", nullptr, (EPropertyFlags)0x0020080000000014, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDmapAsset, m_map_dimensions), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_map_dimensions_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_map_dimensions_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UDmapAsset_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_data_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDmapAsset_Statics::NewProp_m_map_dimensions,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UDmapAsset_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UDmapAsset>::IsAbstract,
@@ -93,7 +105,7 @@ void EmptyLinkFunctionForGeneratedCodeDmapAsset() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UDmapAsset, 30845452);
+	IMPLEMENT_CLASS(UDmapAsset, 1097810533);
 	template<> DMAPMODULE_API UClass* StaticClass<UDmapAsset>()
 	{
 		return UDmapAsset::StaticClass();

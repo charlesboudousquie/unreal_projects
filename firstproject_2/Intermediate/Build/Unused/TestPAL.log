@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Creating makefile for TestPAL (UnrealBuildTool.exe is newer)
+  Waiting for 'git status' command to complete
   Target is up to date
-  Total execution time: 19.46 seconds
+  Total execution time: 11.41 seconds

@@ -48,16 +48,12 @@ void UDmapAsset::ParseData(FString p_file_data)
 		file_dimensions_str.erase(pos, strlen("voxel"));
 	}
 
-	FVector dimensions = readLine(file_dimensions_str);
+	m_map_dimensions = readLine(file_dimensions_str);
 
 	std::string line_read;
 	while (std::getline(iss, line_read))
 	{
 		m_data.Add(readLine(line_read));
 	}
-
-
-
-
 
 }
