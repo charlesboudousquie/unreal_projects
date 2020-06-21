@@ -10,6 +10,10 @@
 #include "Octree.h"
 #include "DrawDebugHelpers.h"
 
+#include "Components/HierarchicalInstancedStaticMeshComponent.h"
+#include "Engine/World.h"
+#include "GameFramework/Actor.h"
+
 // Sets default values for this component's properties
 UMapController::UMapController() : m_tree(new Octree)
 {
@@ -44,7 +48,7 @@ void UMapController::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	// ...
 }
 
-void UMapController::LoadMap(FString p_map_name)
+void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
 {
 
 	FAssetRegistryModule& m_module =
@@ -85,12 +89,20 @@ void UMapController::LoadMap(FString p_map_name)
 				// first get all the nodes,
                 TArray<OctreeNode*> nodes = m_tree->getLeaves();
 
+                //UInstancedStaticMeshComponent
+                auto hierarchical_mesh = Cast< UHierarchicalInstancedStaticMeshComponent>(
+                    p_asteroid_archetype->GetComponentByClass(UHierarchicalInstancedStaticMeshComponent::StaticClass()));
+                hierarchical_mesh->ClearInstances();
+
 				// then for each node get its 8 points
                 for (auto& node : nodes)
                 {
-                    auto points = node->get8Points();
+                    //auto points = node->get8Points();
 				    // then draw box from those 8 points
-                    drawBox(points);
+                    //drawBox(points);
+
+                    drawAsteroid(node->m_voxel, hierarchical_mesh);
+
                 }
 
 			}
@@ -138,6 +150,21 @@ void UMapController::drawBox(const TArray<FVector>& p_points)
 
         DrawDebugLine(world, begin, end, 
             FColor::Emerald, true, -1, 0, debug_line_width);
+    }
+
+}
+
+void UMapController::drawAsteroid(const FVector & p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh)
+{
+    // find object with hierarchical instanced mesh
+    // UInstancedStaticMeshComponent
+    // asteroid_instance
+
+    FTransform l_trans(p_pos);
+
+    if (p_mesh)
+    {
+        p_mesh->AddInstance(l_trans);
     }
 
 }

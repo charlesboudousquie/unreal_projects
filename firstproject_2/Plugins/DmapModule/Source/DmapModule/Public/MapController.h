@@ -12,6 +12,8 @@
 
 #include "MapController.generated.h"
 
+class UHierarchicalInstancedStaticMeshComponent;
+class AActor;
 class Octree;
 
 // Description: This class can load in maps. 
@@ -23,6 +25,7 @@ class DMAPMODULE_API UMapController : public UActorComponent
 
     //std::unique_ptr<Octree> m_tree;
 	Octree* m_tree;
+    
 
 public:	
 	// Sets default values for this component's properties
@@ -38,7 +41,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 		
 	UFUNCTION(BlueprintCallable, Category = "3d maps")
-	void LoadMap(FString p_map_name);
+	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype);
 
     UPROPERTY(EditAnywhere)
     float voxel_scalar;
@@ -48,4 +51,8 @@ public:
 
 	// given an array of points, draw a box from said 8 points
 	void drawBox(const TArray<FVector>& p_points);
+
+    // draw an instance of an asteroid
+    void drawAsteroid(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+
 };

@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 	UPackage* Z_Construct_UPackage__Script_DmapModule();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_LoadMap();
+	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 // End Cross Module References
 	void UMapController::StaticRegisterNativesUMapController()
 	{
@@ -32,7 +33,9 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		struct MapController_eventLoadMap_Parms
 		{
 			FString p_map_name;
+			AActor* p_asteroid_archetype;
 		};
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_p_asteroid_archetype;
 		static const UE4CodeGen_Private::FStrPropertyParams NewProp_p_map_name;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
@@ -40,8 +43,10 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 #endif
 		static const UE4CodeGen_Private::FFunctionParams FuncParams;
 	};
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UMapController_LoadMap_Statics::NewProp_p_asteroid_archetype = { "p_asteroid_archetype", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MapController_eventLoadMap_Parms, p_asteroid_archetype), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UMapController_LoadMap_Statics::NewProp_p_map_name = { "p_map_name", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MapController_eventLoadMap_Parms, p_map_name), METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMapController_LoadMap_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMapController_LoadMap_Statics::NewProp_p_asteroid_archetype,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMapController_LoadMap_Statics::NewProp_p_map_name,
 	};
 #if WITH_METADATA
@@ -88,7 +93,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_DmapModule,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UMapController_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 2481267442
+		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 4114085897
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::Class_MetaDataParams[] = {
@@ -146,7 +151,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMapController, 3238170479);
+	IMPLEMENT_CLASS(UMapController, 4003314263);
 	template<> DMAPMODULE_API UClass* StaticClass<UMapController>()
 	{
 		return UMapController::StaticClass();
