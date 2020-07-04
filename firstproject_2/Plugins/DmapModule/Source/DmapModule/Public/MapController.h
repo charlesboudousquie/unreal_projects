@@ -21,11 +21,20 @@ class Octree;
 UCLASS( ClassGroup=(Custom), BlueprintType, meta=(BlueprintSpawnableComponent) )
 class DMAPMODULE_API UMapController : public UActorComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
+
+    static TArray<FColor> g_colors;
 
     //std::unique_ptr<Octree> m_tree;
 	Octree* m_tree;
     
+    // meshes for the nodes in each level of the tree
+    TArray<UHierarchicalInstancedStaticMeshComponent*> m_meshes;
+
+    TArray< UMaterialInstanceDynamic*> m_materials;
+
+    UPROPERTY()
+    UMaterialInterface* m_wireframe_material;
 
 public:	
 	// Sets default values for this component's properties
@@ -36,12 +45,34 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+    // draw internal node of octree
+    void drawNode(FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+
+    // given an array of points, draw a box from said 8 points
+    void drawBox(const TArray<FVector>& p_points, int p_level);
+
+    // draw an instance of an asteroid
+    void drawAsteroid(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+
+    // draws all internal nodes of octree
+    void drawInternalNodes(/*TArray<AActor*> p_octree_node_archetypes*/);
+
+    // draws all leaf nodes of octree
+    void drawLeaves(AActor* p_asteroid_archetype);
+
+    // for each level, create a dynamic material
+    void setMaterials(/*TArray<AActor*> p_octree_node_archetypes*/);
+
+    // choose color based on level
+    FColor chooseColor(int p_level);
+
 public:	
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 		
 	UFUNCTION(BlueprintCallable, Category = "3d maps")
-	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype);
+	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype/*, TArray<AActor*> p_octree_node_archetypes*/);
 
     UPROPERTY(EditAnywhere)
     float voxel_scalar;
@@ -49,10 +80,10 @@ public:
     UPROPERTY(EditAnywhere)
     float debug_line_width;
 
-	// given an array of points, draw a box from said 8 points
-	void drawBox(const TArray<FVector>& p_points);
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    bool octreeExists();
 
-    // draw an instance of an asteroid
-    void drawAsteroid(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    FVector getOctreePos();
 
 };

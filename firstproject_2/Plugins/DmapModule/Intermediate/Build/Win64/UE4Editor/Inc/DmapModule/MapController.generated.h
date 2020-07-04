@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVector;
 class AActor;
 #ifdef DMAPMODULE_MapController_generated_h
 #error "MapController.generated.h already included, missing '#pragma once' in MapController.h"
@@ -16,6 +17,22 @@ class AActor;
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_SPARSE_DATA
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execgetOctreePos) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector*)Z_Param__Result=P_THIS->getOctreePos(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execoctreeExists) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=P_THIS->octreeExists(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execLoadMap) \
 	{ \
@@ -29,6 +46,22 @@ class AActor;
 
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execgetOctreePos) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector*)Z_Param__Result=P_THIS->getOctreePos(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execoctreeExists) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=P_THIS->octreeExists(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execLoadMap) \
 	{ \
@@ -83,7 +116,10 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UMapController); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UMapController)
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_PRIVATE_PROPERTY_OFFSET
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__m_wireframe_material() { return STRUCT_OFFSET(UMapController, m_wireframe_material); }
+
+
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_21_PROLOG
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

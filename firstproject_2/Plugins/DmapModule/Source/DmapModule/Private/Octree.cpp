@@ -25,7 +25,27 @@ void Octree::getLeavesRec(OctreeNode * p_node, TArray<OctreeNode*>& p_array)
     }
 }
 
-Octree::Octree() : m_root(std::make_unique<OctreeNode>())
+void Octree::getInternalNodesRec(OctreeNode * p_node, ListOfNodes& p_array, int p_level)
+{
+    if (p_node)
+    {
+
+        // if internal node
+        if (p_node->m_empty)
+        {
+            p_array.Add(p_node);
+
+            for (auto& child : p_node->m_children)
+            {
+                getInternalNodesRec(child.get(), p_array, p_level+1);
+            }
+
+        }
+
+    }
+}
+
+Octree::Octree() : m_root(std::make_unique<OctreeNode>(0))
 {
 }
 
@@ -40,9 +60,21 @@ TArray<OctreeNode*> Octree::getLeaves()
     return leaves;
 }
 
+Octree::ListOfNodes Octree::getInternalNodes()
+{
+    ListOfNodes nodes;
+    getInternalNodesRec(m_root.get(), nodes,0);
+    return nodes;
+}
+
+FVector Octree::getPos()
+{
+    return m_root->m_box.GetCenter();
+}
+
 void Octree::clearTree()
 {
-	m_root.reset(new OctreeNode);
+	m_root.reset(new OctreeNode(0));
 }
 
 void Octree::setupDimensions(FVector p_world_dimensions)
@@ -50,7 +82,7 @@ void Octree::setupDimensions(FVector p_world_dimensions)
 	float biggestDimension = p_world_dimensions.GetMax();
 
 	// add 1 to dimensions to account for integer division?
-	FVector newDimensions = FVector{ biggestDimension + 1.0f };
+	FVector newDimensions = FVector{ biggestDimension + m_dimension_modifier };
 
 
 	auto m_center = newDimensions / 2.0f;
@@ -61,6 +93,10 @@ void Octree::setupDimensions(FVector p_world_dimensions)
 void Octree::insertVoxel(FVector p_voxel)
 {
 	m_root->addVoxel(p_voxel);
+}
+
+OctreeNode::OctreeNode(int p_level) : m_level(p_level)
+{
 }
 
 void OctreeNode::addVoxel(FVector p_voxel)
@@ -102,7 +138,7 @@ void OctreeNode::createChildren()
 	// initialize child nodes
 	for (auto& child : m_children)
 	{
-		child.reset(new OctreeNode); // cause unique pointers are fun
+		child.reset(new OctreeNode(this->m_level + 1)); // cause unique pointers are fun
 	}
 
 

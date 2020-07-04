@@ -8,8 +8,8 @@
 			"DmapFactoryDragDrop.cpp.obj",
 			"DmapModule.cpp.obj",
 			"Get3dMapList.cpp.obj",
-			"Octree.cpp.obj",
-			"MapController.cpp.obj"
+			"MapController.cpp.obj",
+			"Octree.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",

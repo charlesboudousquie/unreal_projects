@@ -14,6 +14,8 @@
 struct OctreeNode
 {
 
+    OctreeNode(int p_level);
+
 	static FVector invalid_voxel;
 
 	// insert voxel into this node or its children if necessary
@@ -41,11 +43,12 @@ struct OctreeNode
 
 	FVector m_voxel = invalid_voxel;
 	bool m_empty = true;
+    int m_level = -1;
 
 	FBox m_box;
 
 	//uint8_t m_children_in_use{0};
-	std::array<std::unique_ptr<OctreeNode>,8> m_children;
+    std::array<std::unique_ptr<OctreeNode>, 8> m_children;
 };
 
 /**
@@ -53,10 +56,13 @@ struct OctreeNode
  */
 class /*DMAPMODULE_API*/ Octree
 {
+    typedef TArray<OctreeNode*> ListOfNodes;
 
 	std::unique_ptr<OctreeNode> m_root;
+    int m_dimension_modifier = -1; // what to add to dimensions to fit voxels
 
     void getLeavesRec(OctreeNode*, TArray<OctreeNode*>&);
+    void getInternalNodesRec(OctreeNode * p_node, ListOfNodes& p_array, int p_level);
 
 public:
 
@@ -64,6 +70,10 @@ public:
 	~Octree();
 
     TArray<OctreeNode*> getLeaves();
+    ListOfNodes getInternalNodes();
+
+
+    FVector getPos();
 
 	// clears all nodes in tree
 	void clearTree();
@@ -73,5 +83,7 @@ public:
 	void setupDimensions(FVector p_world_dimensions);
 
 	void insertVoxel(FVector p_voxel);
+
+    // morton encoding
 
 };

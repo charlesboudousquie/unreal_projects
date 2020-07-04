@@ -1,4 +1,4 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\boudo\Desktop\unreal\UnrealEngine).
-  Waiting for 'git status' command to complete
+  Creating makefile for BlankProgram (UnrealBuildTool.exe is newer)
   Target is up to date
-  Total execution time: 42.39 seconds
+  Total execution time: 29.99 seconds

@@ -5,5 +5,3 @@
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapFactoryDragDrop.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapModule.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Get3dMapList.cpp"
-#include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/MapController.cpp"
-#include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Octree.cpp"

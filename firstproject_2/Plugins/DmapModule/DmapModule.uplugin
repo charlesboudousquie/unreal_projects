@@ -18,7 +18,7 @@
 		{
 			"Name": "DmapModule",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "PreDefault"
 		}
 	]
 }
