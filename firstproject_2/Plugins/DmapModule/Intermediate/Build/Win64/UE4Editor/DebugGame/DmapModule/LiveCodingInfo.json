@@ -16,8 +16,8 @@
 			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
-			"Get3dMapList.gen.cpp.obj",
 			"DmapModule.init.gen.cpp.obj",
+			"Get3dMapList.gen.cpp.obj",
 			"MapController.gen.cpp.obj"
 		]
 	}

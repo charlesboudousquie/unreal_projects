@@ -1,5 +1,8 @@
 .vs/
 
+# miscellaneous
+*.log
+
 # Compiled Object files
 *.slo
 *.lo
@@ -70,7 +73,7 @@ Build/*/**
 Saved/*
 
 # Compiled source files for the engine to use
-Intermediate/*
+firstproject_2/Intermediate/
 Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
