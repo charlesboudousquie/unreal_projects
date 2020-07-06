@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Octree.h"
+#include "Engine.h"
 #include <cassert>
 
 FVector OctreeNode::invalid_voxel = FVector{ -1.0f };
@@ -37,7 +38,7 @@ void Octree::getInternalNodesRec(OctreeNode * p_node, ListOfNodes& p_array, int 
 
             for (auto& child : p_node->m_children)
             {
-                getInternalNodesRec(child.get(), p_array, p_level+1);
+                getInternalNodesRec(child.get(), p_array, p_level + 1);
             }
 
         }
@@ -63,7 +64,14 @@ TArray<OctreeNode*> Octree::getLeaves()
 Octree::ListOfNodes Octree::getInternalNodes()
 {
     ListOfNodes nodes;
-    getInternalNodesRec(m_root.get(), nodes,0);
+    getInternalNodesRec(m_root.get(), nodes, 0);
+    return nodes;
+}
+
+Octree::ListOfNodes Octree::getAllNodes()
+{
+    auto nodes = getInternalNodes();
+    nodes.Append(getLeaves());
     return nodes;
 }
 
@@ -74,25 +82,25 @@ FVector Octree::getPos()
 
 void Octree::clearTree()
 {
-	m_root.reset(new OctreeNode(0));
+    m_root.reset(new OctreeNode(0));
 }
 
 void Octree::setupDimensions(FVector p_world_dimensions)
 {
-	float biggestDimension = p_world_dimensions.GetMax();
+    float biggestDimension = p_world_dimensions.GetMax();
 
-	// add 1 to dimensions to account for integer division?
-	FVector newDimensions = FVector{ biggestDimension + m_dimension_modifier };
+    // add 1 to dimensions to account for integer division?
+    FVector newDimensions = FVector{ biggestDimension + m_dimension_modifier };
 
 
-	auto m_center = newDimensions / 2.0f;
-	auto m_half_extents = newDimensions / 2.0f;
-	m_root->m_box = FBox::BuildAABB(m_center, m_half_extents);
+    auto m_center = newDimensions / 2.0f;
+    auto m_half_extents = newDimensions / 2.0f;
+    m_root->m_box = FBox::BuildAABB(m_center, m_half_extents);
 }
 
 void Octree::insertVoxel(FVector p_voxel)
 {
-	m_root->addVoxel(p_voxel);
+    m_root->addVoxel(p_voxel);
 }
 
 OctreeNode::OctreeNode(int p_level) : m_level(p_level)
@@ -102,32 +110,32 @@ OctreeNode::OctreeNode(int p_level) : m_level(p_level)
 void OctreeNode::addVoxel(FVector p_voxel)
 {
 
-	// if leaf
-	if (noChildrenActive())
-	{
-		// if empty
-		if (m_empty)
-		{
-			m_voxel = p_voxel; // take voxel
-			m_empty = false; // we are not empty anymore
-			return;
-		}
-		else
-		{
-			// create children and turn ourselves into leaf
-			createChildren();
-			auto bestChild = findBestChild(m_voxel);
-			m_children[bestChild]->addVoxel(m_voxel);
-			m_empty = true;
-		}
-	}
+    // if leaf
+    if (noChildrenActive())
+    {
+        // if empty
+        if (m_empty)
+        {
+            m_voxel = p_voxel; // take voxel
+            m_empty = false; // we are not empty anymore
+            return;
+        }
+        else
+        {
+            // create children and turn ourselves into leaf
+            createChildren();
+            auto bestChild = findBestChild(m_voxel);
+            m_children[bestChild]->addVoxel(m_voxel);
+            m_empty = true;
+        }
+    }
 
 
-	// send new voxel to children
-	auto c1 = this->findBestChild(p_voxel);
+    // send new voxel to children
+    auto c1 = this->findBestChild(p_voxel);
 
-	// move our voxel and new voxel into child nodes
-	m_children[c1]->addVoxel(p_voxel);
+    // move our voxel and new voxel into child nodes
+    m_children[c1]->addVoxel(p_voxel);
 
 
 }
@@ -135,99 +143,117 @@ void OctreeNode::addVoxel(FVector p_voxel)
 void OctreeNode::createChildren()
 {
 
-	// initialize child nodes
-	for (auto& child : m_children)
-	{
-		child.reset(new OctreeNode(this->m_level + 1)); // cause unique pointers are fun
-	}
+    // initialize child nodes
+    for (auto& child : m_children)
+    {
+        child.reset(new OctreeNode(this->m_level + 1)); // cause unique pointers are fun
+    }
 
 
-	auto m_center = m_box.GetCenter();
-	auto m_min = m_box.Min;
-	auto m_max = m_box.Max;
+    auto m_center = m_box.GetCenter();
+    auto m_min = m_box.Min;
+    auto m_max = m_box.Max;
 
-	// set bounding boxes of child nodes
-	m_children[0]->setBoundingBox(m_min, m_center); // back bottom left
-	m_children[1]->setBoundingBox(FVector(m_center.X, m_min.Y, m_min.Z), FVector(m_max.X, m_center.Y, m_center.Z)); // back bottom right
-	m_children[2]->setBoundingBox(FVector(m_center.X, m_min.Y, m_center.Z), FVector(m_max.X, m_center.Y, m_max.Z)); // front bottom right
-	m_children[3]->setBoundingBox(FVector(m_min.X, m_min.Y, m_center.Z), FVector(m_center.X, m_center.Y, m_max.Z)); // front bottom left
-	m_children[4]->setBoundingBox(FVector(m_min.X, m_center.Y, m_min.Z), FVector(m_center.X, m_max.Y, m_center.Z)); // back top left
-	m_children[5]->setBoundingBox(FVector(m_center.X, m_center.Y, m_min.Z), FVector(m_max.X, m_max.Y, m_center.Z)); // back top right
-	m_children[6]->setBoundingBox(m_center, m_max);																	// front top right
-	m_children[7]->setBoundingBox(FVector(m_min.X, m_center.Y, m_center.Z), FVector(m_center.X, m_max.Y, m_max.Z)); // front top left
+    // set bounding boxes of child nodes
+    m_children[0]->setBoundingBox(m_min, m_center); // back bottom left
+    m_children[1]->setBoundingBox(FVector(m_center.X, m_min.Y, m_min.Z), FVector(m_max.X, m_center.Y, m_center.Z)); // back bottom right
+    m_children[2]->setBoundingBox(FVector(m_center.X, m_min.Y, m_center.Z), FVector(m_max.X, m_center.Y, m_max.Z)); // front bottom right
+    m_children[3]->setBoundingBox(FVector(m_min.X, m_min.Y, m_center.Z), FVector(m_center.X, m_center.Y, m_max.Z)); // front bottom left
+    m_children[4]->setBoundingBox(FVector(m_min.X, m_center.Y, m_min.Z), FVector(m_center.X, m_max.Y, m_center.Z)); // back top left
+    m_children[5]->setBoundingBox(FVector(m_center.X, m_center.Y, m_min.Z), FVector(m_max.X, m_max.Y, m_center.Z)); // back top right
+    m_children[6]->setBoundingBox(m_center, m_max);																	// front top right
+    m_children[7]->setBoundingBox(FVector(m_min.X, m_center.Y, m_center.Z), FVector(m_center.X, m_max.Y, m_max.Z)); // front top left
 
 }
 
 TArray<FVector> OctreeNode::get8Points()
 {
-	auto l_center = m_box.GetCenter();
-	auto l_extents = m_box.GetExtent();
+    auto l_center = m_box.GetCenter();
+    auto l_extents = m_box.GetExtent();
 
-	TArray<FVector> points;
+    TArray<FVector> points;
 
-	float X = l_extents.X;
-	float Y = l_extents.Y;
-	float Z = l_extents.Z;
+    float X = l_extents.X;
+    float Y = l_extents.Y;
+    float Z = l_extents.Z;
 
-	// set bounding boxes of child nodes
-	points.Add(l_center + FVector{-X,-Y,-Z}); // back bottom left
-	points.Add(l_center + FVector{X,-Y,-Z}); // back bottom right
-	points.Add(l_center + FVector{X,-Y,Z}); // front bottom right
-	points.Add(l_center + FVector{-X,-Y,Z}); // front bottom left
-	points.Add(l_center + FVector{-X,Y,-Z}); // back top left
-	points.Add(l_center + FVector{X,Y,-Z}); // back top right
-	points.Add(l_center + FVector{X,Y,Z});// front top right
-	points.Add(l_center + FVector{-X,Y,Z}); // front top left
+    // set bounding boxes of child nodes
+    points.Add(l_center + FVector{ -X,-Y,-Z }); // back bottom left
+    points.Add(l_center + FVector{ X,-Y,-Z }); // back bottom right
+    points.Add(l_center + FVector{ X,-Y,Z }); // front bottom right
+    points.Add(l_center + FVector{ -X,-Y,Z }); // front bottom left
+    points.Add(l_center + FVector{ -X,Y,-Z }); // back top left
+    points.Add(l_center + FVector{ X,Y,-Z }); // back top right
+    points.Add(l_center + FVector{ X,Y,Z });// front top right
+    points.Add(l_center + FVector{ -X,Y,Z }); // front top left
 
-	return points;
+    return points;
 
 }
 
 void OctreeNode::setBoundingBox(FVector p_min, FVector p_max)
 {
-	m_box = {p_min, p_max};
-	//m_min = p_min;
-	//m_max = p_max;
-	//m_half_extents = (p_max - p_min) / 2;
-	//m_center = p_min + m_half_extents;
+    m_box = { p_min, p_max };
+    //m_min = p_min;
+    //m_max = p_max;
+    //m_half_extents = (p_max - p_min) / 2;
+    //m_center = p_min + m_half_extents;
 }
 
 int OctreeNode::findBestChild(FVector p_voxel)
 {
 
-	assert(m_children.empty() == false);
+    assert(m_children.empty() == false);
 
-	// for every child check if it fits
-	for (int i = 0; i < m_children.size(); i++)
-	{
+    // for every child check if it fits
+    for (int i = 0; i < m_children.size(); i++)
+    {
 
         // check if point is inside box
-		if (m_children[i]->m_box.IsInside(p_voxel))
-		{
-			return i;
-		}
-	}
+        if (m_children[i]->m_box.IsInside(p_voxel))
+        {
+            return i;
+        }
+    }
 
-	throw std::runtime_error("no child can contain voxel");
+    throw std::runtime_error("no child can contain voxel");
 }
 
 bool OctreeNode::isInside(FVector p_voxel)
 {
-	
-	// check if greater than min
-	// check if less than max
-	return m_box.IsInside(p_voxel);
+
+    // check if greater than min
+    // check if less than max
+    return m_box.IsInside(p_voxel);
 }
 
 bool OctreeNode::noChildrenActive()
 {
-	for (auto& child : m_children)
-	{
-		if (child != nullptr)
-		{
-			return false;
-		}
-	}
+    for (auto& child : m_children)
+    {
+        if (child != nullptr)
+        {
+            return false;
+        }
+    }
 
-	return true;
+    return true;
+}
+
+void OctreeNode::print()
+{
+    if (!GEngine) { return; }
+
+    auto l_print = [&](FString& p_str)
+    {
+        GEngine->AddOnScreenDebugMessage(-1, 200.0f, FColor::Green, p_str);
+    };
+
+
+
+    auto center = TEXT("Center: ") + m_box.GetCenter().ToString();
+    auto extents = TEXT("Extents: ") + m_box.GetExtent().ToString();
+    auto level = TEXT("Level: ") + FString::FromInt(m_level);
+    auto message = "Node: " + level + ", " + center + ", " + extents;
+    l_print(message);
 }

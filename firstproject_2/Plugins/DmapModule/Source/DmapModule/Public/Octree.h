@@ -41,6 +41,10 @@ struct OctreeNode
 	// check if any children are alive, todo optimize
 	bool noChildrenActive();
 
+    // print out contents of node
+    void print();
+
+
 	FVector m_voxel = invalid_voxel;
 	bool m_empty = true;
     int m_level = -1;
@@ -69,9 +73,9 @@ public:
 	Octree();
 	~Octree();
 
-    TArray<OctreeNode*> getLeaves();
+    ListOfNodes getLeaves();
     ListOfNodes getInternalNodes();
-
+    ListOfNodes getAllNodes();
 
     FVector getPos();
 

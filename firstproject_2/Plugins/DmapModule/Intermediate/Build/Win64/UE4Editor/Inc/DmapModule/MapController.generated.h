@@ -15,8 +15,8 @@ class AActor;
 #endif
 #define DMAPMODULE_MapController_generated_h
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_SPARSE_DATA
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_SPARSE_DATA
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execgetOctreePos) \
 	{ \
@@ -34,6 +34,14 @@ class AActor;
 		P_NATIVE_END; \
 	} \
  \
+	DECLARE_FUNCTION(execprintTree) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		P_THIS->printTree(); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execLoadMap) \
 	{ \
 		P_GET_PROPERTY(UStrProperty,Z_Param_p_map_name); \
@@ -45,7 +53,7 @@ class AActor;
 	}
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execgetOctreePos) \
 	{ \
@@ -63,6 +71,14 @@ class AActor;
 		P_NATIVE_END; \
 	} \
  \
+	DECLARE_FUNCTION(execprintTree) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		P_THIS->printTree(); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execLoadMap) \
 	{ \
 		P_GET_PROPERTY(UStrProperty,Z_Param_p_map_name); \
@@ -74,7 +90,7 @@ class AActor;
 	}
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_INCLASS_NO_PURE_DECLS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUMapController(); \
 	friend struct Z_Construct_UClass_UMapController_Statics; \
@@ -83,7 +99,7 @@ public: \
 	DECLARE_SERIALIZER(UMapController)
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_INCLASS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_INCLASS \
 private: \
 	static void StaticRegisterNativesUMapController(); \
 	friend struct Z_Construct_UClass_UMapController_Statics; \
@@ -92,7 +108,7 @@ public: \
 	DECLARE_SERIALIZER(UMapController)
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_STANDARD_CONSTRUCTORS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UMapController(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMapController) \
@@ -105,7 +121,7 @@ private: \
 public:
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_ENHANCED_CONSTRUCTORS \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API UMapController(UMapController&&); \
@@ -116,31 +132,31 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UMapController); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UMapController)
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_PRIVATE_PROPERTY_OFFSET \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__m_wireframe_material() { return STRUCT_OFFSET(UMapController, m_wireframe_material); }
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_21_PROLOG
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_GENERATED_BODY_LEGACY \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_22_PROLOG
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_PRIVATE_PROPERTY_OFFSET \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_SPARSE_DATA \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_INCLASS \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_STANDARD_CONSTRUCTORS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_PRIVATE_PROPERTY_OFFSET \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_SPARSE_DATA \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_INCLASS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_GENERATED_BODY \
+#define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_PRIVATE_PROPERTY_OFFSET \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_SPARSE_DATA \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_INCLASS_NO_PURE_DECLS \
-	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_24_ENHANCED_CONSTRUCTORS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_PRIVATE_PROPERTY_OFFSET \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_SPARSE_DATA \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_INCLASS_NO_PURE_DECLS \
+	firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -22,6 +22,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_LoadMap();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_octreeExists();
+	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_printTree();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 // End Cross Module References
 	void UMapController::StaticRegisterNativesUMapController()
@@ -31,6 +32,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 			{ "getOctreePos", &UMapController::execgetOctreePos },
 			{ "LoadMap", &UMapController::execLoadMap },
 			{ "octreeExists", &UMapController::execoctreeExists },
+			{ "printTree", &UMapController::execprintTree },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -144,6 +146,31 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UMapController_printTree_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMapController_printTree_Statics::Function_MetaDataParams[] = {
+		{ "Category", "3d maps" },
+		{ "Comment", "// print out octree\n" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+		{ "ToolTip", "print out octree" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UMapController_printTree_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMapController, nullptr, "printTree", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMapController_printTree_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_printTree_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UMapController_printTree()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UMapController_printTree_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_UMapController_NoRegister()
 	{
 		return UMapController::StaticClass();
@@ -179,6 +206,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		{ &Z_Construct_UFunction_UMapController_getOctreePos, "getOctreePos" }, // 4000163366
 		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 2163754402
 		{ &Z_Construct_UFunction_UMapController_octreeExists, "octreeExists" }, // 3098360378
+		{ &Z_Construct_UFunction_UMapController_printTree, "printTree" }, // 328872593
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::Class_MetaDataParams[] = {
@@ -243,7 +271,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMapController, 1843886544);
+	IMPLEMENT_CLASS(UMapController, 1307481111);
 	template<> DMAPMODULE_API UClass* StaticClass<UMapController>()
 	{
 		return UMapController::StaticClass();

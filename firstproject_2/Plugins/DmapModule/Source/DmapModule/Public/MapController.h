@@ -15,6 +15,7 @@
 class UHierarchicalInstancedStaticMeshComponent;
 class AActor;
 class Octree;
+struct OctreeNode;
 
 // Description: This class can load in maps. 
 
@@ -33,6 +34,10 @@ class DMAPMODULE_API UMapController : public UActorComponent
 
     TArray< UMaterialInstanceDynamic*> m_materials;
 
+    AActor* m_octree_archetype;
+
+    float m_mesh_scalar = 1.0f;
+
     UPROPERTY()
     UMaterialInterface* m_wireframe_material;
 
@@ -49,7 +54,7 @@ protected:
     void drawNode(FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
 
     // given an array of points, draw a box from said 8 points
-    void drawBox(const TArray<FVector>& p_points, int p_level);
+    //void drawBox(const TArray<FVector>& p_points, int p_level);
 
     // draw an instance of an asteroid
     void drawAsteroid(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh);
@@ -65,14 +70,22 @@ protected:
 
     // choose color based on level
     FColor chooseColor(int p_level);
+    
+    // for testing
+    void unit_Test(AActor* p_asteroid_archetype);
 
 public:	
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 		
+    // load in user requested map
 	UFUNCTION(BlueprintCallable, Category = "3d maps")
 	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype/*, TArray<AActor*> p_octree_node_archetypes*/);
+
+    // print out octree
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    void printTree();
 
     UPROPERTY(EditAnywhere)
     float voxel_scalar;
