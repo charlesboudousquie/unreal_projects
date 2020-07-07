@@ -18,6 +18,22 @@ class AActor;
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_SPARSE_DATA
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execprintOctreeInfo) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(float*)Z_Param__Result=P_THIS->printOctreeInfo(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execgetMeshScalar) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(float*)Z_Param__Result=P_THIS->getMeshScalar(); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execgetOctreePos) \
 	{ \
 		P_FINISH; \
@@ -54,6 +70,22 @@ class AActor;
 
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execprintOctreeInfo) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(float*)Z_Param__Result=P_THIS->printOctreeInfo(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execgetMeshScalar) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(float*)Z_Param__Result=P_THIS->getMeshScalar(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execgetOctreePos) \
 	{ \

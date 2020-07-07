@@ -87,8 +87,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "3d maps")
     void printTree();
 
-    UPROPERTY(EditAnywhere)
-    float voxel_scalar;
+    //UPROPERTY(EditAnywhere)
+    //float voxel_scalar;
 
     UPROPERTY(EditAnywhere)
     float debug_line_width;
@@ -98,5 +98,13 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "3d maps")
     FVector getOctreePos();
+
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    float getMeshScalar() { return m_mesh_scalar; }
+
+    // print high level info about octree, mainly dimensions
+    // and center
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    float printOctreeInfo() { return m_mesh_scalar; }
 
 };

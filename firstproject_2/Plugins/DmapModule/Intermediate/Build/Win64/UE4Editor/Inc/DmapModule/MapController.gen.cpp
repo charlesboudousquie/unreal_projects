@@ -17,11 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	DMAPMODULE_API UClass* Z_Construct_UClass_UMapController();
 	ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 	UPackage* Z_Construct_UPackage__Script_DmapModule();
+	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_getMeshScalar();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_getOctreePos();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_LoadMap();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_octreeExists();
+	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_printOctreeInfo();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_printTree();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 // End Cross Module References
@@ -29,12 +31,47 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	{
 		UClass* Class = UMapController::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "getMeshScalar", &UMapController::execgetMeshScalar },
 			{ "getOctreePos", &UMapController::execgetOctreePos },
 			{ "LoadMap", &UMapController::execLoadMap },
 			{ "octreeExists", &UMapController::execoctreeExists },
+			{ "printOctreeInfo", &UMapController::execprintOctreeInfo },
 			{ "printTree", &UMapController::execprintTree },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UMapController_getMeshScalar_Statics
+	{
+		struct MapController_eventgetMeshScalar_Parms
+		{
+			float ReturnValue;
+		};
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UMapController_getMeshScalar_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MapController_eventgetMeshScalar_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMapController_getMeshScalar_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMapController_getMeshScalar_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMapController_getMeshScalar_Statics::Function_MetaDataParams[] = {
+		{ "Category", "3d maps" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UMapController_getMeshScalar_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMapController, nullptr, "getMeshScalar", nullptr, nullptr, sizeof(MapController_eventgetMeshScalar_Parms), Z_Construct_UFunction_UMapController_getMeshScalar_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_getMeshScalar_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMapController_getMeshScalar_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_getMeshScalar_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UMapController_getMeshScalar()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UMapController_getMeshScalar_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UMapController_getOctreePos_Statics
 	{
@@ -146,6 +183,41 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UMapController_printOctreeInfo_Statics
+	{
+		struct MapController_eventprintOctreeInfo_Parms
+		{
+			float ReturnValue;
+		};
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MapController_eventprintOctreeInfo_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::Function_MetaDataParams[] = {
+		{ "Category", "3d maps" },
+		{ "Comment", "// print high level info about octree, mainly dimensions\n// and center\n" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+		{ "ToolTip", "print high level info about octree, mainly dimensions\nand center" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMapController, nullptr, "printOctreeInfo", nullptr, nullptr, sizeof(MapController_eventprintOctreeInfo_Parms), Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UMapController_printOctreeInfo()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UMapController_printOctreeInfo_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UMapController_printTree_Statics
 	{
 #if WITH_METADATA
@@ -187,10 +259,6 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_debug_line_width;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_voxel_scalar_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_voxel_scalar;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_wireframe_material_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_m_wireframe_material;
@@ -203,9 +271,11 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_DmapModule,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UMapController_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UMapController_getMeshScalar, "getMeshScalar" }, // 3909612493
 		{ &Z_Construct_UFunction_UMapController_getOctreePos, "getOctreePos" }, // 4000163366
 		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 2163754402
 		{ &Z_Construct_UFunction_UMapController_octreeExists, "octreeExists" }, // 3098360378
+		{ &Z_Construct_UFunction_UMapController_printOctreeInfo, "printOctreeInfo" }, // 2171914443
 		{ &Z_Construct_UFunction_UMapController_printTree, "printTree" }, // 328872593
 	};
 #if WITH_METADATA
@@ -222,17 +292,12 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData[] = {
 		{ "Category", "MapController" },
+		{ "Comment", "//UPROPERTY(EditAnywhere)\n//float voxel_scalar;\n" },
 		{ "ModuleRelativePath", "Public/MapController.h" },
+		{ "ToolTip", "UPROPERTY(EditAnywhere)\nfloat voxel_scalar;" },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width = { "debug_line_width", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, debug_line_width), METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData)) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_voxel_scalar_MetaData[] = {
-		{ "Category", "MapController" },
-		{ "ModuleRelativePath", "Public/MapController.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_voxel_scalar = { "voxel_scalar", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, voxel_scalar), METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_voxel_scalar_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_voxel_scalar_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material_MetaData[] = {
 		{ "ModuleRelativePath", "Public/MapController.h" },
@@ -241,7 +306,6 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material = { "m_wireframe_material", nullptr, (EPropertyFlags)0x0040000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, m_wireframe_material), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMapController_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_voxel_scalar,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMapController_Statics::StaticCppClassTypeInfo = {
@@ -271,7 +335,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMapController, 1307481111);
+	IMPLEMENT_CLASS(UMapController, 1623945016);
 	template<> DMAPMODULE_API UClass* StaticClass<UMapController>()
 	{
 		return UMapController::StaticClass();

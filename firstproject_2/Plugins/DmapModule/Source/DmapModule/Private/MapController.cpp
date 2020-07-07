@@ -133,20 +133,30 @@ void UMapController::BeginPlay()
 void UMapController::drawNode(FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh)
 {
 
+    auto stat_mesh = p_mesh->GetStaticMesh();
+
+    // what is the scale of the mesh p_mesh is using????
+    auto bounds = stat_mesh->GetBounds().BoxExtent;
+    //auto radius = stat_mesh->GetBounds().SphereRadius;
+    //auto hier_loc = p_mesh->GetComponentLocation();
+    //auto hier_trans = p_mesh->GetComponentTransform();
+    //stat_mesh->
 
     auto rotator = FRotator::ZeroRotator;
     auto center = p_box.GetCenter();
     auto extents = p_box.GetExtent();
-    FTransform l_transform(rotator, center, extents /*/ m_mesh_scalar*//*{10,10,10}*/);
+    //FTransform l_transform(rotator, center, extents / m_mesh_scalar);
+    //FTransform l_transform(rotator, center, extents / radius);
+    FTransform l_transform(rotator, center, extents / bounds.X);
     //auto instance_id = p_mesh->AddInstance(l_transform);
     auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
-    FTransform instance_trans_local;
-    FTransform instance_trans_world;
-    p_mesh->GetInstanceTransform(instance_id, instance_trans_local);
-    p_mesh->GetInstanceTransform(instance_id, instance_trans_world, true);
-    auto instance_rel_trans = p_mesh->GetRelativeTransform();
-    auto instance_rel_loc = p_mesh->GetRelativeLocation();
-    auto world = p_mesh->GetWorld();
+    //FTransform instance_trans_local;
+    //FTransform instance_trans_world;
+    //p_mesh->GetInstanceTransform(instance_id, instance_trans_local);
+    //p_mesh->GetInstanceTransform(instance_id, instance_trans_world, true);
+    //auto instance_rel_trans = p_mesh->GetRelativeTransform();
+    //auto instance_rel_loc = p_mesh->GetRelativeLocation();
+    //auto world = p_mesh->GetWorld();
 }
 
 
@@ -300,20 +310,13 @@ void UMapController::drawAsteroid(const FVector & p_pos, UHierarchicalInstancedS
 
 }
 
-void UMapController::drawInternalNodes(/*TArray<AActor*> p_octree_node_archetypes*/)
+void UMapController::drawInternalNodes()
 {
 
     // clear out old instances
     for (auto l_mesh : m_meshes)
     {
         l_mesh->ClearInstances();
-    }
-
-    for (auto l_mesh : m_meshes)
-    {
-        auto stat_mesh = l_mesh->GetStaticMesh();
-        const auto& mat = stat_mesh->GetMaterial(0);
-        auto base_mat = mat->GetBaseMaterial();
     }
 
     // find mesh based on node's level

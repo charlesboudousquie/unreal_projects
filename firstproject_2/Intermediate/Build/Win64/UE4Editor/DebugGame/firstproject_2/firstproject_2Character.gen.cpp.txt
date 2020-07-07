@@ -1,0 +1,9 @@
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\DebugGame\firstproject_2\Definitions.firstproject_2.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Source\firstproject_2/firstproject_2Character.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\RootMotionSource.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Character.generated.h
+c:\users\boudo\documents\unreal projects\firstproject_2\intermediate\build\win64\ue4editor\inc\firstproject_2\firstproject_2Character.generated.h

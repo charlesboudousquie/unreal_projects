@@ -2,6 +2,12 @@
 
 # miscellaneous
 *.log
+*.response
+*.old
+firstproject_2/Saved/Config/CrashReportClient/*
+
+#debugging
+*.pdb
 
 # Compiled Object files
 *.slo
@@ -73,7 +79,7 @@ Build/*/**
 Saved/*
 
 # Compiled source files for the engine to use
-firstproject_2/Intermediate/
+firstproject_2/Plugins/DmapModule/Intermediate/*
 Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
