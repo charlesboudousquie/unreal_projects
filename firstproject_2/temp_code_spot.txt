@@ -1,0 +1,280 @@
+#pragma once
+
+#include "Math/Vector2D.h"
+#include "Math/IntPoint.h"
+#include <vector>
+
+struct Direction final : public FIntPoint
+{
+    static const std::vector<Direction> g_directions;
+
+    int m_index = -1;
+
+    operator FIntPoint();
+
+    // gets relative northwest and northeast directions,
+    // EX: p_dir is N, function will return NW and NE.
+    // EX:: p_dir is NE, func will return N and E
+    static std::pair<Direction, Direction> getRel_NW_NE_dirs(const Direction& p_dir);
+
+    static const Direction& getForwardLeft(const Direction& p_dir);
+    static const Direction& getForwardRight(const Direction& p_dir);
+
+    static const Direction& getDirBehind(const Direction& p_dir);
+
+    static const Direction& getDirBackLeft(const Direction& p_dir);
+    static const Direction& getDirBackRight(const Direction& p_dir);
+
+    static const Direction& getDirLeft(const Direction& p_dir);
+    static const Direction& getDirRight(const Direction& p_dir);
+
+
+};
+
+Direction::operator FIntPoint()
+{
+    return g_directions[m_index];
+}
+
+std::pair<Direction, Direction> Direction::getRel_NW_NE_dirs(const Direction & p_dir)
+{
+    return {getForwardLeft(p_dir), getForwardRight(p_dir)};
+}
+
+const Direction & Direction::getForwardLeft(const Direction & p_dir)
+{
+    p_dir.m_index
+
+
+}
+
+const Direction & Direction::getForwardRight(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+const Direction & Direction::getDirBehind(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+const Direction & Direction::getDirBackLeft(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+const Direction & Direction::getDirBackRight(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+const Direction & Direction::getDirLeft(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+const Direction & Direction::getDirRight(const Direction & p_dir)
+{
+    // TODO: insert return statement here
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma once
+
+#include "Math/IntPoint.h"
+#include "Math/Vector2D.h"
+#include <list>
+#include <vector>
+
+
+
+struct GridNode
+{
+    bool m_isWall = false;
+    bool m_opened = false;
+    bool m_closed = false;
+
+    float g, f, h;
+
+    FIntPoint m_pos; //row, col
+};
+
+
+class JPS_Solver
+{
+
+    static GridNode g_invalid_node;
+
+    TArray<TArray<GridNode>> m_grid; // row,col
+
+    typedef std::list<GridNode> GridPath;
+    typedef FVector2D Direction;
+    typedef FIntPoint GridPos;
+    
+
+    // if within grid and not a wall
+    bool isValid(const GridPos& p_pos);
+    bool withinGrid(const GridPos& p_pos);
+    bool isDiagonal(const Direction& p_dir);
+    GridNode& getNode(const GridPos& p_pos);
+    
+
+
+    TArray<GridNode> findSuccessors(GridPos m_current, GridPos m_start, GridPos m_goal);
+    TArray<FIntPoint> getNeighbors(const FIntPoint& p_point);
+    void prune(GridPos p_current, TArray<GridPos>& p_neighbors);
+    GridNode jump(GridPos p_current, Direction p_dir, GridPos p_start, GridPos p_goal);//(x, direction(x, n), s, g)
+    Direction getDirection(FIntPoint p_current, FIntPoint p_next);
+    GridNode step(GridPos p_current, Direction p_dir);
+
+
+public:
+
+    GridPath getPath(FIntPoint start, FIntPoint goal);
+
+
+
+};
+
+
+#include "JPS_Solver.h"
+#include <vector>
+
+const float sqrt_2 = sqrt(2.0f);
+
+const std::vector<Direction> Direction::g_directions =
+{
+    {0,1},         // 0 - North
+    {sqrt_2,sqrt_2},         // 1 - North East
+    {1,0},         // 2 - East
+    {sqrt_2, -sqrt_2},         // 3 - South East
+    {0,-1},         // 4 - South
+    {-sqrt_2,-sqrt_2},         // 5 - South West
+    {-sqrt_2,0},         // 6 - West
+    {-sqrt_2,sqrt_2},         // 7 - North West
+};
+
+GridNode JPS_Solver::g_invalid_node
+{
+ false,
+ false,
+ false,
+-1.0f, -1.0f, -1.0f,
+{-1.0f,-1.0f} };
+
+JPS_Solver::GridPath JPS_Solver::getPath(GridPos start, GridPos goal)
+{
+
+
+
+
+}
+
+bool JPS_Solver::isValid(const GridPos & p_pos)
+{
+    return withinGrid(p_pos) && (getNode(p_pos).m_isWall == false);
+}
+
+bool JPS_Solver::withinGrid(const GridPos & p_pos)
+{
+    return (p_pos.X < m_grid.Num()) && // row
+        (p_pos.Y < m_grid[0].Num()) &&  // col
+        (p_pos.X >= 0) &&
+        (p_pos.Y >= 0);
+}
+
+GridNode& JPS_Solver::getNode(const GridPos & p_pos)
+{
+    return m_grid[p_pos.X][p_pos.Y];
+}
+
+TArray<GridNode> JPS_Solver::findSuccessors(GridPos m_current, GridPos m_start, GridPos m_goal)
+{
+    //Algorithm 1 Identify Successors
+    //Require : x: current node, s : start, g : goal
+    //    1 : successors(x) ← ∅
+    TArray<GridNode> l_successors;
+    //    2 : neighbours(x) ← prune(x, neighbours(x))
+    TArray<GridNode> l_neighbors;
+    prune(m_current, getNeighbors(m_current));
+    //    3 : for all n ∈ neighbours(x) do
+    for (const auto& neighbor : l_neighbors)
+    {
+        //    4 : n ← jump(x, direction(x, n), s, g)
+        auto n = jump(m_current, getDirection(m_current, neighbor.m_pos), m_start, m_goal);
+        //    5 : add n to successors(x)
+        if (isValid(n.m_pos))
+        {
+            l_successors.Add(n);
+        }
+    }
+
+    //    6 : return successors(x)
+    return l_successors;
+}
+
+GridNode JPS_Solver::jump(GridPos p_current, Direction p_dir, GridPos p_start, GridPos p_goal)
+{
+
+    //Require: x: initial node,
+    //    d : direction, s : start, g : goal
+    //    1 : n ← step(x, d)
+    auto n = step(p_current, p_dir);
+    //    2 : if n is an obstacle or is outside the grid then
+    if (isValid(n.m_pos) == false)
+    {
+    //    3 :       return null
+        return g_invalid_node;
+    }
+    //    4 : if n = g then
+    if (n.m_pos == p_goal)
+    {
+    //    5 :       return n
+        return n;
+    }
+    //    6 : if ∃ n' ∈ neighbours(n) s.t. n' is forced then    
+    if (forcedNeighbor(n))
+    {
+        //    7 :       return n
+        return n;
+    }
+    //    8 : if d is diagonal then
+    if (isDiagonal(p_dir))
+    {
+        //    9 :       for all i ∈{ 1, 2 } do
+        //    10 :      if jump(n, di, s, g) is not null then
+        //    11 :              return n
+    }
+    
+    //    12 : return jump(n, d, s, g)
+    return jump(n.m_pos, p_dir, p_start, p_goal);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,16 +8,18 @@
 			"DmapFactoryDragDrop.cpp.obj",
 			"DmapModule.cpp.obj",
 			"Get3dMapList.cpp.obj",
+			"MapController.cpp.obj",
 			"Octree.cpp.obj",
-			"MapController.cpp.obj"
+			"GridDirection.cpp.obj",
+			"JPS_Solver.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",
 			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
-			"Get3dMapList.gen.cpp.obj",
 			"DmapModule.init.gen.cpp.obj",
+			"Get3dMapList.gen.cpp.obj",
 			"MapController.gen.cpp.obj"
 		]
 	}

@@ -33,10 +33,9 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Development\UnrealEd\SharedPCH.UnrealEd.NonOptimized.ShadowErrors.h.obj"
-"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\MapController.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\GridDirection.cpp.obj"
+"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\JPS_Solver.cpp.obj"
 "C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\Module.DmapModule.cpp.obj"
-"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\DmapModule.init.gen.cpp.obj"
-"C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\MapController.gen.cpp.obj"
 "C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\DebugGame\DmapModule\Module.DmapModule.gen.cpp.obj"
 "C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Development\Default.rc2.res"
 "delayimp.lib"

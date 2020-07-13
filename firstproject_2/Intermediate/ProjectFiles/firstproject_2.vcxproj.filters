@@ -148,9 +148,21 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Get3dMapList.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\GridDirection.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Get3dMapList.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_Solver.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridDirection.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
   </ItemGroup>
