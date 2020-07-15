@@ -6,35 +6,38 @@
 
 #include "Math/Vector2D.h"
 #include "Math/IntPoint.h"
-#include <vector>
+#include <array>
 #include <utility>
 
 struct DMAPMODULE_API GridDirection final : public FIntPoint
 {
-    static const std::vector<GridDirection> g_directions;
+    static std::array<GridDirection,8> g_directions;
+    // get dir from a to b
+    static GridDirection& getDirection(FIntPoint A, FIntPoint B);
 
-    GridDirection(int p_index, FVector2D p_val);
+    GridDirection(bool p_diagonal, int p_index, FVector2D p_val);
 
-    short m_index;
-    FVector2D m_value;
+    const bool m_diagonal;
+    const short m_index;
+    const FVector2D m_value;
 
     //operator FVector2D();
 
     // gets relative northwest and northeast GridDirections,
     // EX: p_dir is N, function will return NW and NE.
     // EX:: p_dir is NE, func will return N and E
-    std::pair<GridDirection, GridDirection> getRel_NW_NE_dirs();
+    //std::pair<GridDirection, GridDirection> getRel_NW_NE_dirs();
 
-    const GridDirection& getForwardLeft() const;
-    const GridDirection& getForwardRight()const;
+    GridDirection& getForwardLeft() ;
+    GridDirection& getForwardRight();
 
-    const GridDirection& getDirBehind()const;
+    GridDirection& getDirBehind();
 
-    const GridDirection& getDirBackLeft()const;
-    const GridDirection& getDirBackRight()const;
+    GridDirection& getDirBackLeft();
+    GridDirection& getDirBackRight();
 
-    const GridDirection& getDirLeft()const;
-    const GridDirection& getDirRight()const;
+    GridDirection& getDirLeft();
+    GridDirection& getDirRight();
 
     bool isDiagonal() const;
 
