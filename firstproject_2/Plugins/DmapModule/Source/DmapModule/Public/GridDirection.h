@@ -12,7 +12,8 @@
 struct DMAPMODULE_API GridDirection final : public FIntPoint
 {
     static std::array<GridDirection,8> g_directions;
-    // get dir from a to b
+
+    // get dir from a to b aka B-A
     static GridDirection& getDirection(FIntPoint A, FIntPoint B);
 
     GridDirection(bool p_diagonal, int p_index, FVector2D p_val);

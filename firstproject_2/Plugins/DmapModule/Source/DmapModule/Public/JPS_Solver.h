@@ -53,7 +53,7 @@ class DMAPMODULE_API JPS_Solver
     // if within grid and not a wall
     bool isValid(const GridPos& p_pos);
     bool withinGrid(const GridPos& p_pos);
-    bool hasForcedNeighbor(const GridNode& p_node);
+    bool hasForcedNeighbor(const GridNode& p_node, GridDirection& p_dir);
 
     GridNode& getNode(const GridPos& p_pos);
 
@@ -62,8 +62,8 @@ class DMAPMODULE_API JPS_Solver
     TArray<GridNode> findSuccessors(GridPos m_current);
     TArray<GridPos> getNeighbors(const GridPos& p_point);
     void prune(GridPos p_current, TArray<GridPos>& p_neighbors);
-    GridNode jump(GridPos p_current, GridDirection& p_dir);//(x, direction(x, n), s, g)
-    GridNode step(GridPos p_current, GridDirection& p_dir);
+    GridNode& jump(GridPos p_current, GridDirection& p_dir);//(x, direction(x, n), s, g)
+    GridNode& step(GridPos p_current, GridDirection& p_dir);
 
 
 public:
