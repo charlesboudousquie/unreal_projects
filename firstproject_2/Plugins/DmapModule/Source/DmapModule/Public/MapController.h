@@ -8,7 +8,6 @@
 #include "Containers/UnrealString.h"
 
 #include <memory>
-//class /*DMAPMODULE_API*/ Octree; 
 
 #include "MapController.generated.h"
 

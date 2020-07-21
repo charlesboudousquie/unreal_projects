@@ -25,6 +25,10 @@
 		{
 			"Name": "StaticMeshEditorExtension",
 			"Enabled": true
+		},
+		{
+			"Name": "WebBrowserWidget",
+			"Enabled": true
 		}
 	]
 }

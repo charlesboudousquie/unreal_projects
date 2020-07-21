@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
+
 #include "Math/IntPoint.h"
 #include "Math/Vector2D.h"
 #include <list>
@@ -11,6 +13,7 @@
 #include <unordered_set>
 
 #include "GridDirection.h"
+#include "JPS_Solver.generated.h"
 
 struct GridNode
 {
@@ -32,8 +35,11 @@ struct GridComparator
     }
 };
 
-class DMAPMODULE_API JPS_Solver
+UCLASS(ClassGroup = (Custom), BlueprintType, meta = (BlueprintSpawnableComponent))
+class DMAPMODULE_API UJPS_Solver : public UActorComponent
 {
+
+    GENERATED_BODY()
 
     typedef FIntPoint GridPos;
     typedef std::vector<GridPos> GridPath;
@@ -52,24 +58,36 @@ class DMAPMODULE_API JPS_Solver
 
     // if within grid and not a wall
     bool isValid(const GridPos& p_pos);
-    bool withinGrid(const GridPos& p_pos);
+    
     bool hasForcedNeighbor(const GridNode& p_node, GridDirection& p_dir);
 
     GridNode& getNode(const GridPos& p_pos);
 
     GridPath getPath(GridPos p_start, GridPos p_goal);
 
-    TArray<GridNode> findSuccessors(GridPos m_current);
+    TArray<GridPos> findSuccessors(GridPos m_current);
     TArray<GridPos> getNeighbors(const GridPos& p_point);
     void prune(GridPos p_current, TArray<GridPos>& p_neighbors);
     GridNode& jump(GridPos p_current, GridDirection& p_dir);//(x, direction(x, n), s, g)
     GridNode& step(GridPos p_current, GridDirection& p_dir);
 
+    void giveGrid(const TArray<TArray<bool>>& p_data);
 
 public:
 
-    GridPath solve(GridPos start, GridPos goal);
+    // checks if position is inside current grid
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    bool withinGrid(const FIntPoint& p_pos);
 
+    // resize grid
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    void resizeGrid(int rows, int cols);
 
+    // user selects start and goal
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    void solve(FIntPoint start, FIntPoint goal);
+
+    // constructor with default grid
+    UJPS_Solver();
 
 };

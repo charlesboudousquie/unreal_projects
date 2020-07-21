@@ -2,8 +2,10 @@
 
 #include "JPS_Solver.h"
 #include <vector>
+#include <algorithm>
+#include <cassert>
 
-GridNode JPS_Solver::g_invalid_node
+GridNode UJPS_Solver::g_invalid_node
 {
  false,
  false,
@@ -12,7 +14,35 @@ GridNode JPS_Solver::g_invalid_node
 nullptr,
 {-1,-1} };
 
-JPS_Solver::GridPath JPS_Solver::solve(GridPos start, GridPos goal)
+void UJPS_Solver::giveGrid(const TArray<TArray<bool>>& p_data)
+{
+    int row_count = p_data.Num();
+    assert(row_count < 1);
+    int col_count = p_data[0].Num();
+    assert(col_count < 1);
+
+    resizeGrid(row_count, col_count);
+
+    // now copy grid
+    for (int row = 0; row < row_count; row++)
+    {
+        for (int col = 0; col < col_count; col++)
+        {
+            m_grid[row][col].m_isWall = p_data[row][col];
+        }
+    }
+}
+
+void UJPS_Solver::resizeGrid(int rows, int cols)
+{
+    m_grid.Reset();
+    m_grid.SetNum(rows);
+    std::for_each(m_grid.begin(), m_grid.end(),
+        [&](TArray<GridNode>& p_row) {p_row.SetNum(cols); });
+
+}
+
+/*UJPS_Solver::GridPath*/void UJPS_Solver::solve(FIntPoint start, FIntPoint goal)
 {
 
     this->clearState();
@@ -32,25 +62,44 @@ JPS_Solver::GridPath JPS_Solver::solve(GridPos start, GridPos goal)
 
         auto successors = findSuccessors(top->m_pos);
 
+        // add each successor to frontier
+        for (auto successor : successors)
+        {
+            m_frontier.push(&getNode(successor));
+        }
 
     }
 
-    return getPath(start, goal);
+    //return getPath(start, goal);
 
 }
 
-void JPS_Solver::clearState()
+UJPS_Solver::UJPS_Solver()
+{
+    TArray<TArray<bool>> defaultGrid
+    {
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0},
+    };
+
+    giveGrid(defaultGrid);
+
+}
+
+void UJPS_Solver::clearState()
 {
     m_frontier = {};
     m_start = m_goal = GridPos::NoneValue;
 }
 
-bool JPS_Solver::isValid(const GridPos & p_pos)
+bool UJPS_Solver::isValid(const GridPos & p_pos)
 {
     return withinGrid(p_pos) && (getNode(p_pos).m_isWall == false);
 }
 
-bool JPS_Solver::withinGrid(const GridPos & p_pos)
+bool UJPS_Solver::withinGrid(const FIntPoint & p_pos)
 {
     return (p_pos.X < m_grid.Num()) && // row
         (p_pos.Y < m_grid[0].Num()) &&  // col
@@ -58,7 +107,7 @@ bool JPS_Solver::withinGrid(const GridPos & p_pos)
         (p_pos.Y >= 0);
 }
 
-bool JPS_Solver::hasForcedNeighbor(const GridNode & p_node, GridDirection & p_dir)
+bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, GridDirection & p_dir)
 {
     auto our_pos = p_node.m_pos;
 
@@ -120,12 +169,12 @@ bool JPS_Solver::hasForcedNeighbor(const GridNode & p_node, GridDirection & p_di
     return false;
 }
 
-GridNode& JPS_Solver::getNode(const GridPos & p_pos)
+GridNode& UJPS_Solver::getNode(const GridPos & p_pos)
 {
     return m_grid[p_pos.X][p_pos.Y];
 }
 
-JPS_Solver::GridPath JPS_Solver::getPath(GridPos p_start, GridPos p_goal)
+UJPS_Solver::GridPath UJPS_Solver::getPath(GridPos p_start, GridPos p_goal)
 {
     GridPath l_path;
 
@@ -142,12 +191,12 @@ JPS_Solver::GridPath JPS_Solver::getPath(GridPos p_start, GridPos p_goal)
 
 }
 
-TArray<GridNode> JPS_Solver::findSuccessors(GridPos m_current)
+TArray<UJPS_Solver::GridPos> UJPS_Solver::findSuccessors(GridPos m_current)
 {
     //Algorithm 1 Identify Successors
     //Require : x: current node, s : start, g : goal
     //    1 : successors(x) ← ∅
-    TArray<GridNode> l_successors;
+    TArray<GridPos> l_successors;
     //    2 : neighbours(x) ← prune(x, neighbours(x))
     TArray<GridPos> l_neighbors = getNeighbors(m_current);
     prune(m_current, l_neighbors);
@@ -162,7 +211,7 @@ TArray<GridNode> JPS_Solver::findSuccessors(GridPos m_current)
             //    5 : add n to successors(x)
             if (isValid(n.m_pos))
             {
-                l_successors.Add(n);
+                l_successors.Add(n.m_pos);
             }
         }
 
@@ -172,7 +221,7 @@ TArray<GridNode> JPS_Solver::findSuccessors(GridPos m_current)
     return l_successors;
 }
 
-TArray<JPS_Solver::GridPos> JPS_Solver::getNeighbors(const GridPos & p_point)
+TArray<UJPS_Solver::GridPos> UJPS_Solver::getNeighbors(const GridPos & p_point)
 {
 
     TArray<GridPos> l_neighbors;
@@ -244,12 +293,12 @@ TArray<JPS_Solver::GridPos> JPS_Solver::getNeighbors(const GridPos & p_point)
 
 }
 
-void JPS_Solver::prune(GridPos p_current, TArray<GridPos>& p_neighbors)
+void UJPS_Solver::prune(GridPos p_current, TArray<GridPos>& p_neighbors)
 {
 
 }
 
-GridNode& JPS_Solver::jump(GridPos p_current, GridDirection& p_dir)
+GridNode& UJPS_Solver::jump(GridPos p_current, GridDirection& p_dir)
 {
 
     //Require: x: initial node,
@@ -295,7 +344,7 @@ GridNode& JPS_Solver::jump(GridPos p_current, GridDirection& p_dir)
     return jump(n.m_pos, p_dir);
 }
 
-GridNode& JPS_Solver::step(GridPos p_current, GridDirection & p_dir)
+GridNode& UJPS_Solver::step(GridPos p_current, GridDirection & p_dir)
 {
     auto newPos = p_current + p_dir;
     return getNode(newPos);
