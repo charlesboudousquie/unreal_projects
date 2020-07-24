@@ -1306,6 +1306,7 @@
     <None Include="..\..\firstproject_2.uproject" />
     <None Include="..\..\Source\firstproject_2.Target.cs" />
     <None Include="..\..\Source\firstproject_2Editor.Target.cs" />
+    <None Include="..\..\temp_code_spot.txt" />
     <None Include="..\..\Config\DefaultEditor.ini" />
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini" />
     <None Include="..\..\Config\DefaultEngine.ini" />
@@ -1319,9 +1320,12 @@
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapModule.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Get3dMapList.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridDirection.cpp" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_Solver.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\MapController.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree.cpp" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\UpdateablePriorityQueue.cpp" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapAsset.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapFactory.h" />
@@ -1332,6 +1336,7 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\MapController.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Octree.h" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\UpdateablePriorityQueue.h" />
     <None Include="..\..\Plugins\DmapModule\DmapModule.uplugin" />
     <None Include="..\..\Plugins\DmapModule\Resources\Icon128.png" />
     <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs" />

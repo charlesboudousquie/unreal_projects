@@ -4,7 +4,7 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealPak\UnrealPak.Target.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealPak\UnrealPak.Build.cs" />
     <Filter Include="Private">
-      <UniqueIdentifier>{547079D9-7724-4A2D-9A77-739194AD496B}</UniqueIdentifier>
+      <UniqueIdentifier>{EBC0AA16-7F10-4BB6-AC8F-96664FD5D4B5}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealPak\Private\UnrealPak.cpp">
       <Filter>Private</Filter>

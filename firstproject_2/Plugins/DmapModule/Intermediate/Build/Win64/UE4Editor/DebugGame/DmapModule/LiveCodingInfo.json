@@ -11,7 +11,9 @@
 			"GridDirection.cpp.obj",
 			"MapController.cpp.obj",
 			"Octree.cpp.obj",
-			"JPS_Solver.cpp.obj"
+			"GridNode.cpp.obj",
+			"JPS_Solver.cpp.obj",
+			"UpdateablePriorityQueue.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",

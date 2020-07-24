@@ -4,7 +4,7 @@
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\DatasmithSDK.Target.cs" />
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\DatasmithSDK.Build.cs" />
     <Filter Include="Documentation">
-      <UniqueIdentifier>{1A7C30A1-D985-42A9-B167-D13F73909196}</UniqueIdentifier>
+      <UniqueIdentifier>{CB733314-9331-4E81-8F05-357718F8D5C5}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\Documentation\1.Welcome.md">
       <Filter>Documentation</Filter>
@@ -19,7 +19,7 @@
       <Filter>Documentation</Filter>
     </None>
     <Filter Include="Documentation\build">
-      <UniqueIdentifier>{215C6AD1-ACA9-42DF-B9F4-848FFA525EEE}</UniqueIdentifier>
+      <UniqueIdentifier>{A5DE1DCB-79D0-45A1-B8A0-6601F712881F}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\Documentation\build\DatasmithSDK_config.txt">
       <Filter>Documentation\build</Filter>
@@ -40,7 +40,7 @@
       <Filter>Documentation\build</Filter>
     </None>
     <Filter Include="Documentation\build\output">
-      <UniqueIdentifier>{8F1ECE1F-170C-44E9-AC8B-9F65666C3385}</UniqueIdentifier>
+      <UniqueIdentifier>{0B375AF6-68CE-470B-9976-CFAA86CB2E8F}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\Documentation\build\output\Datasmith SDK Documentation.html">
       <Filter>Documentation\build\output</Filter>
@@ -49,7 +49,7 @@
       <Filter>Documentation\build\output</Filter>
     </None>
     <Filter Include="Private">
-      <UniqueIdentifier>{B2121A0F-987C-408D-8A32-8F4D4E58342B}</UniqueIdentifier>
+      <UniqueIdentifier>{4B9247E0-24BD-465F-B27A-7123AD2845A6}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\Enterprise\Datasmith\DatasmithSDK\Private\DatasmithSDK.cpp">
       <Filter>Private</Filter>

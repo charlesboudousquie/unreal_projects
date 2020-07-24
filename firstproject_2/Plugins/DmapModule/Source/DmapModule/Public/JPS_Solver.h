@@ -12,20 +12,22 @@
 #include <queue>
 #include <unordered_set>
 
+#include "GridNode.h"
+
 #include "GridDirection.h"
 #include "JPS_Solver.generated.h"
 
-struct GridNode
-{
-    bool m_isWall = false;
-    bool m_opened = false;
-    bool m_closed = false;
-
-    float g = -1.0f, f = -1.0f, h = -1.0f;
-
-    GridNode* m_parent = nullptr;
-    FIntPoint m_pos{-1,-1}; //row, col
-};
+//struct GridNode
+//{
+//    bool m_isWall = false;
+//    bool m_opened = false;
+//    bool m_closed = false;
+//
+//    float g = 0.0f, f = 0.0f, h = 0.0f;
+//
+//    GridNode* m_parent = nullptr;
+//    FIntPoint m_pos{-1,-1}; //row, col
+//};
 
 struct GridComparator
 {
@@ -43,12 +45,13 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
 
     typedef FIntPoint GridPos;
     typedef std::vector<GridPos> GridPath;
+    typedef TArray<TArray<GridNode>> GRID;
 
     static GridNode g_invalid_node;
 
-    GridPos m_start, m_goal;
+    float octileHeuristic(const GridPos& A, const GridPos& B);
 
-    TArray<TArray<GridNode>> m_grid; // row,col
+    GRID m_grid; // row,col
 
     // frontier
     std::priority_queue<GridNode*, std::vector<GridNode*>, GridComparator> m_frontier;
@@ -59,21 +62,41 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
     // if within grid and not a wall
     bool isValid(const GridPos& p_pos);
     
-    bool hasForcedNeighbor(const GridNode& p_node, GridDirection& p_dir);
+    bool hasForcedNeighbor(const GridNode& p_node, FIntPoint p_dir);
 
     GridNode& getNode(const GridPos& p_pos);
 
     GridPath getPath(GridPos p_start, GridPos p_goal);
 
+    void processNeighbors(const GridPos& p_curr, const TArray<GridPos>& p_neighbors);
+
+    // find neighbors and do A* stuff on them
     TArray<GridPos> findSuccessors(GridPos m_current);
+    // simply gets neighbors that can actually be reached,
+    // should only be called on the start node
     TArray<GridPos> getNeighbors(const GridPos& p_point);
-    void prune(GridPos p_current, TArray<GridPos>& p_neighbors);
-    GridNode& jump(GridPos p_current, GridDirection& p_dir);//(x, direction(x, n), s, g)
-    GridNode& step(GridPos p_current, GridDirection& p_dir);
+    // used for getting noteworthy neighbors during jumps
+    void prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_neighbors);
+
+
+    GridNode& jump(GridPos p_current, FIntPoint p_dir);
+    GridNode& step(GridPos p_current, FIntPoint p_dir);
 
     void giveGrid(const TArray<TArray<bool>>& p_data);
 
+    // error sound made when path cannot be found
+    void playFailedPathSound();
+    
+    class UAudioComponent* m_audio_comp;
+
 public:
+
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    void setStartFunc(const FIntPoint& p_pos) { m_start = p_pos; }
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+    void setGoalFunc(const FIntPoint& p_pos){ m_goal = p_pos; }
+
+
 
     // checks if position is inside current grid
     UFUNCTION(BlueprintCallable, Category = "3d maps")
@@ -89,5 +112,14 @@ public:
 
     // constructor with default grid
     UJPS_Solver();
+
+    UPROPERTY(EditAnywhere)
+    FIntPoint m_start;
+
+    UPROPERTY(EditAnywhere)
+    class USoundCue* m_cue;
+
+    UPROPERTY(EditAnywhere)
+    FIntPoint m_goal;
 
 };
