@@ -22,9 +22,7 @@ class DMAPMODULE_API UpdateablePriorityQueue
     typedef TArray<TArray<GridNode>> GRID;
 
     GRID* m_grid;
-    GRID& getGrid();
-    // pointer to grid that queue uses
-    void setGrid(GRID* p_grid) { m_grid = p_grid; }
+    
 
     std::vector<ID> m_queue;
     std::map<ID, Q_POS> m_register; // id, position in queue
@@ -54,10 +52,21 @@ class DMAPMODULE_API UpdateablePriorityQueue
     void bubbleUp(int current);
     void bubbleDown(int parent);
 
-    void update(ID new_point);
 
 public:
-    //void updateIem(Point new_point);
+
+    bool isEmpty() { return m_queue.empty(); }
+
+    // clear queue and register
+    void clear();
+
+    GRID& getGrid();
+    // pointer to grid that queue uses
+    void setGrid(GRID* p_grid) { m_grid = p_grid; }
+
+    // either updates existing item on queue or
+    // adds it to queue
+    void updateOrPush(ID new_point);
     ID top();
     void pop();
 	UpdateablePriorityQueue();

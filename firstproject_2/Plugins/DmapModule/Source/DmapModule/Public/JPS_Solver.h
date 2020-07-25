@@ -13,29 +13,9 @@
 #include <unordered_set>
 
 #include "GridNode.h"
-
 #include "GridDirection.h"
+#include "UpdateablePriorityQueue.h"
 #include "JPS_Solver.generated.h"
-
-//struct GridNode
-//{
-//    bool m_isWall = false;
-//    bool m_opened = false;
-//    bool m_closed = false;
-//
-//    float g = 0.0f, f = 0.0f, h = 0.0f;
-//
-//    GridNode* m_parent = nullptr;
-//    FIntPoint m_pos{-1,-1}; //row, col
-//};
-
-struct GridComparator
-{
-    bool operator()(const GridNode* lhs, const GridNode* rhs)
-    {
-        return rhs->f < lhs->f;
-    }
-};
 
 UCLASS(ClassGroup = (Custom), BlueprintType, meta = (BlueprintSpawnableComponent))
 class DMAPMODULE_API UJPS_Solver : public UActorComponent
@@ -54,8 +34,9 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
     GRID m_grid; // row,col
 
     // frontier
-    std::priority_queue<GridNode*, std::vector<GridNode*>, GridComparator> m_frontier;
-
+    //std::priority_queue<GridNode*, std::vector<GridNode*>, GridComparator> m_frontier;
+    UpdateablePriorityQueue m_frontier;
+    
     // clears frontier and visited node list
     void clearState();
 
@@ -66,21 +47,22 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
 
     GridNode& getNode(const GridPos& p_pos);
 
-    GridPath getPath(GridPos p_start, GridPos p_goal);
+    GridPath getPath();
 
-    void processNeighbors(const GridPos& p_curr, const TArray<GridPos>& p_neighbors);
+    void processNeighbor(const GridPos& p_curr, const GridPos& p_jump_point /*const TArray<GridPos>& p_neighbors*/);
 
     // find neighbors and do A* stuff on them
-    TArray<GridPos> findSuccessors(GridPos m_current);
+    /*TArray<GridPos>*/void findSuccessors(GridPos m_current);
     // simply gets neighbors that can actually be reached,
     // should only be called on the start node
     TArray<GridPos> getNeighbors(const GridPos& p_point);
     // used for getting noteworthy neighbors during jumps
     void prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_neighbors);
 
-
+    // give parent node and direction to go in
     GridNode& jump(GridPos p_current, FIntPoint p_dir);
-    GridNode& step(GridPos p_current, FIntPoint p_dir);
+    // adds dir to current and retrieves that node
+    GridPos step(GridPos p_current, FIntPoint p_dir);
 
     void giveGrid(const TArray<TArray<bool>>& p_data);
 

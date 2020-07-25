@@ -1,9 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "GridDirection.h"
+
 #include <algorithm>
 #include <cstdint>
 
-#include "GridDirection.h"
 #include "Math/UnrealMathUtility.h"
 
 //const float sqrt_2 = sqrt(2.0f);
@@ -114,6 +115,11 @@ FIntPoint GridDirection::getDirection(FIntPoint A, FIntPoint B)
 
 }
 
+bool GridDirection::isDiagonal(FIntPoint p_dir)
+{
+    return p_dir.X != 0 && p_dir.Y != 0;
+}
+
 //GridDirection::GridDirection(bool p_diagonal, int p_index, FVector2D p_val)
 //    : m_diagonal(p_diagonal), m_index(p_index), m_value(p_val)
 //{
@@ -176,31 +182,31 @@ FIntPoint GridDirection::getDirection(FIntPoint A, FIntPoint B)
 //}
 
 
-
-FIntPoint GridDirection::getForwardLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-
-}
-
-FIntPoint GridDirection::getForwardRight(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-
-FIntPoint GridDirection::getBehind(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-
-FIntPoint GridDirection::getBackLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-FIntPoint GridDirection::getBackRight(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-
-FIntPoint GridDirection::getLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-FIntPoint GridDirection::getRight(const FIntPoint& p_current,const FIntPoint& p_dir)
-{
-}
-
+//
+//FIntPoint GridDirection::getForwardLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//
+//}
+//
+//FIntPoint GridDirection::getForwardRight(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//
+//FIntPoint GridDirection::getBehind(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//
+//FIntPoint GridDirection::getBackLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//FIntPoint GridDirection::getBackRight(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//
+//FIntPoint GridDirection::getLeft(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//FIntPoint GridDirection::getRight(const FIntPoint& p_current,const FIntPoint& p_dir)
+//{
+//}
+//

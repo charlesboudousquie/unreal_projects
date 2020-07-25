@@ -3,6 +3,7 @@
 #include "UpdateablePriorityQueue.h"
 
 #include <iostream>
+#include <cassert>
 
 UpdateablePriorityQueue::UpdateablePriorityQueue()
 {
@@ -13,6 +14,12 @@ UpdateablePriorityQueue::~UpdateablePriorityQueue()
 }
 
 
+
+void UpdateablePriorityQueue::clear()
+{
+    m_queue.clear();
+    m_register.clear();
+}
 
 UpdateablePriorityQueue::GRID& UpdateablePriorityQueue::getGrid()
 {
@@ -95,9 +102,9 @@ void UpdateablePriorityQueue::bubbleDown(int parent)
     }
 }
 
-void UpdateablePriorityQueue::update(ID new_point)
+void UpdateablePriorityQueue::updateOrPush(ID new_point)
 {
-
+    // gets value of point on the grid given to us by the JPS_Solver
     int new_value = GetVal(new_point);
 
     // if value is in queue
@@ -111,7 +118,7 @@ void UpdateablePriorityQueue::update(ID new_point)
 
         // assume we always bubble up because the JPS_Solver
         // never adds a worse node to the queue
-
+        assert(new_value < old_value);
         bubbleUp(pos);
 
         //// if cheaper

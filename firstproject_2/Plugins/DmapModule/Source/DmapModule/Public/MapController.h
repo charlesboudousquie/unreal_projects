@@ -30,7 +30,6 @@ class DMAPMODULE_API UMapController : public UActorComponent
     
     // meshes for the nodes in each level of the tree
     TArray<UHierarchicalInstancedStaticMeshComponent*> m_meshes;
-
     TArray< UMaterialInstanceDynamic*> m_materials;
 
     AActor* m_octree_archetype;

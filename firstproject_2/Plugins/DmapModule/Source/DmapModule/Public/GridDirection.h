@@ -17,7 +17,7 @@ struct DMAPMODULE_API GridDirection final : public FIntPoint
     static FIntPoint getDirection(FIntPoint A, FIntPoint B);
     static bool isDiagonal(FIntPoint p_dir);
 
-    GridDirection(bool p_diagonal, int p_index, FVector2D p_val);
+    //GridDirection(bool p_diagonal, int p_index, FVector2D p_val);
 
     //const bool m_diagonal;
     //const short m_index;
@@ -43,16 +43,16 @@ struct DMAPMODULE_API GridDirection final : public FIntPoint
 
     //bool isDiagonal() const;
 
-    static FIntPoint getForwardLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
-    static FIntPoint getForwardRight(const FIntPoint& p_current,const FIntPoint& p_dir);
-           
-    static FIntPoint getBehind(const FIntPoint& p_current,const FIntPoint& p_dir);
-           
-    static FIntPoint getBackLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
-    static FIntPoint getBackRight(const FIntPoint& p_current,const FIntPoint& p_dir);
-           
-    static FIntPoint getLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
-    static FIntPoint getRight(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //static FIntPoint getForwardLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //static FIntPoint getForwardRight(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //       
+    //static FIntPoint getBehind(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //       
+    //static FIntPoint getBackLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //static FIntPoint getBackRight(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //       
+    //static FIntPoint getLeft(const FIntPoint& p_current,const FIntPoint& p_dir);
+    //static FIntPoint getRight(const FIntPoint& p_current,const FIntPoint& p_dir);
 
 
 };

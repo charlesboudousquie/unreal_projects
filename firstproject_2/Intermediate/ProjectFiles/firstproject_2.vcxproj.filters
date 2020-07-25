@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\firstproject_2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{9C703FBE-C58C-4F8A-8432-3ED169447678}</UniqueIdentifier>
+      <UniqueIdentifier>{09F9A7BE-123C-4855-B2FE-04E2C5BFEEA6}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2.Target.cs">
       <Filter>Source</Filter>
@@ -13,7 +13,7 @@
     </None>
     <None Include="..\..\temp_code_spot.txt" />
     <Filter Include="Config">
-      <UniqueIdentifier>{AED126C3-B2E4-44A0-9D5F-6293583F07E5}</UniqueIdentifier>
+      <UniqueIdentifier>{03BD313B-4632-4A2D-8E59-29B7C6EF10A0}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -31,22 +31,22 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Plugins">
-      <UniqueIdentifier>{87FC978C-B630-4B5B-B404-B19AAF75C6F8}</UniqueIdentifier>
+      <UniqueIdentifier>{1CBAA62F-B2ED-448F-B2C7-955A2963D113}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule">
-      <UniqueIdentifier>{FA05C59F-3F84-44F7-8C4B-4E26B8294881}</UniqueIdentifier>
+      <UniqueIdentifier>{C792D720-C928-4431-925A-A504A1BE058F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source">
-      <UniqueIdentifier>{9FE52D17-5218-4168-9BFA-8088F513188B}</UniqueIdentifier>
+      <UniqueIdentifier>{D2D449D3-604F-4DE0-9957-AEBAE106E140}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source\DmapModule">
-      <UniqueIdentifier>{E396ACE0-3C05-481D-ABE3-8534C448108A}</UniqueIdentifier>
+      <UniqueIdentifier>{10EC75B9-52DE-4E2B-9012-681A14CD88DC}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Source\DmapModule\DmapModule.Build.cs">
       <Filter>Plugins\DmapModule\Source\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Private">
-      <UniqueIdentifier>{36A01CD0-2401-4FDF-8CF4-9C4B449647D7}</UniqueIdentifier>
+      <UniqueIdentifier>{E5444002-FEFC-4A91-8719-5C86610916AC}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Asteroid.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
@@ -69,6 +69,12 @@
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridDirection.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_Solver.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
@@ -82,7 +88,7 @@
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Public">
-      <UniqueIdentifier>{9A37B1E5-9F68-41B4-B9E6-33780F96EBD1}</UniqueIdentifier>
+      <UniqueIdentifier>{3FB94E98-5E68-4B54-8655-D4E94FD44F6C}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
@@ -121,13 +127,13 @@
       <Filter>Plugins\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Resources">
-      <UniqueIdentifier>{AD02E568-AD2F-4B0B-89AB-F6A0B7AE9504}</UniqueIdentifier>
+      <UniqueIdentifier>{A00C90B4-962C-4458-AE07-B3AF100F3814}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Resources\Icon128.png">
       <Filter>Plugins\DmapModule\Resources</Filter>
     </None>
     <Filter Include="Source\firstproject_2">
-      <UniqueIdentifier>{AD4DD582-3A92-48F4-B131-14A834FD8D7D}</UniqueIdentifier>
+      <UniqueIdentifier>{95DFBDC1-F293-4D21-BEC5-86018FC9D1C8}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs">
       <Filter>Source\firstproject_2</Filter>
@@ -168,15 +174,5 @@
     <ClInclude Include="..\..\Source\firstproject_2\SpawnMapButton.h">
       <Filter>Source\firstproject_2</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.h">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.cpp">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

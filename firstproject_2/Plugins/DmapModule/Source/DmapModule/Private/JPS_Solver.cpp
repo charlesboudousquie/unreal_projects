@@ -37,6 +37,7 @@ void UJPS_Solver::giveGrid(const TArray<TArray<bool>>& p_data)
             m_grid[row][col].m_isWall = p_data[row][col];
         }
     }
+
 }
 
 void UJPS_Solver::playFailedPathSound()
@@ -45,7 +46,7 @@ void UJPS_Solver::playFailedPathSound()
 
     //class USoundBase* Sound = Soundf.Object;
     m_audio_comp->Play();
-    
+
 }
 
 void UJPS_Solver::resizeGrid(int rows, int cols)
@@ -59,9 +60,11 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
     {
         for (int j = 0; j < m_grid[0].Num(); j++)
         {
-            m_grid[i][j].m_pos = FIntPoint{i,j};
+            m_grid[i][j].m_pos = FIntPoint{ i,j };
         }
     }
+
+    m_frontier.setGrid(&m_grid);
 
 }
 
@@ -79,10 +82,10 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
     m_goal = goal;
 
     // add node to frontier
-    m_frontier.push(&getNode(start));
+    m_frontier.updateOrPush(&getNode(start));
 
     // while there is stuff on the frontier
-    while (m_frontier.empty() == false)
+    while (m_frontier.isEmpty() == false)
     {
 
         // get top and pop
@@ -90,13 +93,13 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         m_frontier.pop();
         getNode(top->m_pos).m_closed = true;
 
-        auto successors = findSuccessors(top->m_pos);
+        /*auto successors = */findSuccessors(top->m_pos);
 
-        // add each successor to frontier
-        for (auto& successor : successors)
-        {
-            m_frontier.push(&getNode(successor));
-        }
+        //// add each successor to frontier
+        //for (auto& successor : successors)
+        //{
+        //    m_frontier.push(&getNode(successor));
+        //}
 
     }
 
@@ -112,6 +115,7 @@ UJPS_Solver::UJPS_Solver()
         {0,0,0,0,0},
         {0,0,0,0,0},
         {0,0,0,0,0},
+        {0,0,0,0,0},
     };
 
     giveGrid(defaultGrid);
@@ -119,7 +123,7 @@ UJPS_Solver::UJPS_Solver()
     static ConstructorHelpers::FObjectFinder<USoundCue> cue(TEXT("SoundCue'/DmapModule/grid_path_not_found_cue.grid_path_not_found_cue'"));
     if (cue.Succeeded())
     {
-        
+
         m_cue = cue.Object;
         m_audio_comp = CreateDefaultSubobject<UAudioComponent>("JPS Audio Comp");
         m_audio_comp->bAutoActivate = false;
@@ -138,7 +142,7 @@ float UJPS_Solver::octileHeuristic(const GridPos & A, const GridPos& B)
 
 void UJPS_Solver::clearState()
 {
-    m_frontier = {};
+    m_frontier.clear();
     m_start = m_goal = GridPos::NoneValue;
 }
 
@@ -166,7 +170,7 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
     if (GridDirection::isDiagonal(p_dir))
     {
         // FL is wall OR FR is wall
-        if (  (!isValid(N + GridPos{ -dx, 0 }) && isValid(N + GridPos{-dx,dy}))
+        if ((!isValid(N + GridPos{ -dx, 0 }) && isValid(N + GridPos{ -dx,dy }))
             || (!isValid(N + GridPos{ 0, -dy }) && isValid(N + GridPos{ dx,-dy }))
             )
         {
@@ -174,8 +178,10 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
         }
 
         // jump FL or FR and see if we hit a jump point
-        if (isValid(jump({ N.X + dx, N.Y }, { N.X, N.Y }).m_pos) ||
-            isValid(jump({ N.X, N.Y + dy }, { N.X, N.Y }).m_pos))
+        /*if (isValid(jump({ N.X + dx, N.Y }, { N.X, N.Y }).m_pos) ||
+            isValid(jump({ N.X, N.Y + dy }, { N.X, N.Y }).m_pos))*/
+        if (isValid(jump({ N.X, N.Y }, { dx,0 }).m_pos) ||
+            isValid(jump({ N.X, N.Y }, { 0,dy }).m_pos))
         {
             return true;
         }
@@ -188,7 +194,7 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
         {
             // if left is wall or right is wall
             if ((!isValid(N + GridPos{ -dx,1 }) && isValid(N + GridPos{ 0,1 })) ||
-                (!isValid(N + GridPos{-dx,1}) && isValid(N + GridPos{0,-1}))
+                (!isValid(N + GridPos{ -dx,1 }) && isValid(N + GridPos{ 0,-1 }))
                 )
             {
                 return true;
@@ -265,13 +271,13 @@ GridNode& UJPS_Solver::getNode(const GridPos & p_pos)
     return m_grid[p_pos.X][p_pos.Y];
 }
 
-UJPS_Solver::GridPath UJPS_Solver::getPath(GridPos p_start, GridPos p_goal)
+UJPS_Solver::GridPath UJPS_Solver::getPath()
 {
     GridPath l_path;
 
-    auto current = p_goal;
+    auto current = m_goal;
 
-    while (current != p_start)
+    while (current != m_start)
     {
         l_path.push_back(current);
         current = getNode(current).m_parent->m_pos;
@@ -282,15 +288,27 @@ UJPS_Solver::GridPath UJPS_Solver::getPath(GridPos p_start, GridPos p_goal)
 
 }
 
-TArray<UJPS_Solver::GridPos> UJPS_Solver::findSuccessors(GridPos m_current)
+/*TArray<UJPS_Solver::GridPos>*/void UJPS_Solver::findSuccessors(GridPos m_current)
 {
     //Algorithm 1 Identify Successors
     //Require : x: current node, s : start, g : goal
     //    1 : successors(x) ← ∅
-    TArray<GridPos> l_successors;
+    //TArray<GridPos> l_successors;
     //    2 : neighbours(x) ← prune(x, neighbours(x))
-    TArray<GridPos> l_neighbors = getNeighbors(m_current);
-    prune(m_current, l_neighbors);
+    TArray<GridPos> l_neighbors;// = getNeighbors(m_current);
+    auto parent = getNode(m_current).m_parent;
+    if (parent)
+    {
+        // pruning rules only work when we are travelling FROM a
+        // parent.
+        auto l_dir = GridDirection::getDirection(parent->m_pos, m_current);
+        prune(m_current, l_dir, l_neighbors);
+    }
+    else
+    {
+        l_neighbors = getNeighbors(m_current);
+    }
+
     //    3 : for all n ∈ neighbours(x) do
     for (const auto& neighbor_pos : l_neighbors)
     {
@@ -298,75 +316,75 @@ TArray<UJPS_Solver::GridPos> UJPS_Solver::findSuccessors(GridPos m_current)
         if (neighbor.m_closed == false)
         {
             //    4 : n ← jump(x, direction(x, n), s, g)
-            auto n = jump(m_current, GridDirection::getDirection(m_current, neighbor_pos));
+            auto dir = GridDirection::getDirection(m_current, neighbor_pos);
+            auto& j = jump(m_current, dir);
+            if (isValid(j.m_pos))
+            {
+                processNeighbor(m_current, j.m_pos);
+            }
+
             //    5 : add n to successors(x)
-            if (isValid(n.m_pos))
+           /* if (isValid(n.m_pos))
             {
                 l_successors.Add(n.m_pos);
-            }
+            }*/
         }
-
     }
 
     //    6 : return successors(x)
-    return l_successors;
+    //return l_successors;
 }
 
-void UJPS_Solver::processNeighbors(const GridPos& p_curr, const TArray<GridPos>& p_neighbors)
+void UJPS_Solver::processNeighbor(const GridPos& p_curr, const GridPos& p_jump_point)// const TArray<GridPos>& p_neighbors)
 {
 
     auto& currentNode = getNode(p_curr);
 
-    for (auto& neighbor : p_neighbors)
+    /*for (auto& neighbor : p_neighbors)
+    {*/
+    // jump in neighbor direction
+    auto dir = p_jump_point - p_curr;
+
+    //auto& j = jump(p_curr, dir);
+    auto& j = getNode(p_jump_point);
+
+    // if we can travel to this node
+    if (isValid(p_jump_point))
     {
-        // jump in neighbor direction
-        auto dir = GridDirection::getDirection(p_curr, neighbor);
 
-        auto& j = jump(p_curr, dir);
-
-        // if we can travel to this node
-        if (isValid(j.m_pos))
+        // if we have already looked at node then just skip it
+        if (j.m_closed)
         {
-
-            // if we have already looked at node then just skip it
-            if (j.m_closed)
-            {
-                continue;
-            }
-
-            // get distance from current to potential jump point
-            auto dist = octileHeuristic(p_curr, j.m_pos);
-
-
-            // update cost jump point
-            float new_g_cost = dist + currentNode.g;
-
-            // if this jump point has never been opened/seen
-            // or we found a better route, then update it
-            if (j.m_opened == false || new_g_cost < j.g)
-            {
-
-                //j.g = new_g_cost;
-                //j.h = j.h || octileHeuristic(j, m_goal);
-                //j.f = j.g + j.h;
-                //j.m_parent = &currentNode;
-
-                //if (!j.m_opened) {
-                //    //openList.push(j);
-                //    m_frontier.push(&j)
-                //    j.m_opened = true;
-                //}
-                //else 
-                //{
-                //    //openList.updateItem(j);
-                //    //m_frontier.
-                //}
-
-            }
-
-
+            return;
         }
 
+        // get distance from current to potential jump point
+        auto dist = octileHeuristic(p_curr, p_jump_point);
+
+        // update cost jump point
+        float new_g_cost = dist + currentNode.g;
+
+        // if this jump point has never been opened/seen
+        // or we found a better route, then update it
+        if (j.m_opened == false || new_g_cost < j.g)
+        {
+
+            j.g = new_g_cost;
+            j.h = j.h || octileHeuristic(p_jump_point, m_goal);
+            j.f = j.g + j.h;
+            j.m_parent = &currentNode;
+
+            m_frontier.updateOrPush(&j);
+            if (!j.m_opened) {
+                //openList.push(j);
+                j.m_opened = true;
+            }
+            else
+            {
+                //openList.updateItem(j);
+            }
+
+        }
     }
 }
 
@@ -384,24 +402,28 @@ TArray<UJPS_Solver::GridPos> UJPS_Solver::getNeighbors(const GridPos & p_point)
         p_point + GridPos{-1,0},   // left     3 
 
         // diagonals
-         
+
     };
 
     auto addIfValid = [&](const GridPos& p_pos)
     {
-        auto& N = getNode(p_pos);
+
         // if not a wall and within grid
         // and NOT CLOSED? maybe not opened???
-        if (isValid(p_pos) && !N.m_closed)
+        if (isValid(p_pos))
         {
-            l_neighbors.Add(p_pos);
+            auto& N = getNode(p_pos);
+            if (!N.m_closed)
+            {
+                l_neighbors.Add(p_pos);
+            }
         }
     };
 
     // add the 4 cardinal directions
     for (auto pos : positions)
     {
-        addIfValid(positions[pos]);
+        addIfValid(pos);
     }
 
     // now check diagonals
@@ -437,7 +459,7 @@ TArray<UJPS_Solver::GridPos> UJPS_Solver::getNeighbors(const GridPos & p_point)
     // if no parent exists then we use all of the neighbors
     /*if (getNode(p_point).m_parent == nullptr)
     {
-        
+
 
 
 
@@ -542,7 +564,7 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
         // case 4
         if (case4)
         {
-            addIfValid(c + GridPos{-dx,dy});
+            addIfValid(c + GridPos{ -dx,dy });
         }
         // case 5
         else if (case5)
@@ -568,7 +590,7 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
                 bool case2 = !isValid(c + GridPos{ dx,0 });
                 if (case2)
                 {
-                    addIfValid(c + GridPos{dx,dy});
+                    addIfValid(c + GridPos{ dx,dy });
                 }
                 bool case3 = !isValid(c + GridPos{ -dx,0 });
                 if (case3)
@@ -576,7 +598,7 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
                     addIfValid(c + GridPos{ -dx,dy });
                 }
             }
-            
+
         }
 
         // if horizontal
@@ -591,7 +613,7 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
                 // case 2
                 if (!isValid(c + GridPos{ 0,dy }))
                 {
-                    addIfValid(c + GridPos{dx,dy});
+                    addIfValid(c + GridPos{ dx,dy });
                 }
 
                 // case 3
@@ -611,23 +633,29 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
 
 }
 
-GridNode& UJPS_Solver::jump(GridPos p_current, GridPos p_next)
+GridNode& UJPS_Solver::jump(GridPos p_parent, FIntPoint p_dir)
 {
 
-    auto dir = GridDirection::getDirection(p_current, p_next);
+    //auto dir = GridDirection::getDirection(p_parent, p_next);
+    assert(p_dir != FIntPoint::ZeroValue);
 
     //Require: x: initial node,
     //    d : direction, s : start, g : goal
     //    1 : n ← step(x, d)
-    auto& n = step(p_current, dir);
+
+    GridPos pos = step(p_parent, p_dir);
+    //auto l_pos = n.m_pos;
     //    2 : if n is an obstacle or is outside the grid then
-    if (isValid(n.m_pos) == false)
+    if (isValid(pos) == false)
     {
         //    3 :       return null
         return g_invalid_node;
     }
+
+    auto& n = getNode(pos);
+
     //    4 : if n = g then
-    if (n.m_pos == m_goal)
+    if (pos == m_goal)
     {
         //    5 :       return n
         return n;
@@ -639,16 +667,19 @@ GridNode& UJPS_Solver::jump(GridPos p_current, GridPos p_next)
         return n;
     }
     //    8 : if d is diagonal then
-    if (p_dir.isDiagonal())
+    if (GridDirection::isDiagonal(p_dir))
     {
         //    9 :       for all i ∈{ 1, 2 } do
         //    10 :      if jump(n, di, s, g) is not null then
         //    11 :              return n
-        if (isValid(jump(n.m_pos, p_dir.getForwardLeft()).m_pos))
+
+        auto dx = p_dir.X;
+        auto dy = p_dir.Y;
+        if (isValid(jump(pos, pos + GridPos{ 0,dy }).m_pos))
         {
             return n;
         }
-        if (isValid(jump(n.m_pos, p_dir.getForwardRight()).m_pos))
+        if (isValid(jump(pos, pos + GridPos{ dx,0 }).m_pos))
         {
             return n;
         }
@@ -656,13 +687,12 @@ GridNode& UJPS_Solver::jump(GridPos p_current, GridPos p_next)
     }
 
     //    12 : return jump(n, d, s, g)
-    return jump(n.m_pos, p_dir);
+    return jump(pos, p_dir);
 }
 
-GridNode& UJPS_Solver::step(GridPos p_current, FIntPoint p_dir)
+UJPS_Solver::GridPos UJPS_Solver::step(GridPos p_current, FIntPoint p_dir)
 {
-    auto newPos = p_current + p_dir;
-    return getNode(newPos);
+    return p_current + p_dir;
 }
 
 
