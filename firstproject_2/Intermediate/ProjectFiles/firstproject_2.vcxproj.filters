@@ -175,4 +175,14 @@
       <Filter>Source\firstproject_2</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_GridDrawer.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

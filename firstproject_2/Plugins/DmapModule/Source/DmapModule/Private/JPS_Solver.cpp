@@ -4,6 +4,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
+#include "JPS_GridDrawer.h"
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -93,17 +94,16 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         m_frontier.pop();
         getNode(top->m_pos).m_closed = true;
 
-        /*auto successors = */findSuccessors(top->m_pos);
-
-        //// add each successor to frontier
-        //for (auto& successor : successors)
-        //{
-        //    m_frontier.push(&getNode(successor));
-        //}
+        // finds and processes successors
+        findSuccessors(top->m_pos);
 
     }
 
-    //return getPath(start, goal);
+    // send path to drawer
+    if (m_jps_drawer.IsValid())
+    {
+        m_jps_drawer.Get()->draw(this);
+    }
 
 }
 
@@ -130,6 +130,14 @@ UJPS_Solver::UJPS_Solver()
         //m_propellerAudioComponent->SetActive(false);
         m_audio_comp->SetSound(m_cue);
     }
+}
+
+void UJPS_Solver::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // get pointer to grid drawer
+    m_jps_drawer = GetOwner()->FindComponentByClass<UJPS_GridDrawer>();
 }
 
 float UJPS_Solver::octileHeuristic(const GridPos & A, const GridPos& B)
@@ -282,6 +290,7 @@ UJPS_Solver::GridPath UJPS_Solver::getPath()
         l_path.push_back(current);
         current = getNode(current).m_parent->m_pos;
     }
+    l_path.push_back(m_start);
 
     std::reverse(l_path.begin(), l_path.end());
     return l_path;

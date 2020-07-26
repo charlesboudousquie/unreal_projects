@@ -31,6 +31,8 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
 
     float octileHeuristic(const GridPos& A, const GridPos& B);
 
+    TWeakObjectPtr <class UJPS_GridDrawer> m_jps_drawer;
+
     GRID m_grid; // row,col
 
     // frontier
@@ -47,7 +49,6 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
 
     GridNode& getNode(const GridPos& p_pos);
 
-    GridPath getPath();
 
     void processNeighbor(const GridPos& p_curr, const GridPos& p_jump_point /*const TArray<GridPos>& p_neighbors*/);
 
@@ -79,6 +80,10 @@ public:
     void setGoalFunc(const FIntPoint& p_pos){ m_goal = p_pos; }
 
 
+    // get most recently generated path
+    GridPath getPath();
+    // get grid in its current state
+    const GRID& getGrid() { return m_grid; }
 
     // checks if position is inside current grid
     UFUNCTION(BlueprintCallable, Category = "3d maps")
@@ -103,5 +108,9 @@ public:
 
     UPROPERTY(EditAnywhere)
     FIntPoint m_goal;
+
+protected:
+    // Called when the game starts
+    virtual void BeginPlay() override;
 
 };

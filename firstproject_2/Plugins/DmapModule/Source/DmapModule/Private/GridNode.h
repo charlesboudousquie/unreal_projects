@@ -17,6 +17,8 @@ public:
     // have we thuroughly examined this node?
     bool m_closed = false;
 
+    bool isJumpPoint() const { return m_opened; }
+
     float g = 0.0f, f = 0.0f, h = 0.0f;
 
     GridNode* m_parent = nullptr;
