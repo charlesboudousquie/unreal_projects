@@ -52,6 +52,7 @@ c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\inter
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/DmapFactoryDragDrop.gen.cpp
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule/Public/DmapFactoryDragDrop.h
 c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\intermediate\build\win64\ue4editor\inc\dmapmodule\DmapFactoryDragDrop.generated.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/DmapModule.init.gen.cpp
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/Get3dMapList.gen.cpp
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule/Public/Get3dMapList.h
 c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\intermediate\build\win64\ue4editor\inc\dmapmodule\Get3dMapList.generated.h

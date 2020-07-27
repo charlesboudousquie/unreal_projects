@@ -21,6 +21,40 @@ GridNode UJPS_Solver::g_invalid_node
 nullptr,
 {-1,-1} };
 
+UJPS_Solver::UJPS_Solver()
+{
+    /*TArray<TArray<bool>> defaultGrid
+    {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+    };*/
+
+    TArray<TArray<bool>> defaultGrid
+    {
+        {0,0,0,0,0},
+        {0,1,1,1,1},
+        {0,0,0,0,0},
+        {1,1,1,1,0},
+        {0,0,0,0,0},
+    };
+
+    giveGrid(defaultGrid);
+
+    static ConstructorHelpers::FObjectFinder<USoundCue> cue(TEXT("SoundCue'/DmapModule/grid_path_not_found_cue.grid_path_not_found_cue'"));
+    if (cue.Succeeded())
+    {
+
+        m_cue = cue.Object;
+        m_audio_comp = CreateDefaultSubobject<UAudioComponent>("JPS Audio Comp");
+        m_audio_comp->bAutoActivate = false;
+        m_audio_comp->SetSound(m_cue);
+    }
+}
+
+
 void UJPS_Solver::giveGrid(const TArray<TArray<bool>>& p_data)
 {
     int row_count = p_data.Num();
@@ -94,6 +128,8 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         m_frontier.pop();
         getNode(top->m_pos).m_closed = true;
 
+        if (top->m_pos == m_goal) { break; }
+
         // finds and processes successors
         findSuccessors(top->m_pos);
 
@@ -105,31 +141,6 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         m_jps_drawer.Get()->draw(this);
     }
 
-}
-
-UJPS_Solver::UJPS_Solver()
-{
-    TArray<TArray<bool>> defaultGrid
-    {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-    };
-
-    giveGrid(defaultGrid);
-
-    static ConstructorHelpers::FObjectFinder<USoundCue> cue(TEXT("SoundCue'/DmapModule/grid_path_not_found_cue.grid_path_not_found_cue'"));
-    if (cue.Succeeded())
-    {
-
-        m_cue = cue.Object;
-        m_audio_comp = CreateDefaultSubobject<UAudioComponent>("JPS Audio Comp");
-        m_audio_comp->bAutoActivate = false;
-        //m_propellerAudioComponent->SetActive(false);
-        m_audio_comp->SetSound(m_cue);
-    }
 }
 
 void UJPS_Solver::BeginPlay()
@@ -178,8 +189,8 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
     if (GridDirection::isDiagonal(p_dir))
     {
         // FL is wall OR FR is wall
-        if ((!isValid(N + GridPos{ -dx, 0 }) && isValid(N + GridPos{ -dx,dy }))
-            || (!isValid(N + GridPos{ 0, -dy }) && isValid(N + GridPos{ dx,-dy }))
+        if ((isValid(N + GridPos{ -dx,dy }) && !isValid(N + GridPos{ -dx, 0 }))
+            || (isValid(N + GridPos{ dx,-dy }) && !isValid(N + GridPos{ 0, -dy }))
             )
         {
             return true;
@@ -201,8 +212,8 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
         if (dy == 0)
         {
             // if left is wall or right is wall
-            if ((!isValid(N + GridPos{ -dx,1 }) && isValid(N + GridPos{ 0,1 })) ||
-                (!isValid(N + GridPos{ -dx,1 }) && isValid(N + GridPos{ 0,-1 }))
+            if ((isValid(N + GridPos{ dx,1 }) && !isValid(N + GridPos{ 0,1 })) ||
+                (isValid(N + GridPos{ dx,-1 }) && !isValid(N + GridPos{ 0,-1 }))
                 )
             {
                 return true;
@@ -212,8 +223,8 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
         else
         {
             // if left is wall or right is wall
-            if ((!isValid(N + GridPos{ -1,-dy }) && isValid(N + GridPos{ -1,0 })) ||
-                (!isValid(N + GridPos{ 1,-dy }) && isValid(N + GridPos{ 1,0 }))
+            if ((isValid(N + GridPos{ 1,dy }) && !isValid(N + GridPos{ 1,0 })) ||
+                (isValid(N + GridPos{ -1,dy }) && !isValid(N + GridPos{ -1,0 }))
                 )
             {
                 return true;
@@ -221,54 +232,6 @@ bool UJPS_Solver::hasForcedNeighbor(const GridNode & p_node, FIntPoint p_dir)
         }
 
     }
-
-
-
-
-    // given some direction, retrieve node nieghbor by going in that unit direction
-    // and checking if it is in grid and valid
-    /*auto isVal = [&](const FIntPoint dir)
-    {
-        return isValid(dir + our_pos);
-    };*/
-    //auto Left =  //GridDirection::getLeft(c);
-    //auto forwardLeft = isVal(p_dir.getForwardLeft());
-    //auto Right = isVal(p_dir.getDirRight());
-    //auto forwardRight = isVal(p_dir.getForwardRight());
-    //// if diagonally
-    //if (GridDirection::isDiagonal(p_dir))
-    //{
-    //    auto backLeft = isVal(p_dir.getDirBackLeft());
-    //    // if back left is wall but left is not and forward left is also not a wall
-    //    if (!backLeft && Left && forwardLeft)
-    //    {
-    //        return true;
-    //    }
-    //    auto backRight = isVal(p_dir.getDirBackRight());
-    //    // if back right is wall but right is not and forward right is also not a wall
-    //    if (!backRight && Right && forwardRight)
-    //    {
-    //        return true;
-    //    }
-    //}
-    //// horizontal or diagonal
-    //else
-    //{
-    //    auto forward = isVal(p_dir);
-    //    if (forward)
-    //    {
-    //        // if left is wall but forward left != wall
-    //        if (!Left && forwardLeft)
-    //        {
-    //            return true;
-    //        }
-    //        // if Right is wall but forward Right != wall
-    //        if (!Right && forwardRight)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //}
 
     // could not find any forced neighbors
     return false;
@@ -379,7 +342,7 @@ void UJPS_Solver::processNeighbor(const GridPos& p_curr, const GridPos& p_jump_p
         {
 
             j.g = new_g_cost;
-            j.h = j.h || octileHeuristic(p_jump_point, m_goal);
+            j.h = j.h ? j.h : octileHeuristic(p_jump_point, m_goal);
             j.f = j.g + j.h;
             j.m_parent = &currentNode;
 
@@ -596,15 +559,15 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
             {
                 addIfValid(c + GridPos{ 0,dy });
 
-                bool case2 = !isValid(c + GridPos{ dx,0 });
+                bool case2 = !isValid(c + GridPos{ 1,0 });
                 if (case2)
                 {
-                    addIfValid(c + GridPos{ dx,dy });
+                    addIfValid(c + GridPos{ 1,dy });
                 }
-                bool case3 = !isValid(c + GridPos{ -dx,0 });
+                bool case3 = !isValid(c + GridPos{ -1,0 });
                 if (case3)
                 {
-                    addIfValid(c + GridPos{ -dx,dy });
+                    addIfValid(c + GridPos{ -1,dy });
                 }
             }
 
@@ -620,15 +583,15 @@ void UJPS_Solver::prune(GridPos p_current, FIntPoint p_dir, TArray<GridPos>& p_n
                 p_neighbors.Add(c + GridPos{ dx,0 });
 
                 // case 2
-                if (!isValid(c + GridPos{ 0,dy }))
+                if (!isValid(c + GridPos{ 0,1 }))
                 {
-                    addIfValid(c + GridPos{ dx,dy });
+                    addIfValid(c + GridPos{ dx,1 });
                 }
 
                 // case 3
-                if (!isValid(c + GridPos{ 0,-dy }))
+                if (!isValid(c + GridPos{ 0,-1 }))
                 {
-                    addIfValid(c + GridPos{ dx,-dy });
+                    addIfValid(c + GridPos{ dx,-1 });
                 }
 
             }

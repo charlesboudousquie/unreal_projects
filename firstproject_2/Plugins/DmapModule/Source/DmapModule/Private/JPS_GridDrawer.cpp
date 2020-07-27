@@ -80,6 +80,15 @@ void UJPS_GridDrawer::drawPath(UJPS_Solver* p_solver)
 
         auto end = transformCell(*std::next(it));
 
+        // shift all points in path by half a cell size so it starts
+        // from the middle of a cell
+        auto stat_mesh = getMeshByType(JPS_TYPE::PATH)->GetStaticMesh();
+
+        auto half_cell_size = stat_mesh->GetBounds().BoxExtent.X;
+        begin -= FVector{ half_cell_size ,half_cell_size ,0 };
+        end -= FVector{ half_cell_size ,half_cell_size ,0 };
+
+
         // draw
         DrawDebugLine(world, begin, end, color, true,-1,0,10.0f);
     }
@@ -162,10 +171,6 @@ void UJPS_GridDrawer::drawCells(UJPS_Solver* p_solver)
         }
     }
 
-
-
-
-
 }
 
 void UJPS_GridDrawer::drawCell(FVector p_pos, UHierarchicalInstancedStaticMeshComponent * p_mesh)
@@ -188,7 +193,7 @@ FVector UJPS_GridDrawer::transformCell(const FIntPoint & p_grid_pos)
     auto result = FVector(p_grid_pos);
     result += our_pos;
     // separate based on position in grid {row,col} --> {X,Y}
-    result += FVector(p_grid_pos * m_grid_scalar);
+    result += FVector(p_grid_pos * m_grid_scalar * 2);
     return result;
 }
 
