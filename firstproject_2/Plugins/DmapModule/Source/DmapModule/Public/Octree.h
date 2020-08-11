@@ -68,6 +68,8 @@ class /*DMAPMODULE_API*/ Octree
     void getLeavesRec(OctreeNode*, TArray<OctreeNode*>&);
     void getInternalNodesRec(OctreeNode * p_node, ListOfNodes& p_array, int p_level);
 
+    void findVoxelLocationRec(const FVector& p_voxel, TArray<int>& p_loc, OctreeNode* p_current);
+
 public:
 
 	Octree();
@@ -87,6 +89,9 @@ public:
 	void setupDimensions(FVector p_world_dimensions);
 
 	void insertVoxel(FVector p_voxel);
+
+    // get location of voxel in octree
+    void findVoxelLocation(const FVector& p_voxel, TArray<int>& p_loc);
 
     // morton encoding
 

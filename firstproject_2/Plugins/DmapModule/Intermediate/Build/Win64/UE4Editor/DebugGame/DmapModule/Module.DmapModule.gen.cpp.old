@@ -4,6 +4,7 @@
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/DmapFactory.gen.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/DmapFactoryDragDrop.gen.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/Get3dMapList.gen.cpp"
+#include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/HelperFunctions.gen.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/JPS_GridDrawer.gen.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/JPS_Solver.gen.cpp"
 #include "C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Intermediate/Build/Win64/UE4Editor/Inc/DmapModule/MapController.gen.cpp"

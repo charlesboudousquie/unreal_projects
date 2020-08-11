@@ -130,9 +130,9 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMapController_LoadMap_Statics::Function_MetaDataParams[] = {
 		{ "Category", "3d maps" },
-		{ "Comment", "/*, TArray<AActor*> p_octree_node_archetypes*/" },
+		{ "Comment", "// load in user requested map\n" },
 		{ "ModuleRelativePath", "Public/MapController.h" },
-		{ "ToolTip", ", TArray<AActor*> p_octree_node_archetypes" },
+		{ "ToolTip", "load in user requested map" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UMapController_LoadMap_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMapController, nullptr, "LoadMap", nullptr, nullptr, sizeof(MapController_eventLoadMap_Parms), Z_Construct_UFunction_UMapController_LoadMap_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_LoadMap_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMapController_LoadMap_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMapController_LoadMap_Statics::Function_MetaDataParams)) };
@@ -273,7 +273,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UMapController_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UMapController_getMeshScalar, "getMeshScalar" }, // 3909612493
 		{ &Z_Construct_UFunction_UMapController_getOctreePos, "getOctreePos" }, // 4000163366
-		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 2163754402
+		{ &Z_Construct_UFunction_UMapController_LoadMap, "LoadMap" }, // 3274945044
 		{ &Z_Construct_UFunction_UMapController_octreeExists, "octreeExists" }, // 3098360378
 		{ &Z_Construct_UFunction_UMapController_printOctreeInfo, "printOctreeInfo" }, // 2171914443
 		{ &Z_Construct_UFunction_UMapController_printTree, "printTree" }, // 328872593
@@ -292,9 +292,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData[] = {
 		{ "Category", "MapController" },
-		{ "Comment", "//UPROPERTY(EditAnywhere)\n//float voxel_scalar;\n" },
 		{ "ModuleRelativePath", "Public/MapController.h" },
-		{ "ToolTip", "UPROPERTY(EditAnywhere)\nfloat voxel_scalar;" },
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width = { "debug_line_width", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, debug_line_width), METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_debug_line_width_MetaData)) };
@@ -335,7 +333,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMapController, 1623945016);
+	IMPLEMENT_CLASS(UMapController, 3870582740);
 	template<> DMAPMODULE_API UClass* StaticClass<UMapController>()
 	{
 		return UMapController::StaticClass();

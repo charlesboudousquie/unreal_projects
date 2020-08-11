@@ -1318,10 +1318,13 @@
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapFactory.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapFactoryDragDrop.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapModule.cpp" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Get3dMapList.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridDirection.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.cpp" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.h" />
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\HelperFunctions.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_GridDrawer.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_Solver.cpp" />
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\MapController.cpp" />
@@ -1334,6 +1337,7 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\DmapModule.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Get3dMapList.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\GridDirection.h" />
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h" />
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\MapController.h" />

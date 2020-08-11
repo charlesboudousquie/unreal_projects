@@ -103,6 +103,29 @@ void Octree::insertVoxel(FVector p_voxel)
     m_root->addVoxel(p_voxel);
 }
 
+void Octree::findVoxelLocationRec(const FVector& p_voxel, TArray<int>& p_loc, OctreeNode* p_current)
+{
+    
+    auto best = p_current->findBestChild(p_voxel);
+    if (best != -1)
+    {
+        p_loc.Add(best);
+
+        findVoxelLocationRec(p_voxel, p_loc, p_current->m_children[best].get());
+    }
+
+}
+
+void Octree::findVoxelLocation(const FVector& p_voxel, TArray<int>& p_loc)
+{
+    assert(m_root->isInside(p_voxel));
+    findVoxelLocationRec(p_voxel, p_loc, m_root.get());
+}
+
+
+
+
+
 OctreeNode::OctreeNode(int p_level) : m_level(p_level)
 {
 }
@@ -210,13 +233,14 @@ int OctreeNode::findBestChild(FVector p_voxel)
     {
 
         // check if point is inside box
-        if (m_children[i]->m_box.IsInside(p_voxel))
+        if (m_children[i] && m_children[i]->m_box.IsInside(p_voxel))
         {
             return i;
         }
     }
 
-    throw std::runtime_error("no child can contain voxel");
+    // no child could contain voxel
+    return -1;
 }
 
 bool OctreeNode::isInside(FVector p_voxel)
@@ -257,3 +281,4 @@ void OctreeNode::print()
     auto message = "Node: " + level + ", " + center + ", " + extents;
     l_print(message);
 }
+

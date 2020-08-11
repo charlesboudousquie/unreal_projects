@@ -13,8 +13,10 @@
 
 class UHierarchicalInstancedStaticMeshComponent;
 class AActor;
-class Octree;
-struct OctreeNode;
+//class Octree;
+class Efficient_Octree;
+//struct OctreeNode;
+struct EO_Node;
 
 // Description: This class can load in maps. 
 
@@ -23,10 +25,7 @@ class DMAPMODULE_API UMapController : public UActorComponent
 {
     GENERATED_BODY()
 
-    static TArray<FColor> g_colors;
-
-    //std::unique_ptr<Octree> m_tree;
-	Octree* m_tree;
+    Efficient_Octree* m_tree;
     
     // meshes for the nodes in each level of the tree
     TArray<UHierarchicalInstancedStaticMeshComponent*> m_meshes;
@@ -48,14 +47,6 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-    // draw internal node of octree
-    void drawNode(FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
-
-    // given an array of points, draw a box from said 8 points
-    //void drawBox(const TArray<FVector>& p_points, int p_level);
-
-    // draw an instance of an asteroid
-    void drawAsteroid(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh);
 
     // draws all internal nodes of octree
     void drawInternalNodes(/*TArray<AActor*> p_octree_node_archetypes*/);
@@ -65,9 +56,6 @@ protected:
 
     // for each level, create a dynamic material
     void setMaterials(/*TArray<AActor*> p_octree_node_archetypes*/);
-
-    // choose color based on level
-    FColor chooseColor(int p_level);
     
     // for testing
     void unit_Test(AActor* p_asteroid_archetype);
@@ -79,14 +67,11 @@ public:
 		
     // load in user requested map
 	UFUNCTION(BlueprintCallable, Category = "3d maps")
-	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype/*, TArray<AActor*> p_octree_node_archetypes*/);
+	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype);
 
     // print out octree
     UFUNCTION(BlueprintCallable, Category = "3d maps")
-    void printTree();
-
-    //UPROPERTY(EditAnywhere)
-    //float voxel_scalar;
+        void printTree() {}
 
     UPROPERTY(EditAnywhere)
     float debug_line_width;

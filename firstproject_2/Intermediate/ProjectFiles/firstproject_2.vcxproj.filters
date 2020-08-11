@@ -179,9 +179,21 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_GridDrawer.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\HelperFunctions.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
   </ItemGroup>
