@@ -33,7 +33,11 @@ class DMAPMODULE_API UMapController : public UActorComponent
 
     AActor* m_octree_archetype;
 
+    UPROPERTY(EditAnywhere)
     float m_mesh_scalar = 1.0f;
+
+    UPROPERTY(EditAnywhere)
+    bool m_use_unit_test = false;
 
     UPROPERTY()
     UMaterialInterface* m_wireframe_material;

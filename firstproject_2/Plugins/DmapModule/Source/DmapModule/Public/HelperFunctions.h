@@ -7,6 +7,7 @@
 #include "HelperFunctions.generated.h"
 
 class UHierarchicalInstancedStaticMeshComponent;
+struct EO_Node;
 
 // class is meant to act as a namespace, because UHT cannot add namespaces.
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -16,6 +17,8 @@ class DMAPMODULE_API UHelperFunctions : public UActorComponent
 
     static TArray<FColor> g_colors;
 
+    static void drawNode(const FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+
 public:
 
     static TArray<FColor>& getColors() { return g_colors; }
@@ -24,13 +27,13 @@ public:
 
     static FColor chooseColor(int p_level);
 
-    static void drawNode(FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
 
     // draw hierarchical instances of the archetype/object specified
-    static void drawInstances(AActor * p_asteroid_archetype, const TArray<FVector>& p_positions,
+    static void drawInstances(AActor * p_asteroid_archetype, const TArray<EO_Node*>& p_instances,
         bool clearInstances = true);
 
-
+    static void drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh,
+        const EO_Node* p_instance, bool clearInstances);
 
 
 

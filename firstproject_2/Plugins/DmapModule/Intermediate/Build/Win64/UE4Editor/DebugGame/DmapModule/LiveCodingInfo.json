@@ -12,11 +12,11 @@
 			"GridNode.cpp.obj",
 			"JPS_GridDrawer.cpp.obj",
 			"JPS_Solver.cpp.obj",
+			"Octree.cpp.obj",
 			"UpdateablePriorityQueue.cpp.obj",
 			"Efficient_Octree.cpp.obj",
 			"HelperFunctions.cpp.obj",
-			"MapController.cpp.obj",
-			"Octree.cpp.obj"
+			"MapController.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",

@@ -32,12 +32,11 @@
 
 #pragma once
 
-
-
 #include "CoreMinimal.h"
 #include "Math/Vector.h"
 #include <array>
 #include <memory>
+#include <map>
 
 struct EO_CODE
 {
@@ -70,7 +69,7 @@ struct EO_Node
 
     EO_CODE m_code;
     EO_Node* m_parent = nullptr;
-    std::array<std::unique_ptr<EO_Node>,8> m_children;
+    std::array<std::unique_ptr<EO_Node>, 8> m_children;
     FBox m_box;
     unsigned m_level = 0;
     bool m_empty = true;
@@ -88,16 +87,37 @@ struct EO_Node
 
 
 /**
- * 
+ *
  */
 class Efficient_Octree
 {
     typedef TArray<EO_Node*> ListOfNodes;
 
     // REMEMBER TO INCLUDE LICENSE
-    //typedef std::shared_ptr<EO_Node> EO_NodePtr;
+
+
+
     typedef EO_Node* EO_NodePtr;
     typedef FIntVector Dir;
+
+    enum class BoxComponents
+    {
+        // Vertices
+        LFD = 0, RFD, RBD, LBD,
+        LFU, RFU, RBU, LBU,
+
+        // Edges
+        FD, RD, BD, LD,
+        LF, RF, RB, LB,
+        LU, FU, RU, BU,
+
+        // Faces
+        L, F, R, B, U, D
+    };
+
+    typedef BoxComponents BC;
+
+    static std::map<BC, Dir> g_directions;
 
     std::unique_ptr<EO_Node> m_root;
     unsigned m_max_level;
@@ -158,14 +178,14 @@ class Efficient_Octree
 
 
 
-    Efficient_Octree() : m_max_level(16), m_root_level(15)
+    Efficient_Octree() : m_max_level(4), m_root_level(3)
     {
         m_max_val = 1 << m_root_level;
     }
 
 public:
 
-    
+
 
     static Efficient_Octree& getEO_Tree()
     {
@@ -180,14 +200,18 @@ public:
 
     ListOfNodes getAllNodes();
 
-    FVector getPos() {return m_root->m_box.GetCenter();}
+    FVector getPos() { return m_root->m_box.GetCenter(); }
     void insert(FVector p_voxel);
     void setDimensions(FVector p_dim); // modifies max val
     void clearTree() { m_root.reset(new EO_Node); }
-    TArray<EO_NodePtr> getSmallestNeighbors(EO_NodePtr p_node, Dir p_dir);
+    TArray<EO_NodePtr> getNeighbors(EO_NodePtr p_node);
+    /*TArray<EO_NodePtr> getDiagonalNeighbors(EO_NodePtr p_node);
+    TArray<EO_NodePtr> getEdgeNeighbors(EO_NodePtr p_node);
+    TArray<EO_NodePtr> getFaceNeighbors(EO_NodePtr p_node);*/
+
 
     // synonymous with traverse
     EO_NodePtr getSmallestNode(FVector p_voxel);
-    
 
+    bool isValid();
 };

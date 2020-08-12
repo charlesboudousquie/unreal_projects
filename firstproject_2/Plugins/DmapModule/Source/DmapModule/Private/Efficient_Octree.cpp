@@ -7,6 +7,49 @@
 
 #define LEAF_LAYER 0
 
+std::map<Efficient_Octree::BC, Efficient_Octree::Dir> Efficient_Octree::g_directions
+{
+
+#define BC_Insert(BC_Name, x,y,z) {BC::BC_Name, {x,y,z}},
+//#define BC_Insert(BC_Name, x,y,z) {BC::BC_Name, {x 1,y 1,z 1}},
+
+    // vertices
+    BC_Insert(LFD, -1,+1,-1)
+    BC_Insert(RFD, +1,+1,-1)
+    BC_Insert(RBD, 1,-1,-1)
+    BC_Insert(LBD, -1,-1,-1)
+    
+    BC_Insert(LFU, -1,1,1)
+    BC_Insert(RFU, 1,1,1)
+    BC_Insert(RBU, 1,-1,1)
+    BC_Insert(LBU, -1,-1,1)
+    
+    // Edges
+    BC_Insert(FD, 0,1,-1)
+    BC_Insert(RD, 1,0,-1)
+    BC_Insert(BD, 0,-1,-1)
+    BC_Insert(LD, 1,0,-1)
+    
+    BC_Insert(LF, -1,1,0)
+    BC_Insert(RF, 1,1,0)
+    BC_Insert(RB, 1,-1,0)
+    BC_Insert(LB, -1,-1,0)
+    
+    BC_Insert(LU, -1,0,1)
+    BC_Insert(FU, 0,1,1)
+    BC_Insert(RU, 1,0,1)
+    BC_Insert(BU, 0,-1,1)
+    
+    // faces
+    BC_Insert(L, -1,0,0)
+    BC_Insert(F, 0,1,0)
+    BC_Insert(R, 1,0,0)
+    BC_Insert(B, 0,-1,0)
+    BC_Insert(U, 0,0,1)
+    BC_Insert(D, 0,0,-1)
+
+};
+
 EO_CODE Efficient_Octree::getNeighborCode(const EO_CODE& oldCode, Dir p_dir, int p_cellSize)
 {
     EO_CODE result = EO_CODE{
@@ -54,6 +97,56 @@ void Efficient_Octree::setDimensions(FVector p_dim)
     m_root->m_level = m_root_level;
     m_root->m_code = Efficient_Octree::getEO_Tree().convertToEO_Code(m_root->m_box.GetCenter());
 }
+
+TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
+{
+    TArray<Efficient_Octree::EO_NodePtr> l_nieghbors;
+    for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
+    {
+        l_nieghbors.Add(getVertexNeighbor(p_node, g_directions[i]));
+    }
+
+    for (BC i = BC::FD; i <= BC::BU; i = static_cast<BC>((int)i + 1))
+    {
+        l_nieghbors.Add(getEdgeNeighbor(p_node, g_directions[i]));
+    }
+
+    for (BC i = BC::L; i <= BC::D; i = static_cast<BC>((int)i + 1))
+    {
+        auto dir = g_directions[i];
+        if (dir.GetMax() == 1)
+        {
+            l_nieghbors.Add(getPositiveDirNeighbor(p_node, dir));
+        }
+        else
+        {
+            l_nieghbors.Add(getNegativeDirNeighbor(p_node, dir));
+        }
+        
+    }
+
+    return l_nieghbors;
+}
+
+//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getDiagonalNeighbors(EO_NodePtr p_node)
+//{
+//    
+//}
+//
+//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getEdgeNeighbors(EO_NodePtr p_node)
+//{
+//    TArray<Efficient_Octree::EO_NodePtr> l_nieghbors;
+//    for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
+//    {
+//
+//    }
+//    return l_nieghbors;
+//}
+//
+//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getFaceNeighbors(EO_NodePtr p_node)
+//{
+//}
+
 
 unsigned int Efficient_Octree::getAxisNeighborCode(int p_old_val, int p_axis_val, int p_cellSize)
 {
@@ -322,11 +415,12 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getEdgeNeighbor(EO_NodePtr p_cell
 
 EO_CODE Efficient_Octree::convertToEO_Code(FVector p_voxel)
 {
-    auto normalized_coord = p_voxel / m_max_val;
+    // divide it by the dimensions of the original world
+    auto dimensions = m_max - m_min;
+    FVector normalized_coord = p_voxel / dimensions.X;
 
     // after division and multiplying again,
     // truncate non integer bits.
-    
     EO_CODE loc_code;
     loc_code = normalized_coord * m_max_val;
     return loc_code;
@@ -405,15 +499,17 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getSmallestNode(FVector p_voxel)
     // leaves are level 0
 
     auto cell = m_root.get();
+    auto converted_code = this->convertToEO_Code(p_voxel);
+    auto xLocCode = converted_code.X;
+    auto yLocCode = converted_code.Y;
+    auto zLocCode = converted_code.Z;
 
     auto nextLevel = m_root_level - 1;
     // while cell is not a leaf
-    while ((cell)->m_children.empty() == false)
+    while ((cell)->m_empty == true)
     {
         unsigned int childBranchBit = 1 << (nextLevel);
-        auto xLocCode = cell->m_code.X;
-        auto yLocCode = cell->m_code.Y;
-        auto zLocCode = cell->m_code.Z;
+        
 
         unsigned xBit = (xLocCode & childBranchBit) >> nextLevel;
         unsigned yBit, zBit;
@@ -494,11 +590,11 @@ void EO_Node::createChildren()
     auto setBB = [&](const short p_index, const FVector p_min_offset, const FVector p_max_offset)
     {
         m_children[p_index]->setBoundingBox(m_center + (p_min_offset * h), m_center + (p_max_offset * h));
-        auto box = m_children[p_index]->m_box;
+        /*auto box = m_children[p_index]->m_box;
         if (m_box[0].Size() > 1000 || m_box[1].Size() > 1000)
         {
             std::cout << "uh oh";
-        }
+        }*/
     };
 
     setBB(0, FVector{-1,-1,-1}, FVector{0});
@@ -649,3 +745,32 @@ void Efficient_Octree::getInternalNodesRec(EO_Node * p_node, ListOfNodes& p_arra
     }
 }
 
+bool Efficient_Octree::isValid()
+{
+    if (m_root == nullptr) { return false; }
+
+
+    auto i_nodes = getInternalNodes();
+    for (auto node : i_nodes)
+    {
+        // if node is an internal node but it still contains a voxel, then there is
+        // a problem
+        if (node->m_empty == false)
+        {
+            return false;
+        }
+    }
+
+    auto l_nodes = getLeaves();
+    for (auto node : l_nodes)
+    {
+        // if node is an internal node but it still contains a voxel, then there is
+        // a problem
+        if (node->m_empty == true)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}

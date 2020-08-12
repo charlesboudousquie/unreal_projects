@@ -7,7 +7,7 @@
 #include "Engine/StaticMesh.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
-
+#include "Efficient_Octree.h"
 
 TArray<FColor> UHelperFunctions::g_colors =
 {
@@ -50,7 +50,7 @@ FColor UHelperFunctions::chooseColor(int p_level)
     return g_colors[p_level % g_colors.Num()];
 }
 
-void UHelperFunctions::drawNode(FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh)
+void UHelperFunctions::drawNode(const FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh)
 {
     auto stat_mesh = p_mesh->GetStaticMesh();
 
@@ -63,22 +63,35 @@ void UHelperFunctions::drawNode(FBox & p_box, UHierarchicalInstancedStaticMeshCo
     auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
 }
 
-void UHelperFunctions::drawInstances(AActor * p_asteroid_archetype, const TArray<FVector>& p_positions, bool clearInstances)
+void UHelperFunctions::drawInstances(AActor * p_asteroid_archetype,
+    const TArray<EO_Node*>& p_instances, bool clearInstances)
 {
     auto l_mesh = p_asteroid_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
     assert(l_mesh != nullptr);
 
-    l_mesh->ClearInstances();
+    if (clearInstances) { l_mesh->ClearInstances(); }
 
-
-    for (auto& pos : p_positions)
+    // draw each node
+    for (auto& instance : p_instances)
     {
-        FTransform l_trans(pos);
-        l_mesh->AddInstance(l_trans);
+        drawNode(instance->m_box, l_mesh);
     }
 }
 
+void UHelperFunctions::drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh,
+    const EO_Node* p_instance, bool clearInstances)
+{
+    assert(p_hierarchical_mesh != nullptr);
 
+    if (clearInstances) { p_hierarchical_mesh->ClearInstances(); }
+
+    drawNode(p_instance->m_box, p_hierarchical_mesh);
+    // draw each node
+    /*for (auto& instance : p_instances)
+    {
+        drawNode(instance->m_box, p_hierarchical_mesh);
+    }*/
+}
 
 
 

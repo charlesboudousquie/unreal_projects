@@ -55,15 +55,6 @@ void UMapController::BeginPlay()
 
     FName l_tag("oct_archetype");
 
-    //TArray<AActor*> OutActors;
-    //UGameplayStatics::GetAllActorsWithTag(this, l_tag, OutActors);
-
-    //// there should be only one
-    //if (OutActors.Num() != 1)
-    //{
-    //    return;
-    //}
-
     m_octree_archetype = UHelperFunctions::getActorWithTag(l_tag, this);// OutActors[0];
 
     auto parent_mesh = m_octree_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
@@ -93,54 +84,15 @@ void UMapController::BeginPlay()
         new_mesh->SetStaticMesh(parent_mesh->GetStaticMesh());
         // Register
         new_mesh->RegisterComponentWithWorld(GetWorld());
-      
+
 
 
     }
-
-    /*for (auto mesh : m_meshes)
-    {
-        auto stat_mesh = mesh->GetStaticMesh();
-
-        auto box = stat_mesh->GetBoundingBox();
-        auto& model = stat_mesh->GetSourceModel(0);
-    }*/
-
 
     // create material instances for each mesh
     this->setMaterials();
 
 }
-
-//void UMapController::drawNode(FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh)
-//{
-//
-//    auto stat_mesh = p_mesh->GetStaticMesh();
-//
-//    // what is the scale of the mesh p_mesh is using????
-//    auto bounds = stat_mesh->GetBounds().BoxExtent;
-//    //auto radius = stat_mesh->GetBounds().SphereRadius;
-//    //auto hier_loc = p_mesh->GetComponentLocation();
-//    //auto hier_trans = p_mesh->GetComponentTransform();
-//    //stat_mesh->
-//
-//    auto rotator = FRotator::ZeroRotator;
-//    auto center = p_box.GetCenter();
-//    auto extents = p_box.GetExtent();
-//    //FTransform l_transform(rotator, center, extents / m_mesh_scalar);
-//    //FTransform l_transform(rotator, center, extents / radius);
-//    FTransform l_transform(rotator, center, extents / bounds.X);
-//    //auto instance_id = p_mesh->AddInstance(l_transform);
-//    auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
-//    //FTransform instance_trans_local;
-//    //FTransform instance_trans_world;
-//    //p_mesh->GetInstanceTransform(instance_id, instance_trans_local);
-//    //p_mesh->GetInstanceTransform(instance_id, instance_trans_world, true);
-//    //auto instance_rel_trans = p_mesh->GetRelativeTransform();
-//    //auto instance_rel_loc = p_mesh->GetRelativeLocation();
-//    //auto world = p_mesh->GetWorld();
-//}
-
 
 // Called every frame
 void UMapController::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -172,24 +124,29 @@ void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
             if (l_asset.AssetName.Compare(l_map_name) == 0)
             {
 
-                //unit_Test(p_asteroid_archetype);
-
-                UDmapAsset* asset = Cast<UDmapAsset>(l_asset.GetAsset());
-                auto& data = asset->getFileData();
-
-                // clear and scale tree dimensions
-                m_tree->clearTree();
-                m_tree->setDimensions(asset->getDimensions() * m_mesh_scalar);
-
-                for (const FVector& v : data)
+                if (m_use_unit_test) 
                 {
-                    // multiply data by scalar
-                    m_tree->insert(v * m_mesh_scalar);
+                    unit_Test(p_asteroid_archetype); 
                 }
-                
-                this->drawInternalNodes();
+                else
+                {
+                    UDmapAsset* asset = Cast<UDmapAsset>(l_asset.GetAsset());
+                    auto& data = asset->getFileData();
 
-                this->drawLeaves(p_asteroid_archetype);
+                    // clear and scale tree dimensions
+                    m_tree->clearTree();
+                    m_tree->setDimensions(asset->getDimensions() * m_mesh_scalar);
+
+                    for (const FVector& v : data)
+                    {
+                        // multiply data by scalar
+                        m_tree->insert(v * m_mesh_scalar);
+                    }
+
+                    this->drawInternalNodes();
+
+                    this->drawLeaves(p_asteroid_archetype);
+                }
 
                 break;
             }
@@ -198,19 +155,6 @@ void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
 
 }
 
-//void UMapController::printTree()
-//{
-//    if(GEngine)
-//    {
-//        GEngine->ClearOnScreenDebugMessages();
-//        auto l_nodes = m_tree->getAllNodes();
-//        for (auto& node : l_nodes)
-//        {
-//            node->print();
-//        }
-//    }
-//}
-
 bool UMapController::octreeExists()
 {
     return m_tree != nullptr;
@@ -218,78 +162,8 @@ bool UMapController::octreeExists()
 
 FVector UMapController::getOctreePos()
 {
-    /*auto leaves = m_tree->getLeaves();
-    if (leaves.Num() > 0)
-    {
-        return leaves[0]->m_box.GetCenter();
-    }
-
-    return {0,0,0};*/
     return m_tree->getPos();
 }
-
-//void UMapController::drawBox(const TArray<FVector>& p_points, int p_level)
-//{
-//    //Assume indices are in this order:
-//    // back bottom left	  0
-//    // back bottom right  1
-//    // front bottom right 2      
-//    // front bottom left  3
-//    // back top left      4
-//    // back top right     5
-//    //front top right     6
-//    // front top left     7
-//
-//    // 12 lines in total
-//    TArray<FIntPoint> indices{
-//    {0,1},
-//    {1,2},
-//    {2,3},
-//    {3,0},
-//
-//    {4,5},
-//    {5,6},
-//    {6,7},
-//    {7,4},
-//
-//    {0,4},
-//    {1,5},
-//    {2,6},
-//    {3,7}
-//    };
-//
-//    auto world = GetWorld();
-//
-//    for (auto& line : indices)
-//    {
-//        auto& begin = p_points[line.X];
-//        auto& end = p_points[line.Y];
-//
-//        auto l_color = chooseColor(p_level);
-//
-//        //DrawDebugBox(world,);
-//        DrawDebugLine(world, begin, end,
-//            l_color, true, -1, 0, debug_line_width);
-//    }
-//
-//}
-
-//void UMapController::drawAsteroid(const FVector & p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh)
-//{
-//    // find object with hierarchical instanced mesh
-//    // UInstancedStaticMeshComponent
-//    // asteroid_instance
-//
-//    //auto rotator = FRotator::ZeroRotator;
-//    //FTransform l_trans(rotator, p_pos, {2,2,2});
-//    FTransform l_trans(p_pos);
-//
-//    if (p_mesh)
-//    {
-//        p_mesh->AddInstance(l_trans);
-//    }
-//
-//}
 
 void UMapController::drawInternalNodes()
 {
@@ -309,33 +183,19 @@ void UMapController::drawInternalNodes()
     // now to draw the octree internal nodes
     auto internal_nodes = m_tree->getInternalNodes();
 
-    for (auto& node : internal_nodes)
+    for (auto node : internal_nodes)
     {
         // the mesh chosen is based on the level
         // each level will have a differently colored wireframe
         auto& l_box = node->m_box;
-        UHelperFunctions::drawNode(l_box, find_corresponding_mesh(node->m_level));
-        //drawNode(l_box, find_corresponding_mesh(node->m_level));
+        UHelperFunctions::drawInstance(find_corresponding_mesh(node->m_level), node, false);
     }
 
 }
 
 void UMapController::drawLeaves(AActor * p_asteroid_archetype)
 {
-    // get all leaf nodes
-    //TArray<EO_Node*> nodes = m_tree->getLeaves();
-
-    UHelperFunctions::drawInstances(p_asteroid_archetype, m_tree->getLeafPositions());
-    //auto asteroid_mesh = p_asteroid_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
-    //assert(asteroid_mesh != nullptr);
-
-    //asteroid_mesh->ClearInstances();
-
-    //// then for each node get its 8 points
-    //for (auto& node : nodes)
-    //{
-    //    drawAsteroid(node->m_voxel, asteroid_mesh);
-    //}
+    UHelperFunctions::drawInstances(p_asteroid_archetype, m_tree->getLeaves());
 }
 
 void UMapController::setMaterials()
@@ -364,17 +224,17 @@ void UMapController::unit_Test(AActor* p_asteroid_archetype)
 {
 
     // find out real scale of mesh
-    auto l_mesh = m_octree_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>()->GetStaticMesh();
+    /*auto l_mesh = m_octree_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>()->GetStaticMesh();
 
     FVector bounds = l_mesh->GetBounds().GetBox().GetSize();
-    m_mesh_scalar = bounds.X;
+    m_mesh_scalar = bounds.X;*/
 
     // clear and scale tree dimensions
     m_tree->clearTree();
-    m_tree->setDimensions(FVector{3} /** m_mesh_scalar*/); // length of a hundred cubes
+    m_tree->setDimensions(FVector{ 2 } * m_mesh_scalar);
 
     std::vector<FVector> data = {
-        FVector{0}, 
+        FVector{0},
         FVector{0,0,1},
         FVector{0,1,0},
         FVector{0,1,1},
@@ -387,16 +247,15 @@ void UMapController::unit_Test(AActor* p_asteroid_archetype)
     for (const FVector& v : data)
     {
         // multiply data by scalar
-        m_tree->insert(v /** m_mesh_scalar*/);
+        m_tree->insert(v * m_mesh_scalar);
     }
 
-    auto nodes = m_tree->getAllNodes();
-    for (auto& node : nodes)
-    {
-        DrawDebugBox(GetWorld(), node->m_box.GetCenter(), node->m_box.GetExtent(), FColor::Green, true, -1.f, 0, 2.f);
-        //drawBox(node->m_box);
-    }
+    bool tree_valid = m_tree->isValid();
 
+    auto node = m_tree->getSmallestNode({ 0,0,0 });
+    auto node2 = m_tree->getSmallestNode({1,1,1});
+
+    //auto neighbors = m_tree->getNeighbors(node);
 
     this->drawInternalNodes();
 
