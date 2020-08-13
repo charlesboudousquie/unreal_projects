@@ -10,12 +10,12 @@
 			"Get3dMapList.cpp.obj",
 			"GridDirection.cpp.obj",
 			"GridNode.cpp.obj",
+			"HelperFunctions.cpp.obj",
 			"JPS_GridDrawer.cpp.obj",
 			"JPS_Solver.cpp.obj",
 			"Octree.cpp.obj",
 			"UpdateablePriorityQueue.cpp.obj",
 			"Efficient_Octree.cpp.obj",
-			"HelperFunctions.cpp.obj",
 			"MapController.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
@@ -23,11 +23,11 @@
 			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
+			"DmapModule.init.gen.cpp.obj",
 			"Get3dMapList.gen.cpp.obj",
 			"HelperFunctions.gen.cpp.obj",
 			"JPS_GridDrawer.gen.cpp.obj",
 			"JPS_Solver.gen.cpp.obj",
-			"DmapModule.init.gen.cpp.obj",
 			"MapController.gen.cpp.obj"
 		]
 	}

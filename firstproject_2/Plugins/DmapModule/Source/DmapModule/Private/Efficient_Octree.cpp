@@ -53,9 +53,9 @@ std::map<Efficient_Octree::BC, Efficient_Octree::Dir> Efficient_Octree::g_direct
 EO_CODE Efficient_Octree::getNeighborCode(const EO_CODE& oldCode, Dir p_dir, int p_cellSize)
 {
     EO_CODE result = EO_CODE{
-        getAxisNeighborCode(oldCode.X, p_dir[0], p_cellSize),
-        getAxisNeighborCode(oldCode.Y, p_dir[1], p_cellSize),
-        getAxisNeighborCode(oldCode.Z, p_dir[2], p_cellSize) };
+        (uint64)getAxisNeighborCode(oldCode.X, p_dir[0], p_cellSize),
+        (uint64)getAxisNeighborCode(oldCode.Y, p_dir[1], p_cellSize),
+        (uint64)getAxisNeighborCode(oldCode.Z, p_dir[2], p_cellSize) };
     return result;
 }
 
@@ -100,32 +100,41 @@ void Efficient_Octree::setDimensions(FVector p_dim)
 
 TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
 {
-    TArray<Efficient_Octree::EO_NodePtr> l_nieghbors;
-    for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
-    {
-        l_nieghbors.Add(getVertexNeighbor(p_node, g_directions[i]));
-    }
 
-    for (BC i = BC::FD; i <= BC::BU; i = static_cast<BC>((int)i + 1))
+    TArray<Efficient_Octree::EO_NodePtr> l_neighbors;
+    auto add_if = [&](EO_NodePtr l_node) 
     {
-        l_nieghbors.Add(getEdgeNeighbor(p_node, g_directions[i]));
-    }
+        if (l_node != nullptr) { l_neighbors.Add(l_node); }
+    };
 
     for (BC i = BC::L; i <= BC::D; i = static_cast<BC>((int)i + 1))
     {
         auto dir = g_directions[i];
         if (dir.GetMax() == 1)
         {
-            l_nieghbors.Add(getPositiveDirNeighbor(p_node, dir));
+            add_if(getPositiveDirNeighbor(p_node, dir));
         }
         else
         {
-            l_nieghbors.Add(getNegativeDirNeighbor(p_node, dir));
+            add_if(getNegativeDirNeighbor(p_node, dir));
         }
-        
+
     }
 
-    return l_nieghbors;
+    
+    for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
+    {
+        add_if(getVertexNeighbor(p_node, g_directions[i]));
+    }
+
+    for (BC i = BC::FD; i <= BC::BU; i = static_cast<BC>((int)i + 1))
+    {
+        add_if(getEdgeNeighbor(p_node, g_directions[i]));
+    }
+
+    
+
+    return l_neighbors;
 }
 
 //TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getDiagonalNeighbors(EO_NodePtr p_node)
@@ -148,7 +157,7 @@ TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p
 //}
 
 
-unsigned int Efficient_Octree::getAxisNeighborCode(int p_old_val, int p_axis_val, int p_cellSize)
+int Efficient_Octree::getAxisNeighborCode(int p_old_val, int p_axis_val, int p_cellSize)
 {
     if (p_axis_val == 0) { return p_old_val; }
 
@@ -182,7 +191,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverse(EO_NodePtr p_parent_cell
     auto cell = p_parent_cell;
 
     // while cell is not a leaf
-    while ((cell)->m_children.empty() == false)
+    while ((cell)->noChildrenActive() == false)
     {
         unsigned int childBranchBit = 1 << (nextLevel);
         auto xLocCode = cell->m_code.X;
@@ -226,14 +235,16 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverseToLevel(EO_NodePtr p_pare
 
     int n = nextLevel - p_level + 1;
 
+    auto xLocCode = p_target_cell_code.X;
+    auto yLocCode = p_target_cell_code.Y;
+    auto zLocCode = p_target_cell_code.Z;
+
     // while cell is not a leaf
-    while (((cell)->m_children.empty() == false) && (n > 0))
+    while (((cell)->noChildrenActive() == false) && (n > 0))
     {
         n--;
         unsigned int childBranchBit = 1 << (nextLevel);
-        auto xLocCode = cell->m_code.X;
-        auto yLocCode = cell->m_code.Y;
-        auto zLocCode = cell->m_code.Z;
+        
 
         unsigned xBit = (xLocCode & childBranchBit) >> nextLevel;
         unsigned yBit, zBit;
@@ -263,6 +274,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverseToLevel(EO_NodePtr p_pare
         cell = cell->m_children[childIndex].get();
     }
 
+    assert(cell->m_code == p_target_cell_code);
     return cell;
 }
 
@@ -272,6 +284,15 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getVertexNeighbor(EO_NodePtr p_ce
     unsigned int our_level = p_cell->m_level;
 
     unsigned cellSize = 1 << our_level;
+
+    // check if any part of the code produces negative numbers.
+    // if so then abort.
+    FIntVector proxyCode = p_cell->m_code.toIntVector();
+    proxyCode += p_dir;
+    // if code became negative then that means we are trying to access
+    // a node outside of the octree
+    if (proxyCode.GetMin() < 0) { return nullptr; }
+
 
     EO_CODE neighbor_code = getNeighborCode(p_cell->m_code, p_dir, cellSize);
 
@@ -348,6 +369,13 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getEdgeNeighbor(EO_NodePtr p_cell
     // get our code
     EO_CODE our_code = p_cell->m_code;
 
+    // check if any part of the code produces negative numbers.
+    // if so then abort.
+    FIntVector proxyCode = p_cell->m_code.toIntVector();
+    proxyCode += p_dir;
+    // if code became negative then that means we are trying to access
+    // a node outside of the octree
+    if (proxyCode.GetMin() < 0) { return nullptr; }
 
     // get neighbor code
     EO_CODE neighbor_code = getNeighborCode(our_code, p_dir,cellSize);
@@ -363,6 +391,8 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getEdgeNeighbor(EO_NodePtr p_cell
     // check if a node exists in that direction.
     auto checkNeighbor = [&](int p_dir_index)
     {
+        if (p_dir[p_dir_index] == 0) { return; }
+
         // get direction going only in 1 of the
         // axis directions
         Dir newDir{ 0 };
@@ -398,7 +428,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getEdgeNeighbor(EO_NodePtr p_cell
     EO_NodePtr biggest_parent = nullptr;
     for (auto parent : l_parents)
     {
-        if (parent->m_level > biggest_level)
+        if (parent && (parent->m_level > biggest_level))
         {
             biggest_level = parent->m_level;
             biggest_parent = parent;

@@ -60,6 +60,12 @@ struct EO_CODE
         Y = p_vec.Y;
         Z = p_vec.Z;
     }
+
+    FIntVector toIntVector()
+    {
+        return { (int)X,(int)Y,(int)Z };
+    }
+
 };
 
 struct EO_Node
@@ -158,7 +164,7 @@ class Efficient_Octree
 
     // get code of neighbor that only differs in
     // one axis
-    unsigned int getAxisNeighborCode(int p_old_code, int p_axis_val, int p_cellSize);
+    int getAxisNeighborCode(int p_old_code, int p_axis_val, int p_cellSize);
 
     // get neighbor_code that differs on multiple
     // axis.

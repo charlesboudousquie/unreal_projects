@@ -255,7 +255,8 @@ void UMapController::unit_Test(AActor* p_asteroid_archetype)
     auto node = m_tree->getSmallestNode({ 0,0,0 });
     auto node2 = m_tree->getSmallestNode({1,1,1});
 
-    //auto neighbors = m_tree->getNeighbors(node);
+
+    auto neighbors = m_tree->getNeighbors(node);
 
     this->drawInternalNodes();
 

@@ -86,27 +86,12 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/GridNode.cpp
 c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\GridNode.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/JPS_GridDrawer.cpp
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\map
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtree
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\JPS_GridDrawer.generated.h
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\list
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\queue
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\deque
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\unordered_set
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xhash
-c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\public\UpdateablePriorityQueue.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\set
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\JPS_Solver.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceDynamic.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceBasePropertyOverrides.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceBasePropertyOverrides.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstance.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceDynamic.generated.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/HelperFunctions.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\HelperFunctions.generated.h
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Components/HierarchicalInstancedStaticMeshComponent.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\HierarchicalInstancedStaticMeshComponent.generated.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime/Engine/Classes/Kismet/GameplayStatics.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerController.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\GameFramework/OnlineReplStructs.h
@@ -136,8 +121,28 @@ C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Ed
 c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\engine\classes\kismet\GameplayStaticsTypes.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStaticsTypes.generated.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStatics.generated.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Components/HierarchicalInstancedStaticMeshComponent.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\HierarchicalInstancedStaticMeshComponent.generated.h
+c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\Efficient_Octree.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\map
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtree
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/JPS_GridDrawer.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\JPS_GridDrawer.generated.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\list
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\queue
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\deque
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\unordered_set
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xhash
+c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\public\UpdateablePriorityQueue.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\set
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\JPS_Solver.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceDynamic.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceBasePropertyOverrides.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceBasePropertyOverrides.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstance.generated.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceDynamic.generated.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/JPS_Solver.cpp
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Components/AudioComponent.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Sound/SoundWave.h
