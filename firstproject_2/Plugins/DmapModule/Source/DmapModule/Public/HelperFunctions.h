@@ -17,7 +17,7 @@ class DMAPMODULE_API UHelperFunctions : public UActorComponent
 
     static TArray<FColor> g_colors;
 
-    static void drawNode(const FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh);
+    static void drawNode(const FBox& p_box, UHierarchicalInstancedStaticMeshComponent* p_mesh, float p_voxel_scalar);
 
 public:
 
@@ -29,11 +29,11 @@ public:
 
 
     // draw hierarchical instances of the archetype/object specified
-    static void drawInstances(AActor * p_asteroid_archetype, const TArray<EO_Node*>& p_instances,
+    static void drawInstances(AActor * p_asteroid_archetype, const TArray<EO_Node*>& p_instances, float p_voxel_scalar,
         bool clearInstances = true);
 
-    static void drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh,
-        const EO_Node* p_instance, bool clearInstances);
+    static void drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh, 
+        const EO_Node* p_instance, float p_voxel_scalar,  bool clearInstances);
 
 
 

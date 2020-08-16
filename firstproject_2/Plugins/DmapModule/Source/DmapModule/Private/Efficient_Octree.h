@@ -68,10 +68,10 @@ struct EO_CODE
 
 };
 
+typedef FIntVector Voxel;
+
 struct EO_Node
 {
-
-    typedef FVector Voxel;
 
     EO_CODE m_code;
     EO_Node* m_parent = nullptr;
@@ -79,15 +79,17 @@ struct EO_Node
     FBox m_box;
     unsigned m_level = 0;
     bool m_empty = true;
+    short m_index = -1; // node's index in the parent's children
     Voxel m_voxel;
 
-    // print out contents of node
-    void print();
+    EO_Node* operator[](short p_index);
 
-    EO_Node* findBestChild(Voxel p_vox);
+    // print out contents of node
+    void print() {}
+
     void createChildren();
     void setBoundingBox(FVector p_min, FVector p_max);
-    void insertVoxel(Voxel p_vox);
+    void setVoxel(Voxel p_vox) { m_voxel = p_vox; m_empty = false; }
     bool noChildrenActive() { return m_children[0] == nullptr; }
 };
 
@@ -98,11 +100,6 @@ struct EO_Node
 class Efficient_Octree
 {
     typedef TArray<EO_Node*> ListOfNodes;
-
-    // REMEMBER TO INCLUDE LICENSE
-
-
-
     typedef EO_Node* EO_NodePtr;
     typedef FIntVector Dir;
 
@@ -174,24 +171,18 @@ class Efficient_Octree
     // Important: assumes only 1 axis is not zero.
     int getAxisIndex(Dir p_dir);
 
-    EO_NodePtr genericAncestorFind(EO_NodePtr p_cell, EO_CODE p_neighbor_code, int p_code_index);
+    EO_NodePtr genericAncestorFind(EO_NodePtr p_cell, Dir p_dir);
 
     friend EO_Node;
-
 
     void getLeavesRec(EO_Node*, TArray<EO_Node*>&);
     void getInternalNodesRec(EO_Node * p_node, ListOfNodes& p_array, int p_level);
 
+    Efficient_Octree() : m_max_level(0), m_root_level(0), m_max_val(0) {}
 
-
-    Efficient_Octree() : m_max_level(4), m_root_level(3)
-    {
-        m_max_val = 1 << m_root_level;
-    }
+    static short getChildIndex(Voxel p_voxel, unsigned nextLevel);
 
 public:
-
-
 
     static Efficient_Octree& getEO_Tree()
     {
@@ -199,25 +190,23 @@ public:
         return m_instance;
     }
 
+    static Voxel toVoxel(FVector p_vec) { return Voxel{ (int)p_vec.X, (int)p_vec.Y, (int)p_vec.Z, }; }
+
     ListOfNodes getLeaves();
-    TArray<FVector> getLeafPositions();
+    TArray<Voxel> getLeafPositions();
     ListOfNodes getInternalNodes();
-    TArray<FVector> getInternalNodePositions();
+    TArray<Voxel> getInternalNodePositions();
 
     ListOfNodes getAllNodes();
 
     FVector getPos() { return m_root->m_box.GetCenter(); }
-    void insert(FVector p_voxel);
+    void insert(Voxel p_voxel);
     void setDimensions(FVector p_dim); // modifies max val
     void clearTree() { m_root.reset(new EO_Node); }
     TArray<EO_NodePtr> getNeighbors(EO_NodePtr p_node);
-    /*TArray<EO_NodePtr> getDiagonalNeighbors(EO_NodePtr p_node);
-    TArray<EO_NodePtr> getEdgeNeighbors(EO_NodePtr p_node);
-    TArray<EO_NodePtr> getFaceNeighbors(EO_NodePtr p_node);*/
-
 
     // synonymous with traverse
-    EO_NodePtr getSmallestNode(FVector p_voxel);
+    EO_NodePtr getSmallestNode(Voxel p_voxel);
 
     bool isValid();
 };

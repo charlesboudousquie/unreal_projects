@@ -50,7 +50,7 @@ FColor UHelperFunctions::chooseColor(int p_level)
     return g_colors[p_level % g_colors.Num()];
 }
 
-void UHelperFunctions::drawNode(const FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh)
+void UHelperFunctions::drawNode(const FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh,float p_voxel_scalar)
 {
     auto stat_mesh = p_mesh->GetStaticMesh();
 
@@ -59,12 +59,15 @@ void UHelperFunctions::drawNode(const FBox & p_box, UHierarchicalInstancedStatic
     auto rotator = FRotator::ZeroRotator;
     auto center = p_box.GetCenter();
     auto extents = p_box.GetExtent();
-    FTransform l_transform(rotator, center, extents / bounds.X);
+
+    auto scalar = p_voxel_scalar > 0 ? p_voxel_scalar : extents.X;
+    //FTransform l_transform(rotator, center, extents / bounds.X);
+    FTransform l_transform(rotator, center, FVector{ scalar / bounds.X });
     auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
 }
 
 void UHelperFunctions::drawInstances(AActor * p_asteroid_archetype,
-    const TArray<EO_Node*>& p_instances, bool clearInstances)
+    const TArray<EO_Node*>& p_instances, float p_voxel_scalar, bool clearInstances)
 {
     auto l_mesh = p_asteroid_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
     assert(l_mesh != nullptr);
@@ -74,23 +77,18 @@ void UHelperFunctions::drawInstances(AActor * p_asteroid_archetype,
     // draw each node
     for (auto& instance : p_instances)
     {
-        drawNode(instance->m_box, l_mesh);
+        drawNode(instance->m_box, l_mesh, p_voxel_scalar);
     }
 }
 
 void UHelperFunctions::drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh,
-    const EO_Node* p_instance, bool clearInstances)
+    const EO_Node* p_instance, float p_voxel_scalar, bool clearInstances)
 {
     assert(p_hierarchical_mesh != nullptr);
 
     if (clearInstances) { p_hierarchical_mesh->ClearInstances(); }
 
-    drawNode(p_instance->m_box, p_hierarchical_mesh);
-    // draw each node
-    /*for (auto& instance : p_instances)
-    {
-        drawNode(instance->m_box, p_hierarchical_mesh);
-    }*/
+    drawNode(p_instance->m_box, p_hierarchical_mesh, p_voxel_scalar);
 }
 
 

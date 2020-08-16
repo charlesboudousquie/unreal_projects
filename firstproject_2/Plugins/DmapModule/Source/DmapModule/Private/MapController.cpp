@@ -124,9 +124,9 @@ void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
             if (l_asset.AssetName.Compare(l_map_name) == 0)
             {
 
-                if (m_use_unit_test) 
+                if (m_use_unit_test)
                 {
-                    unit_Test(p_asteroid_archetype); 
+                    unit_Test(p_asteroid_archetype);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
                     for (const FVector& v : data)
                     {
                         // multiply data by scalar
-                        m_tree->insert(v * m_mesh_scalar);
+                        m_tree->insert(Efficient_Octree::toVoxel(v * m_mesh_scalar));
                     }
 
                     this->drawInternalNodes();
@@ -188,14 +188,14 @@ void UMapController::drawInternalNodes()
         // the mesh chosen is based on the level
         // each level will have a differently colored wireframe
         auto& l_box = node->m_box;
-        UHelperFunctions::drawInstance(find_corresponding_mesh(node->m_level), node, false);
+        UHelperFunctions::drawInstance(find_corresponding_mesh(node->m_level), node, -1.0f, false);
     }
 
 }
 
 void UMapController::drawLeaves(AActor * p_asteroid_archetype)
 {
-    UHelperFunctions::drawInstances(p_asteroid_archetype, m_tree->getLeaves());
+    UHelperFunctions::drawInstances(p_asteroid_archetype, m_tree->getLeaves(), m_mesh_scalar);
 }
 
 void UMapController::setMaterials()
@@ -223,43 +223,41 @@ void UMapController::setMaterials()
 void UMapController::unit_Test(AActor* p_asteroid_archetype)
 {
 
-    // find out real scale of mesh
-    /*auto l_mesh = m_octree_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>()->GetStaticMesh();
-
-    FVector bounds = l_mesh->GetBounds().GetBox().GetSize();
-    m_mesh_scalar = bounds.X;*/
-
     // clear and scale tree dimensions
     m_tree->clearTree();
-    m_tree->setDimensions(FVector{ 2 } * m_mesh_scalar);
+    m_tree->setDimensions(FVector{ 8 } *m_mesh_scalar);
 
-    std::vector<FVector> data = {
-        FVector{0},
-        FVector{0,0,1},
-        FVector{0,1,0},
-        FVector{0,1,1},
-        FVector{1,0,0},
-        FVector{1,0,1},
-        FVector{1,1,0},
-        FVector{1},
+    std::vector<FVector> data =
+    {
+        //FVector{0}, FVector{0,0,1}, FVector{0,1,0}, FVector{0,1,1}, FVector{1,0,0}, FVector{1,0,1}, FVector{1,1,0}, FVector{1},
+        FVector{7,7,7}, FVector{5,5,5},
     };
 
     for (const FVector& v : data)
     {
         // multiply data by scalar
-        m_tree->insert(v * m_mesh_scalar);
+        m_tree->insert(Efficient_Octree::toVoxel(v * m_mesh_scalar));
     }
 
-    bool tree_valid = m_tree->isValid();
+    assert(m_tree->isValid());
 
-    auto node = m_tree->getSmallestNode({ 0,0,0 });
-    auto node2 = m_tree->getSmallestNode({1,1,1});
+    /*auto node = m_tree->getSmallestNode(FVector{ 0 });
+    auto node2 = m_tree->getSmallestNode(FVector{ 1 });*/
+
+    auto node = m_tree->getSmallestNode(Efficient_Octree::toVoxel(FVector{ 0 }));
+    auto node2 = m_tree->getSmallestNode(Efficient_Octree::toVoxel(FVector{ 5 }));
 
 
-    auto neighbors = m_tree->getNeighbors(node);
+    auto neighbors = m_tree->getNeighbors(node2);
 
-    this->drawInternalNodes();
+    if (m_draw_internal_nodes)
+    {
+        this->drawInternalNodes();
+    }
 
-    this->drawLeaves(p_asteroid_archetype);
+    if (m_draw_leaves)
+    {
+        this->drawLeaves(p_asteroid_archetype);
+    }
 }
 

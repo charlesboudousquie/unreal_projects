@@ -39,6 +39,12 @@ class DMAPMODULE_API UMapController : public UActorComponent
     UPROPERTY(EditAnywhere)
     bool m_use_unit_test = false;
 
+    UPROPERTY(EditAnywhere)
+    bool m_draw_leaves = true;
+
+    UPROPERTY(EditAnywhere)
+    bool m_draw_internal_nodes = true;
+
     UPROPERTY()
     UMaterialInterface* m_wireframe_material;
 

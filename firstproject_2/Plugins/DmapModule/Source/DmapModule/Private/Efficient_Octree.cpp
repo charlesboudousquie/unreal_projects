@@ -28,7 +28,7 @@ std::map<Efficient_Octree::BC, Efficient_Octree::Dir> Efficient_Octree::g_direct
     BC_Insert(FD, 0,1,-1)
     BC_Insert(RD, 1,0,-1)
     BC_Insert(BD, 0,-1,-1)
-    BC_Insert(LD, 1,0,-1)
+    BC_Insert(LD, -1,0,-1)
     
     BC_Insert(LF, -1,1,0)
     BC_Insert(RF, 1,1,0)
@@ -67,17 +67,80 @@ int Efficient_Octree::getAxisIndex(Dir p_dir)
     return -1;
 }
 
-Efficient_Octree::EO_NodePtr Efficient_Octree::genericAncestorFind(EO_NodePtr p_cell, EO_CODE p_neighbor_code, int p_code_index)
+Efficient_Octree::EO_NodePtr Efficient_Octree::genericAncestorFind(EO_NodePtr p_cell, Dir p_dir)
 {
-    auto curr_level = p_cell->m_level;
-    auto our_code = p_cell->m_code;
-    auto diff = our_code[p_code_index] ^ p_neighbor_code[p_code_index];
-    return findComPar(p_cell, curr_level, diff);
+
+    unsigned our_level = p_cell->m_level;
+    unsigned cellSize = 1 << our_level;
+
+    // get our code
+    short activeAxis = getAxisIndex(p_dir);
+    short axisValue = p_dir[activeAxis];
+    assert(axisValue != 0);
+    unsigned our_dir_code = p_cell->m_code[activeAxis];
+
+    // get neighbor's code
+    int neighbor_dir_code = our_dir_code;
+    if (axisValue > 0)
+    {
+        neighbor_dir_code += cellSize;
+        assert(neighbor_dir_code <= m_max_val);
+    }
+    else
+    {
+        neighbor_dir_code -= 1;
+        assert(neighbor_dir_code >= 0);
+    }
+
+    // find difference in codes
+    unsigned diff = our_dir_code ^ neighbor_dir_code;
+
+    // find common parent
+    unsigned nextLevel = our_level;
+
+    return findComPar(p_cell, nextLevel, diff);
 }
 
-void Efficient_Octree::insert(FVector p_voxel)
+void Efficient_Octree::insert(Voxel v)
 {
-    m_root->insertVoxel(p_voxel);
+
+    auto nodeFound = getSmallestNode(v);
+
+    // after we have hit the bottom we can assume
+    // that "curr" can indeed contain said voxel.
+    // Since that is the case we can simply tell the node itself
+    // to take the voxel. If it is empty then we just
+    // take it. If voxel is full then we set it to empty,
+    // create new children, and we call insert again,
+    // for both the new voxel "v", and the voxel that was 
+    // already inside the node that we found.
+
+    // if empty
+    if (nodeFound->m_empty)
+    {
+        nodeFound->setVoxel(v);
+        // create the children
+        //nodeFound->createChildren();
+    }
+    else
+    {
+        nodeFound->m_empty = true;
+        nodeFound->createChildren();
+        /*short level = nodeFound->m_level - 1;
+        short c1 = getChildIndex(v, level);
+        short c2 = getChildIndex(nodeFound->m_voxel, level);*/
+
+        auto old_voxel = nodeFound->m_voxel;
+
+        // give voxels to children
+        insert(v);
+        insert(old_voxel);
+
+
+    }
+
+    
+
 }
 
 void Efficient_Octree::setDimensions(FVector p_dim)
@@ -85,31 +148,49 @@ void Efficient_Octree::setDimensions(FVector p_dim)
     // make sure that p_dim is exactly what the file says,
     // so don't subtract dimensions by 1 before handing them
     // over to this function.
-    m_min = FVector{ -0.5 };
-    float l_max_dim = p_dim.GetMax();
-    m_max = m_min + FVector{ l_max_dim };
 
-    // assume tree has already been reset
+    this->clearTree();
+    m_min = FVector{ 0 };//-0.5};
+    float l_max_dim = p_dim.GetMax();
+
+    int levelCount = 0;
+    unsigned tree_size = 1;
+    while (tree_size < l_max_dim)
+    {
+        levelCount++;
+        tree_size *= 2;
+    }
+
+    m_root_level = levelCount;
+    m_max_level = levelCount + 1;
+    m_max_val = 1 << m_root_level;
+    m_max = FVector{ (float)tree_size };
 
     auto m_center = (m_max + m_min) / 2.0f;
     auto m_half_extents = FVector{ l_max_dim } / 2.0f;
     m_root->m_box = FBox::BuildAABB(m_center, m_half_extents);
     m_root->m_level = m_root_level;
-    m_root->m_code = Efficient_Octree::getEO_Tree().convertToEO_Code(m_root->m_box.GetCenter());
+    m_root->m_code = m_root->m_box.Min;// Efficient_Octree::getEO_Tree().convertToEO_Code(m_root->m_box.Min);
 }
 
 TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
 {
-
+    EO_NodePtr most_recently_added_neighbor = nullptr;
     TArray<Efficient_Octree::EO_NodePtr> l_neighbors;
     auto add_if = [&](EO_NodePtr l_node) 
     {
-        if (l_node != nullptr) { l_neighbors.Add(l_node); }
+        if (l_node != nullptr && l_neighbors.Contains(l_node) == false)
+        { 
+            l_neighbors.Add(l_node); 
+            most_recently_added_neighbor = l_node;
+        }
     };
+
+    FIntVector dir;
 
     for (BC i = BC::L; i <= BC::D; i = static_cast<BC>((int)i + 1))
     {
-        auto dir = g_directions[i];
+        dir = g_directions[i];
         if (dir.GetMax() == 1)
         {
             add_if(getPositiveDirNeighbor(p_node, dir));
@@ -124,38 +205,20 @@ TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p
     
     for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
     {
-        add_if(getVertexNeighbor(p_node, g_directions[i]));
+        dir = g_directions[i];
+        add_if(getVertexNeighbor(p_node, dir));
     }
 
     for (BC i = BC::FD; i <= BC::BU; i = static_cast<BC>((int)i + 1))
     {
-        add_if(getEdgeNeighbor(p_node, g_directions[i]));
+        dir = g_directions[i];
+        add_if(getEdgeNeighbor(p_node, dir));
     }
 
     
 
     return l_neighbors;
 }
-
-//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getDiagonalNeighbors(EO_NodePtr p_node)
-//{
-//    
-//}
-//
-//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getEdgeNeighbors(EO_NodePtr p_node)
-//{
-//    TArray<Efficient_Octree::EO_NodePtr> l_nieghbors;
-//    for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
-//    {
-//
-//    }
-//    return l_nieghbors;
-//}
-//
-//TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getFaceNeighbors(EO_NodePtr p_node)
-//{
-//}
-
 
 int Efficient_Octree::getAxisNeighborCode(int p_old_val, int p_axis_val, int p_cellSize)
 {
@@ -165,6 +228,7 @@ int Efficient_Octree::getAxisNeighborCode(int p_old_val, int p_axis_val, int p_c
     else
     {
         return p_old_val - 1;
+        //return p_old_val - p_cellSize;
     }
 }
 
@@ -243,9 +307,8 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverseToLevel(EO_NodePtr p_pare
     while (((cell)->noChildrenActive() == false) && (n > 0))
     {
         n--;
-        unsigned int childBranchBit = 1 << (nextLevel);
-        
 
+        /*unsigned int childBranchBit = 1 << (nextLevel);
         unsigned xBit = (xLocCode & childBranchBit) >> nextLevel;
         unsigned yBit, zBit;
         if ((nextLevel - 1) >= 0)
@@ -256,21 +319,19 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverseToLevel(EO_NodePtr p_pare
         {
             yBit = (yLocCode & childBranchBit) << std::abs((int)nextLevel - 1);
         }
-
-        if ((nextLevel - 2) >= 0)
+        if (nextLevel - 2 >= 0)
         {
             zBit = (zLocCode & childBranchBit) >> (nextLevel - 2);
         }
         else
         {
             zBit = (zLocCode & childBranchBit) << std::abs((int)nextLevel - 2);
-        }
+        }*/
 
+        unsigned childIndex = getChildIndex(p_target_cell_code.toIntVector(), nextLevel); // xBit + yBit + zBit;
         nextLevel--;
 
-        unsigned childIndex = xBit + yBit + zBit;
-
-        assert(childIndex < 8 && childIndex >= 0);
+        //assert(childIndex < 8 && childIndex >= 0);
         cell = cell->m_children[childIndex].get();
     }
 
@@ -300,6 +361,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getVertexNeighbor(EO_NodePtr p_ce
     l_neighbors.SetNumZeroed(3);*/
 
     TArray<EO_NodePtr> l_common_parents;
+    TArray<EO_NodePtr> l_neighbors;
     l_common_parents.SetNumZeroed(3);
 
     // for each separate axis element of the direction,
@@ -326,7 +388,8 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getVertexNeighbor(EO_NodePtr p_ce
         //l_neighbors[p_dir_index] = l_neighbor;
         if (l_neighbor)
         {
-            l_common_parents[p_dir_index] = genericAncestorFind(p_cell, l_neighbor->m_code, p_dir_index);
+            l_neighbors.Add(l_neighbor);
+            l_common_parents[p_dir_index] = genericAncestorFind(p_cell, newDir);
         }
         
 
@@ -411,7 +474,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getEdgeNeighbor(EO_NodePtr p_cell
         if (l_neighbor != nullptr)
         {
             neighbor_count++;
-            l_parents[p_dir_index] = genericAncestorFind(p_cell, l_neighbor->m_code, p_dir_index);
+            l_parents[p_dir_index] = genericAncestorFind(p_cell, newDir);
         }
     };
 
@@ -465,7 +528,10 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getNegativeDirNeighbor(EO_NodePtr
     // if at boundary stop
     if (our_dir_code == 0) { return nullptr; }
 
+    int p_cell_size = 1 << p_cell->m_level;
+
     // get code of neighbor
+    //unsigned neighbor_dir_code = our_dir_code - 1;
     unsigned neighbor_dir_code = our_dir_code - 1;
 
     // get smallest neighbor
@@ -524,69 +590,22 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getPositiveDirNeighbor(EO_NodePtr
 }
 
 
-Efficient_Octree::EO_NodePtr Efficient_Octree::getSmallestNode(FVector p_voxel)
+Efficient_Octree::EO_NodePtr Efficient_Octree::getSmallestNode(Voxel p_voxel)
 {
     // leaves are level 0
 
-    auto cell = m_root.get();
-    auto converted_code = this->convertToEO_Code(p_voxel);
-    auto xLocCode = converted_code.X;
-    auto yLocCode = converted_code.Y;
-    auto zLocCode = converted_code.Z;
+    auto curr = m_root.get();
 
-    auto nextLevel = m_root_level - 1;
+    auto nextLevel = curr->m_level;
     // while cell is not a leaf
-    while ((cell)->m_empty == true)
+    while (curr->noChildrenActive() == false)// && ((cell)->m_empty == true))
     {
-        unsigned int childBranchBit = 1 << (nextLevel);
-        
-
-        unsigned xBit = (xLocCode & childBranchBit) >> nextLevel;
-        unsigned yBit, zBit;
-        if ((nextLevel - 1) >= 0)
-        {
-            yBit = (yLocCode & childBranchBit) >> (nextLevel - 1);
-        }
-        else
-        {
-            yBit = (yLocCode & childBranchBit) << std::abs((int)nextLevel - 1);
-        }
-
-        if ((nextLevel - 2) >= 0)
-        {
-            zBit = (zLocCode & childBranchBit) >> (nextLevel - 2);
-        }
-        else
-        {
-            zBit = (zLocCode & childBranchBit) << std::abs((int)nextLevel - 2);
-        }
-
         nextLevel--;
-
-        unsigned childIndex = xBit + yBit + zBit;
-
-        assert(childIndex < 8 && childIndex >= 0);
-        cell = cell->m_children[childIndex].get();
+        unsigned childIndex = getChildIndex(p_voxel, nextLevel);
+        curr = curr->m_children[childIndex].get();
     }
 
-    return cell;
-}
-
-void EO_Node::print()
-{
-}
-
-EO_Node * EO_Node::findBestChild(Voxel p_vox)
-{
-    for (auto& child : m_children)
-    {
-        if (child->m_box.IsInside(p_vox))
-        {
-            return child.get();
-        }
-    }
-
-    throw std::runtime_error("could not find child that fits");
+    return curr;
 }
 
 void EO_Node::createChildren()
@@ -620,11 +639,6 @@ void EO_Node::createChildren()
     auto setBB = [&](const short p_index, const FVector p_min_offset, const FVector p_max_offset)
     {
         m_children[p_index]->setBoundingBox(m_center + (p_min_offset * h), m_center + (p_max_offset * h));
-        /*auto box = m_children[p_index]->m_box;
-        if (m_box[0].Size() > 1000 || m_box[1].Size() > 1000)
-        {
-            std::cout << "uh oh";
-        }*/
     };
 
     setBB(0, FVector{-1,-1,-1}, FVector{0});
@@ -645,12 +659,23 @@ void EO_Node::createChildren()
     //m_children[6]->setBoundingBox(m_center, m_max);																	// R // front top right
     //m_children[7]->setBoundingBox(FVector(m_min.X, m_center.Y, m_center.Z), FVector(m_center.X, m_max.Y, m_max.Z)); // L // front top left
 
+    short l_index_counter = 0;
     // set codes
     for (auto& child : m_children)
     {
-        child->m_code = Efficient_Octree::getEO_Tree().convertToEO_Code(child->m_box.GetCenter());
-        child->m_parent = this;
         
+        child->m_code = child->m_box.Min;// Efficient_Octree::getEO_Tree().convertToEO_Code(child->m_box.GetCenter());
+
+        assert(m_children.ContainsByPredicate(
+            [child](EO_Node* p_node)
+        {
+            return p_node->m_code == child->m_code;
+        }
+        ) == false);
+
+        child->m_parent = this;
+        child->m_index = l_index_counter;
+        l_index_counter++;
     }
 
 }
@@ -660,35 +685,15 @@ void EO_Node::setBoundingBox(FVector p_min, FVector p_max)
     m_box = { p_min, p_max };
 }
 
-void EO_Node::insertVoxel(Voxel p_vox)
+EO_Node* EO_Node::operator[](short p_index)
 {
-    // if leaf
-    if (noChildrenActive())
-    {
-        // if empty
-        if (m_empty)
-        {
-            m_voxel = p_vox; // take voxel
-            m_empty = false; // we are not empty anymore
-            return;
-        }
-        else
-        {
-            // create children and turn ourselves into leaf
-            createChildren();
-            auto bestChild = findBestChild(m_voxel);
-            bestChild->insertVoxel(m_voxel);
-            m_empty = true;
-        }
-    }
-
-
-    // send new voxel to children
-    auto c1 = this->findBestChild(p_vox);
-
-    // move our voxel and new voxel into child nodes
-    c1->insertVoxel(p_vox);
+    return m_children[p_index].get();
 }
+
+//void EO_Node::insert(Voxel p_vox)
+//{
+//    
+//}
 
 TArray<EO_Node*> Efficient_Octree::getLeaves()
 {
@@ -697,10 +702,10 @@ TArray<EO_Node*> Efficient_Octree::getLeaves()
     return leaves;
 }
 
-TArray<FVector> Efficient_Octree::getLeafPositions()
+TArray<Voxel> Efficient_Octree::getLeafPositions()
 {
     auto leaves = getLeaves();
-    TArray<FVector> l_positions;
+    TArray<Voxel> l_positions;
     l_positions.SetNumZeroed(leaves.Num());
     for (int i = 0; i < leaves.Num(); i++)
     {
@@ -716,10 +721,10 @@ Efficient_Octree::ListOfNodes Efficient_Octree::getInternalNodes()
     return nodes;
 }
 
-TArray<FVector> Efficient_Octree::getInternalNodePositions()
+TArray<Voxel> Efficient_Octree::getInternalNodePositions()
 {
     auto nodes = getInternalNodes();
-    TArray<FVector> l_positions;
+    TArray<Voxel> l_positions;
     l_positions.SetNumZeroed(nodes.Num());
     for (int i = 0; i < nodes.Num(); i++)
     {
@@ -775,6 +780,22 @@ void Efficient_Octree::getInternalNodesRec(EO_Node * p_node, ListOfNodes& p_arra
     }
 }
 
+short Efficient_Octree::getChildIndex(Voxel v, unsigned nextLevel)
+{
+    // get index of child that best fits this voxel
+    short childbit = 1 << nextLevel;
+
+    // extract bits from voxel
+    short xBit = (v.X & childbit) >> nextLevel;
+
+    short yBit = ((v.Y & childbit) >> nextLevel) << 1;
+
+    short zBit = ((v.Z & childbit) >> nextLevel) << 2;
+
+    short ci = xBit + yBit + zBit;
+    return ci;
+}
+
 bool Efficient_Octree::isValid()
 {
     if (m_root == nullptr) { return false; }
@@ -804,3 +825,4 @@ bool Efficient_Octree::isValid()
 
     return true;
 }
+
