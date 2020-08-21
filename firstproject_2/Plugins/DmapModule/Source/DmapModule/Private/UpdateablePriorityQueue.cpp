@@ -1,43 +1,51 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UpdateablePriorityQueue.h"
-
+#include "GridNode.h"
+#include "Octree_AStar.h"
 #include <iostream>
 #include <cassert>
 
-UpdateablePriorityQueue::UpdateablePriorityQueue()
+template <typename T>
+UpdateablePriorityQueue<T>::UpdateablePriorityQueue()
 {
 }
 
-UpdateablePriorityQueue::~UpdateablePriorityQueue()
+template <typename T>
+UpdateablePriorityQueue<T>::~UpdateablePriorityQueue()
 {
 }
 
 
 
-void UpdateablePriorityQueue::clear()
+template <typename T>
+void UpdateablePriorityQueue<T>::clear()
 {
     m_queue.clear();
     m_register.clear();
 }
 
-UpdateablePriorityQueue::GRID& UpdateablePriorityQueue::getGrid()
-{
-    return *m_grid;
-}
+//template <typename T>
+//typename UpdateablePriorityQueue<T>::GRID& UpdateablePriorityQueue<T>::getGrid()
+//{
+//    return *m_grid;
+//}
 
-float UpdateablePriorityQueue::GetVal(ID p_id)
+template <typename T>
+float UpdateablePriorityQueue<T>::GetVal(ID p_id)
 {
-    return p_id->f;
+    return p_id.f;
 }
+template <typename T>
 
-bool UpdateablePriorityQueue::pointInQueue(ID id)
+bool UpdateablePriorityQueue<T>::pointInQueue(ID id)
 {
     return m_register.find(id) != m_register.end();
 }
 
+template <typename T>
 // swap 2 elements in queue
-void UpdateablePriorityQueue::my_swap(Q_POS index_a, Q_POS index_b)
+void UpdateablePriorityQueue<T>::my_swap(Q_POS index_a, Q_POS index_b)
 {
     ID a_id = m_queue[index_a];
     ID b_id = m_queue[index_b];
@@ -45,8 +53,9 @@ void UpdateablePriorityQueue::my_swap(Q_POS index_a, Q_POS index_b)
     m_register[a_id] = index_b;
     m_register[b_id] = index_a;
 }
+template <typename T>
 
-void UpdateablePriorityQueue::bubbleUp(int current)
+void UpdateablePriorityQueue<T>::bubbleUp(int current)
 {
     while (current > 0)
     {
@@ -70,8 +79,9 @@ void UpdateablePriorityQueue::bubbleUp(int current)
         current = parent;
     }
 }
+template <typename T>
 
-void UpdateablePriorityQueue::bubbleDown(int parent)
+void UpdateablePriorityQueue<T>::bubbleDown(int parent)
 {
     // get size of queue
     const int size = m_queue.size();
@@ -101,8 +111,9 @@ void UpdateablePriorityQueue::bubbleDown(int parent)
 
     }
 }
+template <typename T>
 
-void UpdateablePriorityQueue::updateOrPush(ID new_point)
+void UpdateablePriorityQueue<T>::updateOrPush(ID new_point)
 {
     // gets value of point on the grid given to us by the JPS_Solver
     int new_value = GetVal(new_point);
@@ -147,12 +158,14 @@ void UpdateablePriorityQueue::updateOrPush(ID new_point)
 
 }
 
-UpdateablePriorityQueue::ID UpdateablePriorityQueue::top()
+template <typename T>
+typename UpdateablePriorityQueue<T>::ID UpdateablePriorityQueue<T>::top()
 {
     return m_queue[0];
 }
+template <typename T>
 
-void UpdateablePriorityQueue::pop()
+void UpdateablePriorityQueue<T>::pop()
 {
     ID root = top();
 
@@ -166,5 +179,10 @@ void UpdateablePriorityQueue::pop()
     //Perform BubbleDown operation on the root. This will fix all violations of the heap.
     bubbleDown(0);
 }
+
+
+template class UpdateablePriorityQueue<GridNode>;
+//template class UpdateablePriorityQueue<GridNode*>;
+template class UpdateablePriorityQueue<UOctree_AStar::Node>;
 
 

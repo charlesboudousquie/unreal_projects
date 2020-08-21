@@ -3,14 +3,14 @@
   <ItemGroup>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealDisasterRecoveryService\UnrealDisasterRecoveryService.Target.cs" />
     <Filter Include="Config">
-      <UniqueIdentifier>{1F9B99F4-74A4-4B69-A8AF-E157164321B3}</UniqueIdentifier>
+      <UniqueIdentifier>{4A25BB21-3346-4B6E-BE17-0003BB3B43DD}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Programs\UnrealDisasterRecoveryService\Config\DefaultEngine.ini">
       <Filter>Config</Filter>
     </None>
     <None Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealDisasterRecoveryService\UnrealDisasterRecoveryService.Build.cs" />
     <Filter Include="Private">
-      <UniqueIdentifier>{516F3AC6-6D19-4A3A-8131-313A6C9505CA}</UniqueIdentifier>
+      <UniqueIdentifier>{D7DC163D-B12A-4079-880E-344BB9ED7825}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\..\..\..\Desktop\unreal\UnrealEngine\Engine\Source\Programs\UnrealDisasterRecoveryService\Private\UnrealDisasterRecoveryService.cpp">
       <Filter>Private</Filter>

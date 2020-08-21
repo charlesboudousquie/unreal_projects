@@ -12,7 +12,8 @@ UObject * UDmapFactoryDragDrop::FactoryCreateBinary(
 	const uint8 *& Buffer, const uint8 * BufferEnd, 
 	FFeedbackContext * Warn)
 {
-	FEditorDelegates::OnAssetPreImport.Broadcast(this, Class, InParent, Name, Type);
+    GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetPreImport.Broadcast(this, Class, InParent, Name, Type);
+	//FEditorDelegates::OnAssetPreImport.Broadcast(this, Class, InParent, Name, Type);
 	
 	FString file_text;
 

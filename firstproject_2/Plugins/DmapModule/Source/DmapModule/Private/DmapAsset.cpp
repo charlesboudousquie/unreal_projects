@@ -15,7 +15,7 @@ UDmapAsset::~UDmapAsset()
 {
 }
 
-FVector UDmapAsset::readLine(std::string p_input)
+FIntVector UDmapAsset::readLine(std::string p_input)
 {
 	// extract string into stream
 	std::stringstream stream;
@@ -24,7 +24,7 @@ FVector UDmapAsset::readLine(std::string p_input)
 	
 
 	// read numbers from stream
-	FVector result;
+    FIntVector result;
 	stream >> result.X;
 	stream >> result.Y;
 	stream >> result.Z;
@@ -48,7 +48,7 @@ void UDmapAsset::ParseData(FString p_file_data)
 		file_dimensions_str.erase(pos, strlen("voxel"));
 	}
 
-	m_map_dimensions = readLine(file_dimensions_str);
+    m_dimensions = readLine(file_dimensions_str);
 
 	std::string line_read;
 	while (std::getline(iss, line_read))

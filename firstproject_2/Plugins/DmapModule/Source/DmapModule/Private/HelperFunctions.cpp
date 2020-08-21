@@ -27,10 +27,6 @@ TArray<FColor> UHelperFunctions::g_colors =
 
 };
 
-//void UHelperFunctions::drawInstance(const FVector& p_pos, UHierarchicalInstancedStaticMeshComponent* p_mesh)
-//{
-//}
-
 AActor * UHelperFunctions::getActorWithTag(FName & p_tag, const UObject* p_world_obj)
 {
     TArray<AActor*> OutActors;
@@ -50,48 +46,77 @@ FColor UHelperFunctions::chooseColor(int p_level)
     return g_colors[p_level % g_colors.Num()];
 }
 
-void UHelperFunctions::drawNode(const FBox & p_box, UHierarchicalInstancedStaticMeshComponent * p_mesh,float p_voxel_scalar)
+UHierarchicalInstancedStaticMeshComponent* UHelperFunctions::getInstanceMesh(AActor *p_archetype)
 {
-    auto stat_mesh = p_mesh->GetStaticMesh();
+    return p_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
+}
 
-    auto bounds = stat_mesh->GetBounds().BoxExtent;
+std::unordered_map<int, TArray<EO_Node*>> UHelperFunctions::partitionNodes(const TArray<EO_Node*>& p_nodes)
+{
+    std::unordered_map<int, TArray<EO_Node*>> l_map;
+    for (auto& node : p_nodes)
+    {
+        l_map[node->m_level].Add(node);
+    }
+
+    return l_map;
+}
+
+
+void UHelperFunctions::setNodeInfo(DrawInfo& p_info, 
+    float p_vox_scalar, bool p_is_leaf,
+    UHierarchicalInstancedStaticMeshComponent* p_mesh,
+    TArray<EO_Node*>& p_instances,
+    bool p_should_clear_instances)
+{
+    p_info.m_voxel_scalar = p_vox_scalar;
+    p_info.m_is_leaf = p_is_leaf;
+    p_info.m_mesh = p_mesh;
+    Swap(p_info.m_instances, p_instances);
+    p_info.m_should_clear_instances = p_should_clear_instances;
+}
+
+void UHelperFunctions::drawNode(const DrawInfo& p_info, EO_Node* p_node)
+{
+    auto stat_mesh = p_info.m_mesh->GetStaticMesh();
+
+    //auto 
+    FVector mesh_extents; 
 
     auto rotator = FRotator::ZeroRotator;
-    auto center = p_box.GetCenter();
-    auto extents = p_box.GetExtent();
+    FVector center;
+    float size = p_info.m_voxel_scalar;
+    if (p_info.m_is_leaf)
+    {
+        // "m_voxel" itself is the minimum corner of the voxel
+        // thus add 0.5 to get actual center
+        center = (FVector(p_node->m_voxel) + FVector{ 0.5f }) * p_info.m_voxel_scalar;
+        mesh_extents = stat_mesh->GetBounds().GetBox().GetSize(); // wtf??????
+    }
+    else
+    {
+        size *= p_node->m_box.GetExtent().X;
+        center = p_node->m_box.GetCenter() * p_info.m_voxel_scalar;
+        mesh_extents = stat_mesh->GetBounds().BoxExtent; // ???? TODO, further research as to why extents differ
+    }
 
-    auto scalar = p_voxel_scalar > 0 ? p_voxel_scalar : extents.X;
-    //FTransform l_transform(rotator, center, extents / bounds.X);
-    FTransform l_transform(rotator, center, FVector{ scalar / bounds.X });
-    auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
+    FTransform l_transform(rotator, center, FVector{ size / mesh_extents.X });
+    auto instance_id = p_info.m_mesh->AddInstanceWorldSpace(l_transform);
 }
 
-void UHelperFunctions::drawInstances(AActor * p_asteroid_archetype,
-    const TArray<EO_Node*>& p_instances, float p_voxel_scalar, bool clearInstances)
+void UHelperFunctions::drawInstances(const DrawInfo& p_info)
 {
-    auto l_mesh = p_asteroid_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
+    auto l_mesh = p_info.m_mesh;// ->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
     assert(l_mesh != nullptr);
 
-    if (clearInstances) { l_mesh->ClearInstances(); }
+    if (p_info.m_should_clear_instances) { l_mesh->ClearInstances(); }
 
     // draw each node
-    for (auto& instance : p_instances)
+    for (auto& instance : p_info.m_instances)
     {
-        drawNode(instance->m_box, l_mesh, p_voxel_scalar);
+        drawNode(p_info, instance);
     }
 }
-
-void UHelperFunctions::drawInstance(UHierarchicalInstancedStaticMeshComponent * p_hierarchical_mesh,
-    const EO_Node* p_instance, float p_voxel_scalar, bool clearInstances)
-{
-    assert(p_hierarchical_mesh != nullptr);
-
-    if (clearInstances) { p_hierarchical_mesh->ClearInstances(); }
-
-    drawNode(p_instance->m_box, p_hierarchical_mesh, p_voxel_scalar);
-}
-
-
 
 
 
@@ -140,7 +165,6 @@ UHelperFunctions::UHelperFunctions()
 	// ...
 }
 
-
 // Called when the game starts
 void UHelperFunctions::BeginPlay()
 {
@@ -150,7 +174,6 @@ void UHelperFunctions::BeginPlay()
 	
 }
 
-
 // Called every frame
 void UHelperFunctions::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -158,4 +181,3 @@ void UHelperFunctions::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	// ...
 }
-

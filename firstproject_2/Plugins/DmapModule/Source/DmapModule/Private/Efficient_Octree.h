@@ -37,6 +37,7 @@
 #include <array>
 #include <memory>
 #include <map>
+#include <vector>
 
 struct EO_CODE
 {
@@ -91,6 +92,8 @@ struct EO_Node
     void setBoundingBox(FVector p_min, FVector p_max);
     void setVoxel(Voxel p_vox) { m_voxel = p_vox; m_empty = false; }
     bool noChildrenActive() { return m_children[0] == nullptr; }
+
+    
 };
 
 
@@ -121,6 +124,8 @@ class Efficient_Octree
     typedef BoxComponents BC;
 
     static std::map<BC, Dir> g_directions;
+
+    //TArray<EO_Node> m_nodes;
 
     std::unique_ptr<EO_Node> m_root;
     unsigned m_max_level;
@@ -200,13 +205,22 @@ public:
     ListOfNodes getAllNodes();
 
     FVector getPos() { return m_root->m_box.GetCenter(); }
-    void insert(Voxel p_voxel);
-    void setDimensions(FVector p_dim); // modifies max val
+    void insert(const Voxel& p_voxel);
+    void setDimensions(FIntVector p_dim); // modifies max val
     void clearTree() { m_root.reset(new EO_Node); }
+
+    // given some list of nodes, return their indices and levels
+    static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const std::vector<EO_Node*>& p_nodes);
+    static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const TArray<EO_Node*>& p_nodes);
+
+    std::vector<std::tuple<unsigned, short>> getAllLvlAndIndices();
+
+
     TArray<EO_NodePtr> getNeighbors(EO_NodePtr p_node);
 
     // synonymous with traverse
     EO_NodePtr getSmallestNode(Voxel p_voxel);
 
     bool isValid();
+    int getRootLevel() { return m_root_level; }
 };

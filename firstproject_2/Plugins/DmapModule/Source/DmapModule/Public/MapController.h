@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Asteroid.h"
 #include "Containers/UnrealString.h"
+#include "Math/IntVector.h"
 
 #include <memory>
 
@@ -15,89 +16,126 @@ class UHierarchicalInstancedStaticMeshComponent;
 class AActor;
 //class Octree;
 class Efficient_Octree;
+class UOctree_AStar;
 //struct OctreeNode;
 struct EO_Node;
 
 // Description: This class can load in maps. 
 
-UCLASS( ClassGroup=(Custom), BlueprintType, meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), BlueprintType, meta = (BlueprintSpawnableComponent))
 class DMAPMODULE_API UMapController : public UActorComponent
 {
     GENERATED_BODY()
 
+    FColor m_start_color = FColor::Red;
+    FColor m_path_color = FColor::Blue;
+    FColor m_end_color = FColor::Green;
+    typedef FIntVector Voxel;
+
     Efficient_Octree* m_tree;
-    
+
     // meshes for the nodes in each level of the tree
     TArray<UHierarchicalInstancedStaticMeshComponent*> m_meshes;
     TArray< UMaterialInstanceDynamic*> m_materials;
 
     AActor* m_octree_archetype;
+    AActor* m_asteroid_archetype;
+    AActor* m_path_archetype;
 
     UPROPERTY(EditAnywhere)
-    float m_mesh_scalar = 1.0f;
+        float m_mesh_scalar = 1.0f;
 
     UPROPERTY(EditAnywhere)
-    bool m_use_unit_test = false;
+        float m_debug_line_width = 5.0f;
 
     UPROPERTY(EditAnywhere)
-    bool m_draw_leaves = true;
+        bool m_use_unit_test = false;
 
     UPROPERTY(EditAnywhere)
-    bool m_draw_internal_nodes = true;
+        bool m_draw_leaves = true;
+
+    UPROPERTY(EditAnywhere)
+        bool m_draw_internal_nodes = true;
+
+    UPROPERTY(EditAnywhere)
+        bool m_draw_debug_boxes = false;
+
+    UPROPERTY(EditAnywhere)
+        bool m_draw_neighbors = false;
+
+    UPROPERTY(EditAnywhere)
+        bool m_draw_path_lines = true;
+    
+    UPROPERTY(EditAnywhere)
+        bool m_draw_path_nodes = true;
+
 
     UPROPERTY()
-    UMaterialInterface* m_wireframe_material;
+        UMaterialInterface* m_wireframe_material;
 
-public:	
-	// Sets default values for this component's properties
-	UMapController();
-	~UMapController();
+    UOctree_AStar* m_oct_solver;
+
+public:
+    // Sets default values for this component's properties
+    UMapController();
+    ~UMapController();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+    // Called when the game starts
+    virtual void BeginPlay() override;
 
+    // find mesh based on node's level
+    UHierarchicalInstancedStaticMeshComponent* find_corresponding_mesh(int p_level);
+
+    // draw random set of nodes
+    void drawNodes(const TArray<EO_Node*>& p_nodes);
 
     // draws all internal nodes of octree
-    void drawInternalNodes(/*TArray<AActor*> p_octree_node_archetypes*/);
+    void drawInternalNodes();
 
     // draws all leaf nodes of octree
-    void drawLeaves(AActor* p_asteroid_archetype);
+    void drawLeaves();
 
     // for each level, create a dynamic material
-    void setMaterials(/*TArray<AActor*> p_octree_node_archetypes*/);
-    
+    void setMaterials();
+
     // for testing
-    void unit_Test(AActor* p_asteroid_archetype);
+    void unit_Test();
 
-public:	
+    void drawPath(const TArray<EO_Node*>& p_nodes);
+    void drawOctDebugBox(EO_Node* p_node, FColor p_color);
+    void drawDebugBoxes(const TArray<EO_Node*>& p_nodes);
 
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-		
+    // function to handle all other drawing functions in map controller.
+    void draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_Node*>& p_path);
+
+    void setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions);
+
+public:
+
+    // Called every frame
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
     // load in user requested map
-	UFUNCTION(BlueprintCallable, Category = "3d maps")
-	void LoadMap(FString p_map_name, AActor* p_asteroid_archetype);
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+        void LoadMap(FString p_map_name);
 
     // print out octree
     UFUNCTION(BlueprintCallable, Category = "3d maps")
         void printTree() {}
 
-    UPROPERTY(EditAnywhere)
-    float debug_line_width;
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+        bool octreeExists();
 
     UFUNCTION(BlueprintCallable, Category = "3d maps")
-    bool octreeExists();
+        FVector getOctreePos();
 
     UFUNCTION(BlueprintCallable, Category = "3d maps")
-    FVector getOctreePos();
-
-    UFUNCTION(BlueprintCallable, Category = "3d maps")
-    float getMeshScalar() { return m_mesh_scalar; }
+        float getMeshScalar() { return m_mesh_scalar; }
 
     // print high level info about octree, mainly dimensions
     // and center
     UFUNCTION(BlueprintCallable, Category = "3d maps")
-    float printOctreeInfo() { return m_mesh_scalar; }
+        float printOctreeInfo() { return m_mesh_scalar; }
 
 };

@@ -37,7 +37,7 @@ class DMAPMODULE_API UJPS_Solver : public UActorComponent
 
     // frontier
     //std::priority_queue<GridNode*, std::vector<GridNode*>, GridComparator> m_frontier;
-    UpdateablePriorityQueue m_frontier;
+    UpdateablePriorityQueue<GridNode> m_frontier;
     
     // clears frontier and visited node list
     void clearState();

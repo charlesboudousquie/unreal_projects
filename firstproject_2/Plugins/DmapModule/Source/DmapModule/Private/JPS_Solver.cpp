@@ -99,7 +99,7 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         }
     }
 
-    m_frontier.setGrid(&m_grid);
+    //m_frontier.setGrid(&m_grid);
 
 }
 
@@ -117,7 +117,7 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
     m_goal = goal;
 
     // add node to frontier
-    m_frontier.updateOrPush(&getNode(start));
+    m_frontier.updateOrPush(getNode(start));
 
     // while there is stuff on the frontier
     while (m_frontier.isEmpty() == false)
@@ -126,12 +126,12 @@ void UJPS_Solver::resizeGrid(int rows, int cols)
         // get top and pop
         auto top = m_frontier.top();
         m_frontier.pop();
-        getNode(top->m_pos).m_closed = true;
+        getNode(top.m_pos).m_closed = true;
 
-        if (top->m_pos == m_goal) { break; }
+        if (top.m_pos == m_goal) { break; }
 
         // finds and processes successors
-        findSuccessors(top->m_pos);
+        findSuccessors(top.m_pos);
 
     }
 
@@ -346,7 +346,7 @@ void UJPS_Solver::processNeighbor(const GridPos& p_curr, const GridPos& p_jump_p
             j.f = j.g + j.h;
             j.m_parent = &currentNode;
 
-            m_frontier.updateOrPush(&j);
+            m_frontier.updateOrPush(j);
             if (!j.m_opened) {
                 //openList.push(j);
                 j.m_opened = true;

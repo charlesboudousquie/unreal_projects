@@ -19,6 +19,9 @@ public:
 
     bool isJumpPoint() const { return m_opened; }
 
+    bool operator()(const GridNode& lhs, const GridNode& rhs) const { return lhs.f < rhs.f; }
+    bool operator<(const GridNode& rhs) const { return this->f < rhs.f; }
+
     float g = 0.0f, f = 0.0f, h = 0.0f;
 
     GridNode* m_parent = nullptr;

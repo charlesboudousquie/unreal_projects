@@ -7,7 +7,7 @@
 #include "Containers/Array.h"
 #include <string>
 
-#include "Math/Vector.h"
+#include "Math/IntVector.h"
 
 #include "DmapAsset.generated.h"
 
@@ -27,17 +27,17 @@ public:
 	UDmapAsset();
 	~UDmapAsset();
 
-	const TArray<FVector>& getFileData() { return m_data; }
-	const FVector& getDimensions() { return m_map_dimensions; }
+	const TArray<FIntVector>& getFileData() { return m_data; }
+	const FIntVector& getDimensions() { return m_dimensions; }
 
 protected:
 
-	FVector readLine(std::string p_input);
+    FIntVector readLine(std::string p_input);
 
 	UPROPERTY(BlueprintReadOnly)
-	FVector m_map_dimensions;
+    FIntVector m_dimensions;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="DmapAsset")
-	TArray<FVector> m_data;
+	TArray<FIntVector> m_data;
 
 };

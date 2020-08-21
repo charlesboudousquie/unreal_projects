@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\firstproject_2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{09F9A7BE-123C-4855-B2FE-04E2C5BFEEA6}</UniqueIdentifier>
+      <UniqueIdentifier>{598F1CA2-F7B9-48E0-AB98-1667A7BC52FE}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2.Target.cs">
       <Filter>Source</Filter>
@@ -13,7 +13,7 @@
     </None>
     <None Include="..\..\temp_code_spot.txt" />
     <Filter Include="Config">
-      <UniqueIdentifier>{03BD313B-4632-4A2D-8E59-29B7C6EF10A0}</UniqueIdentifier>
+      <UniqueIdentifier>{ECB21DA7-2D0F-4098-AA9A-BBF38AEEE160}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -31,22 +31,22 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Plugins">
-      <UniqueIdentifier>{1CBAA62F-B2ED-448F-B2C7-955A2963D113}</UniqueIdentifier>
+      <UniqueIdentifier>{5966C6A9-AAC0-458C-9C31-572C295B043F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule">
-      <UniqueIdentifier>{C792D720-C928-4431-925A-A504A1BE058F}</UniqueIdentifier>
+      <UniqueIdentifier>{6B566C0E-3D41-49DD-BB6E-AC3AC0433F7D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source">
-      <UniqueIdentifier>{D2D449D3-604F-4DE0-9957-AEBAE106E140}</UniqueIdentifier>
+      <UniqueIdentifier>{16630CF0-112E-47BB-9EA5-1A6D3A1A56B6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source\DmapModule">
-      <UniqueIdentifier>{10EC75B9-52DE-4E2B-9012-681A14CD88DC}</UniqueIdentifier>
+      <UniqueIdentifier>{E779C9CC-632C-4D29-BE21-71595FECA964}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Source\DmapModule\DmapModule.Build.cs">
       <Filter>Plugins\DmapModule\Source\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Private">
-      <UniqueIdentifier>{E5444002-FEFC-4A91-8719-5C86610916AC}</UniqueIdentifier>
+      <UniqueIdentifier>{E257D4FF-292E-4670-8C11-5FD2AAC9F96E}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Asteroid.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
@@ -63,6 +63,12 @@
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\DmapModule.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Get3dMapList.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
@@ -75,6 +81,12 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\GridNode.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\HelperFunctions.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_GridDrawer.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_Solver.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
@@ -84,11 +96,17 @@
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree_AStar.cpp">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Octree_AStar.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\UpdateablePriorityQueue.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Public">
-      <UniqueIdentifier>{3FB94E98-5E68-4B54-8655-D4E94FD44F6C}</UniqueIdentifier>
+      <UniqueIdentifier>{525F07F5-13D2-4FE9-8E81-C123255D324B}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
@@ -111,6 +129,12 @@
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\GridDirection.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h">
+      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_Solver.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
     </ClInclude>
@@ -127,13 +151,13 @@
       <Filter>Plugins\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Resources">
-      <UniqueIdentifier>{A00C90B4-962C-4458-AE07-B3AF100F3814}</UniqueIdentifier>
+      <UniqueIdentifier>{BB21FD89-8FC4-49AA-911A-DACD8439E80D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Resources\Icon128.png">
       <Filter>Plugins\DmapModule\Resources</Filter>
     </None>
     <Filter Include="Source\firstproject_2">
-      <UniqueIdentifier>{95DFBDC1-F293-4D21-BEC5-86018FC9D1C8}</UniqueIdentifier>
+      <UniqueIdentifier>{BED11BB6-6962-4725-B5B9-39EBD653F944}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs">
       <Filter>Source\firstproject_2</Filter>
@@ -174,27 +198,5 @@
     <ClInclude Include="..\..\Source\firstproject_2\SpawnMapButton.h">
       <Filter>Source\firstproject_2</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.h">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\JPS_GridDrawer.cpp">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Efficient_Octree.cpp">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\HelperFunctions.cpp">
-      <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

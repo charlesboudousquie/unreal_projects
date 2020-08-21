@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GridNode.h"
 #include <vector>
 #include <set>
 #include <map>
@@ -13,15 +12,15 @@
 /**
  * 
  */
-//template <typename T>
+template <typename T>
 class DMAPMODULE_API UpdateablePriorityQueue
 {
 
-    typedef GridNode* ID;
+    typedef T ID;
     typedef int Q_POS;
-    typedef TArray<TArray<GridNode>> GRID;
+    //typedef TArray<TArray<GridNode>> GRID;
 
-    GRID* m_grid;
+    //GRID* m_grid;
     
 
     std::vector<ID> m_queue;
@@ -55,14 +54,17 @@ class DMAPMODULE_API UpdateablePriorityQueue
 
 public:
 
+    std::vector<ID> getQueue() { return m_queue; };
+    std::map<ID, Q_POS> getRegister() { return m_register; };
+
     bool isEmpty() { return m_queue.empty(); }
 
     // clear queue and register
     void clear();
 
-    GRID& getGrid();
+    //GRID& getGrid();
     // pointer to grid that queue uses
-    void setGrid(GRID* p_grid) { m_grid = p_grid; }
+    //void setGrid(GRID* p_grid) { m_grid = p_grid; }
 
     // either updates existing item on queue or
     // adds it to queue

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+//#include "Octree.h"
 #include "MapController.h"
 #include "Modules/ModuleManager.h"
 #include "AssetRegistryModule.h"
@@ -7,12 +8,14 @@
 #include "AssetData.h"
 #include "UObject/ConstructorHelpers.h"
 #include "DmapAsset.h"
-//#include "Octree.h"
+#include "Octree_AStar.h"
 #include "Efficient_Octree.h"
 #include "HelperFunctions.h"
 #include "DrawDebugHelpers.h"
 #include <cassert>
 #include <vector>
+
+#include "Kismet/KismetMathLibrary.h"
 
 #include "Engine/StaticMesh.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
@@ -24,16 +27,13 @@
 #include "Engine.h"
 
 
-
 // Sets default values for this component's properties
 UMapController::UMapController() : m_tree(&Efficient_Octree::getEO_Tree())
 {
     // Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
     // off to improve performance if you don't need them.
     PrimaryComponentTick.bCanEverTick = true;
-
     // ...
-
     auto instance = ConstructorHelpers::FObjectFinder<UMaterialInterface>(TEXT("Material'/DmapModule/materials/M_wireframe.M_wireframe'"));
     if (instance.Object)
     {
@@ -41,21 +41,22 @@ UMapController::UMapController() : m_tree(&Efficient_Octree::getEO_Tree())
     }
 }
 
-UMapController::~UMapController()
-{
-    //delete m_tree;
-}
-
+UMapController::~UMapController() {}
 
 // Called when the game starts
 void UMapController::BeginPlay()
 {
     Super::BeginPlay();
 
+    m_oct_solver = NewObject<UOctree_AStar>(this);
 
-    FName l_tag("oct_archetype");
+    FName l_oct_tag("oct_archetype");
+    m_octree_archetype = UHelperFunctions::getActorWithTag(l_oct_tag, this);
+    FName l_ast_tag("asteroid_archetype");
+    m_asteroid_archetype = UHelperFunctions::getActorWithTag(l_ast_tag, this);
 
-    m_octree_archetype = UHelperFunctions::getActorWithTag(l_tag, this);// OutActors[0];
+    FName l_path_tag("path_archetype");
+    m_path_archetype = UHelperFunctions::getActorWithTag(l_path_tag, this);
 
     auto parent_mesh = m_octree_archetype->FindComponentByClass<UHierarchicalInstancedStaticMeshComponent>();
 
@@ -85,12 +86,32 @@ void UMapController::BeginPlay()
         // Register
         new_mesh->RegisterComponentWithWorld(GetWorld());
 
-
-
     }
 
     // create material instances for each mesh
     this->setMaterials();
+
+}
+
+void UMapController::drawNodes(const TArray<EO_Node*>& p_nodes)
+{
+
+    auto partitioned_nodes = UHelperFunctions::partitionNodes(p_nodes);
+
+    for (auto& node_level : partitioned_nodes)
+    {
+        // the mesh chosen is based on the level
+        // each level will have a differently colored wireframe
+        int l_level = node_level.first;
+
+        UHelperFunctions::DrawInfo info;
+        UHelperFunctions::setNodeInfo(info, m_mesh_scalar, false,
+            find_corresponding_mesh(l_level),
+            node_level.second,
+            true
+        );
+        UHelperFunctions::drawInstances(info);
+    }
 
 }
 
@@ -102,7 +123,7 @@ void UMapController::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
     // ...
 }
 
-void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
+void UMapController::LoadMap(FString p_map_name)
 {
 
     FAssetRegistryModule& m_module = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
@@ -126,33 +147,26 @@ void UMapController::LoadMap(FString p_map_name, AActor* p_asteroid_archetype)
 
                 if (m_use_unit_test)
                 {
-                    unit_Test(p_asteroid_archetype);
+                    unit_Test();
                 }
                 else
                 {
                     UDmapAsset* asset = Cast<UDmapAsset>(l_asset.GetAsset());
-                    auto& data = asset->getFileData();
+                    const auto& data = asset->getFileData();
 
-                    // clear and scale tree dimensions
-                    m_tree->clearTree();
-                    m_tree->setDimensions(asset->getDimensions() * m_mesh_scalar);
+                    setupTree(data, asset->getDimensions());
+                    auto node = m_tree->getSmallestNode(Voxel{ 0 });
+                    auto node2 = m_tree->getSmallestNode(Voxel{ 800 });
 
-                    for (const FVector& v : data)
-                    {
-                        // multiply data by scalar
-                        m_tree->insert(Efficient_Octree::toVoxel(v * m_mesh_scalar));
-                    }
+                    auto path = UHelperFunctions::toTArray(m_oct_solver->solve(m_tree, node, node2));
 
-                    this->drawInternalNodes();
-
-                    this->drawLeaves(p_asteroid_archetype);
+                    draw({}, path);
                 }
 
                 break;
             }
         }
     }
-
 }
 
 bool UMapController::octreeExists()
@@ -165,37 +179,48 @@ FVector UMapController::getOctreePos()
     return m_tree->getPos();
 }
 
+UHierarchicalInstancedStaticMeshComponent* UMapController::find_corresponding_mesh(int p_level)
+{
+    return m_meshes[p_level % m_meshes.Num()];
+}
+
 void UMapController::drawInternalNodes()
 {
 
-    // clear out old instances
-    for (auto l_mesh : m_meshes)
-    {
-        l_mesh->ClearInstances();
-    }
-
-    // find mesh based on node's level
-    auto find_corresponding_mesh = [&](int p_level)
-    {
-        return m_meshes[p_level % m_meshes.Num()];
-    };
-
     // now to draw the octree internal nodes
-    auto internal_nodes = m_tree->getInternalNodes();
+    TArray<EO_Node*> internal_nodes = m_tree->getInternalNodes();
 
-    for (auto node : internal_nodes)
+    auto partitioned_nodes =
+        UHelperFunctions::partitionNodes(internal_nodes);
+
+
+    for (auto& node_level : partitioned_nodes)
     {
         // the mesh chosen is based on the level
         // each level will have a differently colored wireframe
-        auto& l_box = node->m_box;
-        UHelperFunctions::drawInstance(find_corresponding_mesh(node->m_level), node, -1.0f, false);
+        int l_level = node_level.first;
+
+        UHelperFunctions::DrawInfo info;
+        UHelperFunctions::setNodeInfo(info, m_mesh_scalar, false,
+            find_corresponding_mesh(l_level),
+            node_level.second,
+            true
+        );
+        UHelperFunctions::drawInstances(info);
     }
 
 }
 
-void UMapController::drawLeaves(AActor * p_asteroid_archetype)
+void UMapController::drawLeaves()
 {
-    UHelperFunctions::drawInstances(p_asteroid_archetype, m_tree->getLeaves(), m_mesh_scalar);
+    UHelperFunctions::DrawInfo info;
+    auto leaves = m_tree->getLeaves();
+    UHelperFunctions::setNodeInfo(info, m_mesh_scalar, true,
+        UHelperFunctions::getInstanceMesh(m_asteroid_archetype),
+        leaves,
+        true
+    );
+    UHelperFunctions::drawInstances(info);
 }
 
 void UMapController::setMaterials()
@@ -220,35 +245,91 @@ void UMapController::setMaterials()
 
 }
 
-void UMapController::unit_Test(AActor* p_asteroid_archetype)
+void UMapController::drawPath(const TArray<EO_Node*>& p_nodes)
+{
+    auto hier_mesh = UHelperFunctions::getInstanceMesh(m_path_archetype);
+    auto stat_mesh = hier_mesh->GetStaticMesh();
+    auto mesh_extents = stat_mesh->GetBounds().GetBox().GetSize();
+
+    for (int i = 0; i < p_nodes.Num() - 1; i++)
+    {
+        auto first = p_nodes[i];
+        auto second = p_nodes[i+1];
+
+        // positions are relative to mesh scalar
+        auto firstPos = first->m_box.GetCenter() * m_mesh_scalar;
+        auto secondPos = second->m_box.GetCenter()* m_mesh_scalar;
+        auto center = (firstPos + secondPos) / 2.0f;
+
+        auto diff = secondPos - firstPos;
+        float scale = diff.Size();
+
+        auto rot = UKismetMathLibrary::FindLookAtRotation(firstPos, secondPos);
+
+
+        // x axis should be forward vector
+        FTransform l_transform(rot, center, FVector{ scale / mesh_extents.X,m_debug_line_width,m_debug_line_width });
+        auto instance_id = hier_mesh->AddInstanceWorldSpace(l_transform);
+    }
+}
+
+
+void UMapController::drawOctDebugBox(EO_Node* p_node, FColor p_color)
+{
+    DrawDebugBox(GetWorld(), p_node->m_box.GetCenter() * m_mesh_scalar, p_node->m_box.GetExtent()* m_mesh_scalar, FQuat::Identity, p_color, true, -1, 0, m_debug_line_width);
+}
+
+void UMapController::drawDebugBoxes(const TArray<EO_Node*>& p_nodes)
 {
 
-    // clear and scale tree dimensions
-    m_tree->clearTree();
-    m_tree->setDimensions(FVector{ 8 } *m_mesh_scalar);
+    for (auto& node : p_nodes)
+    {
+        drawOctDebugBox(node, FColor::Green);
+    }
+}
 
-    std::vector<FVector> data =
+void UMapController::unit_Test()
+{
+
+    TArray<Voxel> data =
     {
         //FVector{0}, FVector{0,0,1}, FVector{0,1,0}, FVector{0,1,1}, FVector{1,0,0}, FVector{1,0,1}, FVector{1,1,0}, FVector{1},
-        FVector{7,7,7}, FVector{5,5,5},
+        Voxel{7}, Voxel{5}, Voxel{6},
     };
 
-    for (const FVector& v : data)
-    {
-        // multiply data by scalar
-        m_tree->insert(Efficient_Octree::toVoxel(v * m_mesh_scalar));
-    }
+    setupTree(data, Voxel{ 8 });
 
-    assert(m_tree->isValid());
-
-    /*auto node = m_tree->getSmallestNode(FVector{ 0 });
-    auto node2 = m_tree->getSmallestNode(FVector{ 1 });*/
-
-    auto node = m_tree->getSmallestNode(Efficient_Octree::toVoxel(FVector{ 0 }));
-    auto node2 = m_tree->getSmallestNode(Efficient_Octree::toVoxel(FVector{ 5 }));
-
+    auto node = m_tree->getSmallestNode(Voxel{ 0 });
+    auto node2 = m_tree->getSmallestNode(Voxel{ 5 });
 
     auto neighbors = m_tree->getNeighbors(node2);
+
+    std::vector<EO_Node*> path = m_oct_solver->solve(m_tree, node, node2);
+    draw(neighbors, UHelperFunctions::toTArray<EO_Node*>(path));
+
+}
+
+void UMapController::draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_Node*>& p_path)
+{
+    // if there is at least a beginning and end
+    if (m_draw_path_lines && (p_path.Num() >= 2))
+    {
+        // trim off begining and end since we will render them first in red
+        drawOctDebugBox(p_path[0], m_start_color);
+        drawOctDebugBox(p_path.Last(), m_end_color);
+
+        drawPath(p_path);
+    }
+
+    if (m_draw_path_nodes)
+    {
+        drawNodes(p_path);
+    }
+
+    if (m_draw_neighbors)
+    {
+        drawNodes(p_neighbors);
+    }
 
     if (m_draw_internal_nodes)
     {
@@ -257,7 +338,30 @@ void UMapController::unit_Test(AActor* p_asteroid_archetype)
 
     if (m_draw_leaves)
     {
-        this->drawLeaves(p_asteroid_archetype);
+        this->drawLeaves();
+    }
+
+    if (m_draw_debug_boxes)
+    {
+        drawDebugBoxes(m_tree->getAllNodes());
     }
 }
 
+void UMapController::setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions)
+{
+    // clear and scale tree dimensions
+    m_tree->clearTree();
+    if (p_dimensions != Voxel::ZeroValue)
+    {
+        m_tree->setDimensions(p_dimensions);
+
+        for (const Voxel& v : p_data)
+        {
+            // multiply data by scalar
+            m_tree->insert(v);
+        }
+
+        assert(m_tree->isValid());
+    }
+
+}

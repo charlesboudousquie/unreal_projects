@@ -2,6 +2,7 @@
 
 
 #include "Efficient_Octree.h"
+#include "HelperFunctions.h"
 #include <assert.h>
 #include <iostream>
 
@@ -101,7 +102,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::genericAncestorFind(EO_NodePtr p_
     return findComPar(p_cell, nextLevel, diff);
 }
 
-void Efficient_Octree::insert(Voxel v)
+void Efficient_Octree::insert(const Voxel& v)
 {
 
     auto nodeFound = getSmallestNode(v);
@@ -139,11 +140,9 @@ void Efficient_Octree::insert(Voxel v)
 
     }
 
-    
-
 }
 
-void Efficient_Octree::setDimensions(FVector p_dim)
+void Efficient_Octree::setDimensions(FIntVector p_dim)
 {
     // make sure that p_dim is exactly what the file says,
     // so don't subtract dimensions by 1 before handing them
@@ -167,10 +166,10 @@ void Efficient_Octree::setDimensions(FVector p_dim)
     m_max = FVector{ (float)tree_size };
 
     auto m_center = (m_max + m_min) / 2.0f;
-    auto m_half_extents = FVector{ l_max_dim } / 2.0f;
+    auto m_half_extents = FVector{ (float)tree_size } / 2.0f;
     m_root->m_box = FBox::BuildAABB(m_center, m_half_extents);
     m_root->m_level = m_root_level;
-    m_root->m_code = m_root->m_box.Min;// Efficient_Octree::getEO_Tree().convertToEO_Code(m_root->m_box.Min);
+    m_root->m_code = m_root->m_box.Min;
 }
 
 TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
@@ -179,8 +178,10 @@ TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p
     TArray<Efficient_Octree::EO_NodePtr> l_neighbors;
     auto add_if = [&](EO_NodePtr l_node) 
     {
-        if (l_node != nullptr && l_neighbors.Contains(l_node) == false)
+        // if it exists and we have not added it yet and its not a leaf
+        if ((l_node != nullptr) && (l_neighbors.Contains(l_node) == false) && l_node->m_empty)
         { 
+
             l_neighbors.Add(l_node); 
             most_recently_added_neighbor = l_node;
         }
@@ -690,11 +691,6 @@ EO_Node* EO_Node::operator[](short p_index)
     return m_children[p_index].get();
 }
 
-//void EO_Node::insert(Voxel p_vox)
-//{
-//    
-//}
-
 TArray<EO_Node*> Efficient_Octree::getLeaves()
 {
     TArray<EO_Node*> leaves;
@@ -826,3 +822,35 @@ bool Efficient_Octree::isValid()
     return true;
 }
 
+std::vector<std::tuple<unsigned,short>> Efficient_Octree::getLevelsAndIndices(const std::vector<EO_Node*>& p_nodes)
+{
+    //return {};/*std::function<std::tuple<unsigned, short>(EO_Node*)>*/
+    //auto createTuple = [](EO_Node* p_node) { return std::make_tuple(p_node->m_level, p_node->m_index); };
+    return UHelperFunctions::gatherMembersFromObjects<EO_Node*, unsigned, short>(p_nodes, [](EO_Node* p_node) { return std::make_tuple(p_node->m_level, p_node->m_index); });
+
+}
+
+std::vector<std::tuple<unsigned, short>> Efficient_Octree::getLevelsAndIndices(const TArray<EO_Node*>& p_nodes)
+{
+    auto items = getLevelsAndIndices(UHelperFunctions::toStdVector(p_nodes));
+    auto sorter = [](const std::tuple<unsigned, short>& A, const std::tuple<unsigned, short>& B)
+    {
+            auto lhs_level = std::get<0>(A);
+            auto rhs_level = std::get<0>(B);
+            if (lhs_level == rhs_level)
+            {
+                return std::get<1>(A) < std::get<1>(B);
+            }
+            else
+            {
+                return lhs_level < rhs_level;
+            }
+    };
+    std::sort(items.begin(), items.end(), sorter);
+    return items;
+}
+
+std::vector<std::tuple<unsigned, short>> Efficient_Octree::getAllLvlAndIndices()
+{
+    return getLevelsAndIndices(UHelperFunctions::toStdVector(getAllNodes()));
+}
