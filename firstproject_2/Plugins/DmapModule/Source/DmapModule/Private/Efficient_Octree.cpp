@@ -256,7 +256,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverse(EO_NodePtr p_parent_cell
     auto cell = p_parent_cell;
 
     // while cell is not a leaf
-    while ((cell)->noChildrenActive() == false)
+    while (cell->isLeaf() == false)
     {
         unsigned int childBranchBit = 1 << (nextLevel);
         auto xLocCode = cell->m_code.X;
@@ -305,7 +305,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::traverseToLevel(EO_NodePtr p_pare
     auto zLocCode = p_target_cell_code.Z;
 
     // while cell is not a leaf
-    while (((cell)->noChildrenActive() == false) && (n > 0))
+    while ((cell->isLeaf() == false) && (n > 0))
     {
         n--;
 
@@ -599,7 +599,7 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::getSmallestNode(Voxel p_voxel)
 
     auto nextLevel = curr->m_level;
     // while cell is not a leaf
-    while (curr->noChildrenActive() == false)// && ((cell)->m_empty == true))
+    while (curr->isLeaf() == false)// && ((cell)->m_empty == true))
     {
         nextLevel--;
         unsigned childIndex = getChildIndex(p_voxel, nextLevel);
@@ -665,7 +665,7 @@ void EO_Node::createChildren()
     for (auto& child : m_children)
     {
         
-        child->m_code = child->m_box.Min;// Efficient_Octree::getEO_Tree().convertToEO_Code(child->m_box.GetCenter());
+        child->m_code = child->m_box.Min;
 
         assert(m_children.ContainsByPredicate(
             [child](EO_Node* p_node)
@@ -853,4 +853,35 @@ std::vector<std::tuple<unsigned, short>> Efficient_Octree::getLevelsAndIndices(c
 std::vector<std::tuple<unsigned, short>> Efficient_Octree::getAllLvlAndIndices()
 {
     return getLevelsAndIndices(UHelperFunctions::toStdVector(getAllNodes()));
+}
+
+
+//-------------------------------------------------------------------------------
+// Locate the smallest cell that entirely contains a rectangular region defined
+// by its min and max vertex
+//------------------------------------------------------------------------------- 
+Efficient_Octree::EO_NodePtr Efficient_Octree::locateRegionCell(Voxel p_min, Voxel p_max)
+{
+
+    auto diff = getDiff(p_min, p_max);
+
+    auto current = m_root.get();
+    unsigned l_level = m_root_level;
+    int x_min_level = m_root_level;
+    int y_min_level = m_root_level;
+    int z_min_level = m_root_level;
+
+    int xDiff = diff.X;
+    int yDiff = diff.Y;
+    int zDiff = diff.Z;
+    // find the first split for the x,y, and z
+    while (!(xDiff & (1 << x_min_level)) && x_min_level) x_min_level--;
+    while (!(yDiff & (1 << y_min_level)) && (y_min_level > x_min_level)) y_min_level--;
+    while (!(zDiff & (1 << z_min_level)) && (z_min_level > y_min_level)) z_min_level--;
+
+    z_min_level++;
+    //----Follow the branching patterns of the locational codes of v0 from the
+    //----root cell to the smallest cell entirely containing the region
+    l_level = m_root_level - 1;
+    return traverseToLevel(current, l_level, EO_CODE(p_min), z_min_level);
 }

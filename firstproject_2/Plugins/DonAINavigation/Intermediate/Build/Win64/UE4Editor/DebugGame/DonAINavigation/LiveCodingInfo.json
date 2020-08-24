@@ -1,0 +1,26 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.DonAINavigation.cpp.obj": [
+			"DonNavigationWorker.cpp.obj",
+			"BTTask_FlyTo.cpp.obj",
+			"DonAINavigation.cpp.obj",
+			"DonNavigationHelper.cpp.obj",
+			"DonNavigationManager.cpp.obj",
+			"DonNavigationManagerUnbound.cpp.obj",
+			"DonNavigatorInterface.cpp.obj",
+			"DEPRECATED_DoNNavigationVolumeComponent.cpp.obj",
+			"DEPRECATED_VolumeAdaptiveBuilder.cpp.obj"
+		],
+		"Module.DonAINavigation.gen.cpp.obj": [
+			"BTTask_FlyTo.gen.cpp.obj",
+			"DEPRECATED_DoNNavigationVolumeComponent.gen.cpp.obj",
+			"DEPRECATED_VolumeAdaptiveBuilder.gen.cpp.obj",
+			"DonAINavigation.init.gen.cpp.obj",
+			"DonNavigationHelper.gen.cpp.obj",
+			"DonNavigationManager.gen.cpp.obj",
+			"DonNavigationManagerUnbound.gen.cpp.obj",
+			"DonNavigatorInterface.gen.cpp.obj"
+		]
+	}
+}

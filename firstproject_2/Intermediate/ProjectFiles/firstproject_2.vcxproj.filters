@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\firstproject_2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{598F1CA2-F7B9-48E0-AB98-1667A7BC52FE}</UniqueIdentifier>
+      <UniqueIdentifier>{64C92B03-89E8-4F1B-B082-80CA2BBC8C4E}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2.Target.cs">
       <Filter>Source</Filter>
@@ -13,7 +13,7 @@
     </None>
     <None Include="..\..\temp_code_spot.txt" />
     <Filter Include="Config">
-      <UniqueIdentifier>{ECB21DA7-2D0F-4098-AA9A-BBF38AEEE160}</UniqueIdentifier>
+      <UniqueIdentifier>{FD57026E-CFA9-4F5B-9FD9-BFC3C764CB3D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -31,22 +31,22 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Plugins">
-      <UniqueIdentifier>{5966C6A9-AAC0-458C-9C31-572C295B043F}</UniqueIdentifier>
+      <UniqueIdentifier>{809DDBCD-064A-4495-9F26-16EABF9785C4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule">
-      <UniqueIdentifier>{6B566C0E-3D41-49DD-BB6E-AC3AC0433F7D}</UniqueIdentifier>
+      <UniqueIdentifier>{B0A5ED74-7137-41D9-B290-7859DDE5B110}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source">
-      <UniqueIdentifier>{16630CF0-112E-47BB-9EA5-1A6D3A1A56B6}</UniqueIdentifier>
+      <UniqueIdentifier>{0D12FD44-4C15-4CAA-B916-655E0B771852}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\DmapModule\Source\DmapModule">
-      <UniqueIdentifier>{E779C9CC-632C-4D29-BE21-71595FECA964}</UniqueIdentifier>
+      <UniqueIdentifier>{74F26A03-4F93-4565-A8E4-A1DEDE0C50BE}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Source\DmapModule\DmapModule.Build.cs">
       <Filter>Plugins\DmapModule\Source\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Private">
-      <UniqueIdentifier>{E257D4FF-292E-4670-8C11-5FD2AAC9F96E}</UniqueIdentifier>
+      <UniqueIdentifier>{1EE3FF18-0BD7-4998-88EA-FF1FD0A23486}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Plugins\DmapModule\Source\DmapModule\Private\Asteroid.cpp">
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
@@ -106,7 +106,7 @@
       <Filter>Plugins\DmapModule\Source\DmapModule\Private</Filter>
     </ClCompile>
     <Filter Include="Plugins\DmapModule\Source\DmapModule\Public">
-      <UniqueIdentifier>{525F07F5-13D2-4FE9-8E81-C123255D324B}</UniqueIdentifier>
+      <UniqueIdentifier>{6EB5041D-0DDF-40F8-8BAF-54A6F2621C3E}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Plugins\DmapModule\Source\DmapModule\Public\Asteroid.h">
       <Filter>Plugins\DmapModule\Source\DmapModule\Public</Filter>
@@ -151,13 +151,124 @@
       <Filter>Plugins\DmapModule</Filter>
     </None>
     <Filter Include="Plugins\DmapModule\Resources">
-      <UniqueIdentifier>{BB21FD89-8FC4-49AA-911A-DACD8439E80D}</UniqueIdentifier>
+      <UniqueIdentifier>{4BACC150-7D28-46D7-AAEA-0BBA3C314CB8}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Plugins\DmapModule\Resources\Icon128.png">
       <Filter>Plugins\DmapModule\Resources</Filter>
     </None>
+    <Filter Include="Plugins\DonAINavigation">
+      <UniqueIdentifier>{627D383D-721D-4199-97CC-227495ED99C4}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\DonAINavigation\DonAINavigation.uplugin">
+      <Filter>Plugins\DonAINavigation</Filter>
+    </None>
+    <Filter Include="Plugins\DonAINavigation\Resources">
+      <UniqueIdentifier>{390421E2-D66C-42AF-BD4A-D3DC5DE305C1}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\DonAINavigation\Resources\Icon128.png">
+      <Filter>Plugins\DonAINavigation\Resources</Filter>
+    </None>
+    <Filter Include="Plugins\DonAINavigation\Source">
+      <UniqueIdentifier>{EBD57BDF-FAD9-436B-A50A-BC791B249D3A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation">
+      <UniqueIdentifier>{620ED44C-6965-4D6E-8FF4-6D99A369FD0E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\DonAINavigation.Build.cs">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation</Filter>
+    </None>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Classes">
+      <UniqueIdentifier>{2ED5F62F-3A07-4376-9629-EC34286DC8FD}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\DonNavigationCommon.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\DonNavigationHelper.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\DonNavigationManager.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\DonNavigationManagerUnbound.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\DonNavigatorInterface.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Classes\BehaviorTree">
+      <UniqueIdentifier>{A3E2E48B-9660-4D33-BBEF-8CF94CBC255E}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\BehaviorTree\BTTask_FlyTo.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes\BehaviorTree</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Classes\Legacy">
+      <UniqueIdentifier>{6BF3499C-A448-4EDC-A77A-137185A1433B}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\Legacy\DEPRECATED_DoNNavigationVolumeComponent.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes\Legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\Legacy\DEPRECATED_VolumeAdaptiveBuilder.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes\Legacy</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Classes\Multithreading">
+      <UniqueIdentifier>{DA3A0B44-4B30-413C-BE6C-0DCF8DA3E1FF}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\Multithreading\DonDrawDebugThreadSafe.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes\Multithreading</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Classes\Multithreading\DonNavigationWorker.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Classes\Multithreading</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Private">
+      <UniqueIdentifier>{15D960F5-D7F5-435B-A7AB-D62F8C789CE0}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonAINavigation.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonAINavigationPrivatePCH.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonNavigationHelper.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonNavigationManager.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonNavigationManagerUnbound.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\DonNavigatorInterface.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Private\BehaviorTree">
+      <UniqueIdentifier>{A1AEC485-D806-4852-A0BE-4ED5A1E1B36B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\BehaviorTree\BTTask_FlyTo.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private\BehaviorTree</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Private\Legacy">
+      <UniqueIdentifier>{2121AC31-62D8-4D6C-80D4-926DC86D752A}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\Legacy\DEPRECATED_DoNNavigationVolumeComponent.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private\Legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\Legacy\DEPRECATED_VolumeAdaptiveBuilder.cpp">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private\Legacy</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Private\Multithreading">
+      <UniqueIdentifier>{B1CA61E5-3691-4891-98BC-02D27CBDF55D}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Private\Multithreading\DonNavigationWorker.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Private\Multithreading</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\DonAINavigation\Source\DonAINavigation\Public">
+      <UniqueIdentifier>{2CCB107F-7B1C-4987-8D80-8FB884A0B7A5}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\DonAINavigation\Source\DonAINavigation\Public\IDonAINavigation.h">
+      <Filter>Plugins\DonAINavigation\Source\DonAINavigation\Public</Filter>
+    </ClInclude>
     <Filter Include="Source\firstproject_2">
-      <UniqueIdentifier>{BED11BB6-6962-4725-B5B9-39EBD653F944}</UniqueIdentifier>
+      <UniqueIdentifier>{11E644D9-601B-428E-BF7C-742D9290C2E1}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\firstproject_2\firstproject_2.Build.cs">
       <Filter>Source\firstproject_2</Filter>

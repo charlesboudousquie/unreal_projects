@@ -299,13 +299,24 @@ void UMapController::unit_Test()
 
     setupTree(data, Voxel{ 8 });
 
-    auto node = m_tree->getSmallestNode(Voxel{ 0 });
+    auto region1 = m_tree->locateRegionCell(Voxel{ 0 }, Voxel{ 7 });
+    auto region2 = m_tree->locateRegionCell(Voxel{ 1 }, Voxel{ 1,1,7 });
+    auto region3 = m_tree->locateRegionCell(Voxel{ 0 }, Voxel{ 0,7,3 });
+    auto region4 = m_tree->locateRegionCell(Voxel{ 6 }, Voxel{ 7 });
+    auto region5 = m_tree->locateRegionCell(Voxel{ 4 }, Voxel{ 7 });
+    auto region6 = m_tree->locateRegionCell(Voxel{ 5 }, Voxel{7});
+
+    drawOctDebugBox(region1, FColor::Green);
+    drawOctDebugBox(region2, FColor::Red);
+    drawOctDebugBox(region3, FColor::Blue);
+
+    /*auto node = m_tree->getSmallestNode(Voxel{ 0 });
     auto node2 = m_tree->getSmallestNode(Voxel{ 5 });
 
     auto neighbors = m_tree->getNeighbors(node2);
 
     std::vector<EO_Node*> path = m_oct_solver->solve(m_tree, node, node2);
-    draw(neighbors, UHelperFunctions::toTArray<EO_Node*>(path));
+    draw(neighbors, UHelperFunctions::toTArray<EO_Node*>(path));*/
 
 }
 

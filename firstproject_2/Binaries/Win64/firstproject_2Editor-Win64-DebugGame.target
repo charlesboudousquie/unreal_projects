@@ -309,6 +309,14 @@
 			"Type": "SymbolFile"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/DonAINavigation/Binaries/Win64/UE4Editor-DonAINavigation-Win64-DebugGame.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/DonAINavigation/Binaries/Win64/UE4Editor-DonAINavigation-Win64-DebugGame.pdb",
+			"Type": "SymbolFile"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -4313,6 +4321,10 @@
 			"Type": "RequiredResource"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/DonAINavigation/Binaries/Win64/UE4Editor-Win64-DebugGame.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor.modules",
 			"Type": "RequiredResource"
 		},
@@ -4684,6 +4696,10 @@
 		},
 		{
 			"Path": "$(ProjectDir)/Plugins/DmapModule/DmapModule.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/DonAINavigation/DonAINavigation.uplugin",
 			"Type": "UFS"
 		},
 		{

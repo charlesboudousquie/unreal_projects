@@ -49,6 +49,12 @@ struct EO_CODE
         if (p_index == 2) { return Z; }
         else throw std::runtime_error("wrong index");
     }
+
+    EO_CODE(uint64 p_x, uint64 p_y, uint64 p_z) : X(p_x), Y(p_y), Z(p_z) {}
+    explicit EO_CODE(FIntVector p_v) : X(p_v.X), Y(p_v.Y), Z(p_v.Z) {}
+    EO_CODE() {}
+
+
     EO_CODE& operator=(FIntVector p_vec)
     {
         X = p_vec.X;
@@ -91,8 +97,9 @@ struct EO_Node
     void createChildren();
     void setBoundingBox(FVector p_min, FVector p_max);
     void setVoxel(Voxel p_vox) { m_voxel = p_vox; m_empty = false; }
-    bool noChildrenActive() { return m_children[0] == nullptr; }
-
+    bool isLeaf() { return m_children[0] == nullptr; }
+    bool isEmpty() { return m_empty; }
+    bool isWall() { return isLeaf() && !m_empty; }
     
 };
 
@@ -161,8 +168,12 @@ class Efficient_Octree
         unsigned& nextLevel, EO_CODE p_target_cell_code,
         unsigned p_level);
 
+    
+
     // get diff between two x,y,z codes
     EO_CODE getDiff(EO_CODE A, EO_CODE B);
+
+    Voxel getDiff(Voxel A, Voxel B) { return Voxel{ A.X ^ B.X, A.Y ^ B.Y, A.Z ^ B.Z}; }
 
     // get code of neighbor that only differs in
     // one axis
@@ -196,6 +207,12 @@ public:
     }
 
     static Voxel toVoxel(FVector p_vec) { return Voxel{ (int)p_vec.X, (int)p_vec.Y, (int)p_vec.Z, }; }
+
+    //-------------------------------------------------------------------------------
+    // Locate the smallest cell that entirely contains a rectangular region defined
+    // by its min and max vertex
+    //------------------------------------------------------------------------------- 
+    EO_NodePtr locateRegionCell(Voxel p_min, Voxel p_max);
 
     ListOfNodes getLeaves();
     TArray<Voxel> getLeafPositions();
