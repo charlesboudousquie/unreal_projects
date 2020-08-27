@@ -26,7 +26,6 @@
 // MODIFICATIONS.
 //------------------------------------------------------------------------------- 
 
-
 // Note: this code is a modified version of the original
 // code. Original code can be found here: https://www.merl.com/publications/docs/TR2002-41.pdf
 
@@ -34,74 +33,14 @@
 
 #include "CoreMinimal.h"
 #include "Math/Vector.h"
-#include <array>
-#include <memory>
+
 #include <map>
 #include <vector>
+#include <memory>
 
-struct EO_CODE
-{
-    uint64 X, Y, Z;
-    uint64& operator[](int p_index)
-    {
-        if (p_index == 0) { return X; }
-        if (p_index == 1) { return Y; }
-        if (p_index == 2) { return Z; }
-        else throw std::runtime_error("wrong index");
-    }
+struct EO_Node;
+using Voxel = FIntVector;
 
-    EO_CODE(uint64 p_x, uint64 p_y, uint64 p_z) : X(p_x), Y(p_y), Z(p_z) {}
-    explicit EO_CODE(FIntVector p_v) : X(p_v.X), Y(p_v.Y), Z(p_v.Z) {}
-    EO_CODE() {}
-
-
-    EO_CODE& operator=(FIntVector p_vec)
-    {
-        X = p_vec.X;
-        Y = p_vec.Y;
-        Z = p_vec.Z;
-    }
-    EO_CODE& operator=(FVector p_vec)
-    {
-        X = p_vec.X;
-        Y = p_vec.Y;
-        Z = p_vec.Z;
-    }
-
-    FIntVector toIntVector()
-    {
-        return { (int)X,(int)Y,(int)Z };
-    }
-
-};
-
-typedef FIntVector Voxel;
-
-struct EO_Node
-{
-
-    EO_CODE m_code;
-    EO_Node* m_parent = nullptr;
-    std::array<std::unique_ptr<EO_Node>, 8> m_children;
-    FBox m_box;
-    unsigned m_level = 0;
-    bool m_empty = true;
-    short m_index = -1; // node's index in the parent's children
-    Voxel m_voxel;
-
-    EO_Node* operator[](short p_index);
-
-    // print out contents of node
-    void print() {}
-
-    void createChildren();
-    void setBoundingBox(FVector p_min, FVector p_max);
-    void setVoxel(Voxel p_vox) { m_voxel = p_vox; m_empty = false; }
-    bool isLeaf() { return m_children[0] == nullptr; }
-    bool isEmpty() { return m_empty; }
-    bool isWall() { return isLeaf() && !m_empty; }
-    
-};
 
 
 /**
@@ -112,6 +51,7 @@ class Efficient_Octree
     typedef TArray<EO_Node*> ListOfNodes;
     typedef EO_Node* EO_NodePtr;
     typedef FIntVector Dir;
+    typedef FIntVector EO_CODE;
 
     enum class BoxComponents
     {
@@ -132,15 +72,14 @@ class Efficient_Octree
 
     static std::map<BC, Dir> g_directions;
 
-    //TArray<EO_Node> m_nodes;
-
     std::unique_ptr<EO_Node> m_root;
     unsigned m_max_level;
     unsigned m_root_level;
     unsigned m_max_val;
+    float m_current_npc_width = 1;
     FVector m_min, m_max;
 
-    EO_CODE convertToEO_Code(FVector p_voxel);
+    
 
     // get neighbor in specified negative
     // direction aka Left, Back, or Down.
@@ -168,11 +107,6 @@ class Efficient_Octree
         unsigned& nextLevel, EO_CODE p_target_cell_code,
         unsigned p_level);
 
-    
-
-    // get diff between two x,y,z codes
-    EO_CODE getDiff(EO_CODE A, EO_CODE B);
-
     Voxel getDiff(Voxel A, Voxel B) { return Voxel{ A.X ^ B.X, A.Y ^ B.Y, A.Z ^ B.Z}; }
 
     // get code of neighbor that only differs in
@@ -198,6 +132,10 @@ class Efficient_Octree
 
     static short getChildIndex(Voxel p_voxel, unsigned nextLevel);
 
+    FBox createVoxelBox(Voxel p_pos) { return FBox(FVector(p_pos) + FVector{ -0.5f }, FVector(p_pos) + FVector{0.5f}); }
+    //bool checkRegion(FBox p_box, EO_Node* p_curr);
+    //bool isNavigable(EO_Node* p_neighbor);
+
 public:
 
     static Efficient_Octree& getEO_Tree()
@@ -221,10 +159,11 @@ public:
 
     ListOfNodes getAllNodes();
 
-    FVector getPos() { return m_root->m_box.GetCenter(); }
+    FVector getPos();// { return m_root->m_box.GetCenter(); }
     void insert(const Voxel& p_voxel);
     void setDimensions(FIntVector p_dim); // modifies max val
-    void clearTree() { m_root.reset(new EO_Node); }
+    void setNPCWidth(int p_width) { m_current_npc_width = p_width; }
+    void clearTree();// { m_root.reset(new EO_Node); }
 
     // given some list of nodes, return their indices and levels
     static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const std::vector<EO_Node*>& p_nodes);

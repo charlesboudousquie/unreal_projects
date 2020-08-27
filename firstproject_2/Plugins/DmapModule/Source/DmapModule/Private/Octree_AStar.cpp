@@ -5,6 +5,7 @@
 #include <cassert>
 #include "UpdateablePriorityQueue.h"
 #include "Efficient_Octree.h"
+#include "EO_Node.hpp"
 
 // Sets default values for this component's properties
 UOctree_AStar::UOctree_AStar()

@@ -12,6 +12,7 @@
 #include "Efficient_Octree.h"
 #include "HelperFunctions.h"
 #include "DrawDebugHelpers.h"
+#include "EO_Node.hpp"
 #include <cassert>
 #include <vector>
 
@@ -154,9 +155,9 @@ void UMapController::LoadMap(FString p_map_name)
                     UDmapAsset* asset = Cast<UDmapAsset>(l_asset.GetAsset());
                     const auto& data = asset->getFileData();
 
-                    setupTree(data, asset->getDimensions());
-                    auto node = m_tree->getSmallestNode(Voxel{ 0 });
-                    auto node2 = m_tree->getSmallestNode(Voxel{ 800 });
+                    setupTree(data, asset->getDimensions(), m_npc_width);
+                    auto node = m_tree->getSmallestNode(m_start);
+                    auto node2 = m_tree->getSmallestNode(m_end);
 
                     auto path = UHelperFunctions::toTArray(m_oct_solver->solve(m_tree, node, node2));
 
@@ -297,7 +298,7 @@ void UMapController::unit_Test()
         Voxel{7}, Voxel{5}, Voxel{6},
     };
 
-    setupTree(data, Voxel{ 8 });
+    setupTree(data, Voxel{ 8 }, m_npc_width);
 
     auto region1 = m_tree->locateRegionCell(Voxel{ 0 }, Voxel{ 7 });
     auto region2 = m_tree->locateRegionCell(Voxel{ 1 }, Voxel{ 1,1,7 });
@@ -310,13 +311,14 @@ void UMapController::unit_Test()
     drawOctDebugBox(region2, FColor::Red);
     drawOctDebugBox(region3, FColor::Blue);
 
-    /*auto node = m_tree->getSmallestNode(Voxel{ 0 });
+    auto node = m_tree->getSmallestNode(Voxel{ 0 });
     auto node2 = m_tree->getSmallestNode(Voxel{ 5 });
+    auto node3 = m_tree->getSmallestNode(Voxel{ 7,5,5});
 
     auto neighbors = m_tree->getNeighbors(node2);
 
-    std::vector<EO_Node*> path = m_oct_solver->solve(m_tree, node, node2);
-    draw(neighbors, UHelperFunctions::toTArray<EO_Node*>(path));*/
+    std::vector<EO_Node*> path = m_oct_solver->solve(m_tree, node, node3);
+    draw(neighbors, UHelperFunctions::toTArray<EO_Node*>(path));
 
 }
 
@@ -358,10 +360,11 @@ void UMapController::draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_N
     }
 }
 
-void UMapController::setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions)
+void UMapController::setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions, int p_npc_width)
 {
     // clear and scale tree dimensions
     m_tree->clearTree();
+    m_tree->setNPCWidth(p_npc_width);
     if (p_dimensions != Voxel::ZeroValue)
     {
         m_tree->setDimensions(p_dimensions);

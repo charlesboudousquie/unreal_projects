@@ -8,6 +8,7 @@
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "Efficient_Octree.h"
+#include "EO_Node.hpp"
 
 TArray<FColor> UHelperFunctions::g_colors =
 {

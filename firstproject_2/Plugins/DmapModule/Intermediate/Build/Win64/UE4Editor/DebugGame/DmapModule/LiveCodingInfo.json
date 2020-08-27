@@ -10,27 +10,29 @@
 			"Get3dMapList.cpp.obj",
 			"GridDirection.cpp.obj",
 			"GridNode.cpp.obj",
-			"HelperFunctions.cpp.obj",
 			"JPS_GridDrawer.cpp.obj",
 			"JPS_Solver.cpp.obj",
 			"Octree.cpp.obj",
-			"Octree_AStar.cpp.obj",
 			"UpdateablePriorityQueue.cpp.obj",
 			"Efficient_Octree.cpp.obj",
-			"MapController.cpp.obj"
+			"EO_Node.cpp.obj",
+			"HelperFunctions.cpp.obj",
+			"MapController.cpp.obj",
+			"Octree_AStar.cpp.obj",
+			"OctreeHelpers.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",
 			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
-			"DmapModule.init.gen.cpp.obj",
 			"Get3dMapList.gen.cpp.obj",
 			"HelperFunctions.gen.cpp.obj",
 			"JPS_GridDrawer.gen.cpp.obj",
 			"JPS_Solver.gen.cpp.obj",
-			"MapController.gen.cpp.obj",
-			"Octree_AStar.gen.cpp.obj"
+			"Octree_AStar.gen.cpp.obj",
+			"DmapModule.init.gen.cpp.obj",
+			"MapController.gen.cpp.obj"
 		]
 	}
 }

@@ -162,8 +162,11 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UMapController); \
 
 
 #define firstproject_2_Plugins_DmapModule_Source_DmapModule_Public_MapController_h_28_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__m_start() { return STRUCT_OFFSET(UMapController, m_start); } \
+	FORCEINLINE static uint32 __PPO__m_end() { return STRUCT_OFFSET(UMapController, m_end); } \
 	FORCEINLINE static uint32 __PPO__m_mesh_scalar() { return STRUCT_OFFSET(UMapController, m_mesh_scalar); } \
 	FORCEINLINE static uint32 __PPO__m_debug_line_width() { return STRUCT_OFFSET(UMapController, m_debug_line_width); } \
+	FORCEINLINE static uint32 __PPO__m_npc_width() { return STRUCT_OFFSET(UMapController, m_npc_width); } \
 	FORCEINLINE static uint32 __PPO__m_use_unit_test() { return STRUCT_OFFSET(UMapController, m_use_unit_test); } \
 	FORCEINLINE static uint32 __PPO__m_draw_leaves() { return STRUCT_OFFSET(UMapController, m_draw_leaves); } \
 	FORCEINLINE static uint32 __PPO__m_draw_internal_nodes() { return STRUCT_OFFSET(UMapController, m_draw_internal_nodes); } \

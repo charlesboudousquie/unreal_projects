@@ -25,6 +25,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_printOctreeInfo();
 	DMAPMODULE_API UFunction* Z_Construct_UFunction_UMapController_printTree();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
 // End Cross Module References
 	void UMapController::StaticRegisterNativesUMapController()
 	{
@@ -289,6 +290,10 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		static void NewProp_m_use_unit_test_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_m_use_unit_test;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_npc_width_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_m_npc_width;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_debug_line_width_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_m_debug_line_width;
@@ -296,6 +301,14 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_mesh_scalar_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_m_mesh_scalar;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_end_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_m_end;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_m_start_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_m_start;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -407,6 +420,13 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_use_unit_test = { "m_use_unit_test", nullptr, (EPropertyFlags)0x0040000000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UMapController), &Z_Construct_UClass_UMapController_Statics::NewProp_m_use_unit_test_SetBit, METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_use_unit_test_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_use_unit_test_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_m_npc_width_MetaData[] = {
+		{ "Category", "MapController" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_npc_width = { "m_npc_width", nullptr, (EPropertyFlags)0x0040000000000001, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, m_npc_width), METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_npc_width_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_npc_width_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_m_debug_line_width_MetaData[] = {
 		{ "Category", "MapController" },
 		{ "ModuleRelativePath", "Public/MapController.h" },
@@ -420,6 +440,20 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_mesh_scalar = { "m_mesh_scalar", nullptr, (EPropertyFlags)0x0040000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, m_mesh_scalar), METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_mesh_scalar_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_mesh_scalar_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_m_end_MetaData[] = {
+		{ "Category", "MapController" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_end = { "m_end", nullptr, (EPropertyFlags)0x0040000000000001, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, m_end), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_end_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_end_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMapController_Statics::NewProp_m_start_MetaData[] = {
+		{ "Category", "MapController" },
+		{ "ModuleRelativePath", "Public/MapController.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_UMapController_Statics::NewProp_m_start = { "m_start", nullptr, (EPropertyFlags)0x0040000000000001, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMapController, m_start), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UClass_UMapController_Statics::NewProp_m_start_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMapController_Statics::NewProp_m_start_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMapController_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_wireframe_material,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_draw_path_nodes,
@@ -429,8 +463,11 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_draw_internal_nodes,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_draw_leaves,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_use_unit_test,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_npc_width,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_debug_line_width,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_mesh_scalar,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_end,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMapController_Statics::NewProp_m_start,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMapController_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UMapController>::IsAbstract,
@@ -459,7 +496,7 @@ void EmptyLinkFunctionForGeneratedCodeMapController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMapController, 94497344);
+	IMPLEMENT_CLASS(UMapController, 1781977547);
 	template<> DMAPMODULE_API UClass* StaticClass<UMapController>()
 	{
 		return UMapController::StaticClass();

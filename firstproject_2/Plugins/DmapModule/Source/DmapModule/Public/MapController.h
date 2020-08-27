@@ -27,6 +27,8 @@ class DMAPMODULE_API UMapController : public UActorComponent
 {
     GENERATED_BODY()
 
+    typedef FIntVector Voxel;
+
     FColor m_start_color = FColor::Red;
     FColor m_path_color = FColor::Blue;
     FColor m_end_color = FColor::Green;
@@ -43,10 +45,19 @@ class DMAPMODULE_API UMapController : public UActorComponent
     AActor* m_path_archetype;
 
     UPROPERTY(EditAnywhere)
+        FIntVector m_start;
+
+    UPROPERTY(EditAnywhere)
+        FIntVector m_end;
+
+    UPROPERTY(EditAnywhere)
         float m_mesh_scalar = 1.0f;
 
     UPROPERTY(EditAnywhere)
         float m_debug_line_width = 5.0f;
+
+    UPROPERTY(EditAnywhere)
+        int m_npc_width = 1;
 
     UPROPERTY(EditAnywhere)
         bool m_use_unit_test = false;
@@ -109,7 +120,7 @@ protected:
     // function to handle all other drawing functions in map controller.
     void draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_Node*>& p_path);
 
-    void setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions);
+    void setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions, int p_npc_width);
 
 public:
 
