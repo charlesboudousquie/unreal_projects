@@ -87,14 +87,34 @@ float UOctree_AStar::euclidean(EO_Node* p_node)
     return FVector::Dist(getPos(p_node), m_goal);
 }
 
+void UOctree_AStar::setup(Efficient_Octree* p_tree, EO_Node* p_start, EO_Node* p_goal)
+{
+    if (!p_start || !p_goal) { return; }
+    assert(start != goal);
+    m_start = getPos(p_start); m_start_ptr = p_start;
+    m_goal = getPos(p_goal); m_end_ptr = p_goal;
+    m_tree = p_tree;
+    m_frontier->clear();
+    m_done = false;
+
+    Node startNode;
+    startNode.g = 0;
+    startNode.h = euclidean(p_start);
+    startNode.f = startNode.h;
+    startNode.m_id = p_start;
+    // put node on queue
+    m_frontier->updateOrPush(startNode);
+}
+
 UOctree_AStar::Path UOctree_AStar::solve(Efficient_Octree* p_tree, EO_Node* p_start, EO_Node* p_goal)
 {
     if (!p_start || !p_goal) { return{}; }
     assert(start != goal);
-    m_start = getPos(p_start);
-    m_goal = getPos(p_goal);
+    m_start = getPos(p_start); m_start_ptr = p_start;
+    m_goal = getPos(p_goal); m_end_ptr = p_goal;
     m_tree = p_tree;
     m_frontier->clear();
+    m_done = false;
 
     Node startNode;
     startNode.g = 0;
@@ -104,10 +124,10 @@ UOctree_AStar::Path UOctree_AStar::solve(Efficient_Octree* p_tree, EO_Node* p_st
     // put node on queue
     m_frontier->updateOrPush(startNode);
 
-    while (!m_frontier->isEmpty())
+    while (!m_frontier->isEmpty() && !m_done)
     {
-
-        auto top = m_frontier->top(); m_frontier->pop();
+        incrementAlgorithmLoop();
+        /*auto top = m_frontier->top(); m_frontier->pop();
 
         if (getPos(top.m_id) == m_goal)
         {
@@ -119,7 +139,7 @@ UOctree_AStar::Path UOctree_AStar::solve(Efficient_Octree* p_tree, EO_Node* p_st
         for (auto& neighbor : neighbors)
         {
             processNeighbor(&top, neighbor);
-        }
+        }*/
 
     }
 
@@ -128,18 +148,42 @@ UOctree_AStar::Path UOctree_AStar::solve(Efficient_Octree* p_tree, EO_Node* p_st
 
 }
 
-UOctree_AStar::Path UOctree_AStar::getPath(EO_Node* p_goal, EO_Node* p_start)
+void UOctree_AStar::incrementAlgorithmLoop()
+{
+    if (!m_frontier->isEmpty() && !m_done)
+    {
+        m_done = false;
+
+        auto top = m_frontier->top(); m_frontier->pop();
+
+        if (getPos(top.m_id) == m_goal)
+        {
+            m_done = true;
+            return;
+        }
+
+        auto neighbors = m_tree->getNeighbors(top.m_id);
+
+        for (auto& neighbor : neighbors)
+        {
+            processNeighbor(&top, neighbor);
+        }
+    }
+    
+}
+
+UOctree_AStar::Path UOctree_AStar::getPath()
 {
     Path l_path;
 
-    auto current = p_goal;
+    auto current = m_end_ptr;
 
     while (current->m_parent)
     {
         l_path.push_back(current);
         current = current->m_parent;
     }
-    l_path.push_back(p_start);
+    l_path.push_back(m_start_ptr);
 
     std::reverse(l_path.begin(), l_path.end());
     return l_path;

@@ -8,6 +8,7 @@
 #include <queue>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 #include <cstdint>
 // /Engine/Plugins/Experimental/GeometryProcessing/Source/GeometricObjects/Public/Util/IndexPriorityQueue.h
@@ -47,6 +48,11 @@ private:
     // list of nodes found
     std::unordered_map<EO_Node*, Node> m_node_list;
 
+    /*TArray<EO_Node*> m_neighbors_recently_added;
+    std::unordered_set<EO_Node*> m_all_neighbors_found;*/
+    bool m_done{ false };
+    EO_Node* m_start_ptr;
+    EO_Node* m_end_ptr;
     Pos m_start;
     Pos m_goal;
     Efficient_Octree* m_tree;
@@ -62,7 +68,6 @@ private:
     void processNeighbor(Node* p_current, EO_Node* p_neighbor);
     Node ConstructNode(Node* p_current, EO_Node* p_neighbor);
 
-    Path getPath(EO_Node* p_goal, EO_Node* p_start);
 
     Pos getPos(EO_Node* p_node);// { return p_node->m_box.GetCenter(); }
 
@@ -71,6 +76,17 @@ public:
     // Sets default values for this component's properties
     UOctree_AStar();
 
+    const std::unordered_map<EO_Node*, Node>& getNodeList() { return m_node_list; }
+    const UpdateablePriorityQueue<Node>* getFrontier() { return m_frontier; }
+
+    // do 1 iteration of the astar loop, returns neighbors that were added to the queue
+    void incrementAlgorithmLoop();
+    bool isDone() { return m_done; }
+    Path getPath();
+
+
+
+    void setup(Efficient_Octree* p_tree, EO_Node* p_start, EO_Node* p_goal);
 
     Path solve(Efficient_Octree* p_tree, EO_Node* p_start, EO_Node* p_goal);
 

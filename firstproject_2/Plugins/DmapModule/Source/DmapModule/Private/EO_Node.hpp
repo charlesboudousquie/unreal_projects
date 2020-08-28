@@ -36,6 +36,6 @@ struct EO_Node
     bool isEmpty() { return m_empty; }
 
     bool collides(FBox p_npc); // tells you if given npc would collide with voxel
-    int getWidth() { return m_box.GetExtent().X; }
+    float getWidth() { return m_box.Max.X - m_box.Min.X; }
 };
 

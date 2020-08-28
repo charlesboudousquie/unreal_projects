@@ -100,6 +100,19 @@ public:
         return toReturn;
     }
 
+    //template <typename T>
+    //static TArray<T> toTArray(const TSet<T>& p_vec)
+    //{
+    //    return p_vec.Array();
+    //    //TArray<T> toReturn;// (p_vec.size());
+    //    //toReturn.SetNumZeroed(p_vec.size());
+    //    //for (int i = 0; i < p_vec.size(); i++)
+    //    //{
+    //    //    toReturn[i] = p_vec[i];
+    //    //}
+    //    //return toReturn;
+    //}
+
     template <typename T>
     static TArray<T> arraySubrange(const TArray<T>& p_array, int first, int last)
     {

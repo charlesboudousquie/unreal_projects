@@ -7,9 +7,18 @@
 #include <cassert>
 #include "Math/UnrealMathUtility.h"
 
-void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* neighbor, TArray<EO_Node*>& outNeighbors, int p_npc_size)
+void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* neighbor, TSet<EO_Node*>& outNeighbors, int p_npc_size, bool& p_added_neighbor)
 {
-    auto neighbor_size = neighbor->getWidth();
+    float neighbor_size = neighbor->getWidth();
+    p_added_neighbor = false;
+    auto add_if = [&](EO_Node* l_neighbor)
+    {
+        if (!outNeighbors.Contains(l_neighbor))
+        {
+            outNeighbors.Add(l_neighbor);
+            p_added_neighbor = true;
+        }
+    };
 
     // if a leaf
     if (neighbor->isLeaf())
@@ -19,7 +28,7 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
             // best case scenario
             if (neighbor->isEmpty())
             {
-                outNeighbors.Add(neighbor);
+                add_if(neighbor);
             }
             else 
             {
@@ -31,14 +40,14 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
                 // they contain.
                 if (regionCheck(region, line_between, p_npc_size, p_tree))
                 {
-                    outNeighbors.Add(neighbor);
+                    add_if(neighbor);
                 }
             }
         }
     }
     else
     {
-        int our_cell_size = current->getWidth();
+        float our_cell_size = current->getWidth();
         assert(neighbor_size == our_cell_size);
 
         // do regionCheck to see if there is a straight path to the neighbor node.
@@ -48,7 +57,7 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
         {
             // if there is a straight shot then we'll take it
             // as part of the path (even if its not a leaf)
-            outNeighbors.Add(neighbor);
+            add_if(neighbor);
         }
         else
         {
@@ -58,7 +67,7 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
             // Add leaves that can fit us
             for (auto leaf : leaves)
             {
-                addIfNavigable(p_tree, current, leaf, outNeighbors, p_npc_size);
+                addIfNavigable(p_tree, current, leaf, outNeighbors, p_npc_size, p_added_neighbor);
             }
         }
     }
@@ -117,17 +126,20 @@ bool OH::regionCheck(FBox p_box, Line p_curr_to_neighbor, unsigned p_npc_size, E
 
     for (auto& leaf : leaves)
     {
-        // there is line/tunnel between us and our neighbor.
-        // Its radius is half of the npc's size.
-        // The universal size for any VOXEL is 1.0f.
-        // Each "voxel" is considered to be the "minimum"
-        // of the actual cell, thus its midpoint would actually be voxel + 0.5
-        // in each axis.
-        FVector voxelPos = FVector(leaf->m_voxel) + VoxelCenterOffset;
-        float dist = FMath::PointDistToLine(voxelPos, p_curr_to_neighbor.v2 - p_curr_to_neighbor.v1, p_curr_to_neighbor.v1);
-        if (dist < (npc_half_size+0.5f))
+        if (!leaf->m_empty)
         {
-            return false;
+            // there is line/tunnel between us and our neighbor.
+            // Its radius is half of the npc's size.
+            // The universal size for any VOXEL is 1.0f.
+            // Each "voxel" is considered to be the "minimum"
+            // of the actual cell, thus its midpoint would actually be voxel + 0.5
+            // in each axis.
+            FVector voxelPos = FVector(leaf->m_voxel) + VoxelCenterOffset;
+            float dist = FMath::PointDistToLine(voxelPos, p_curr_to_neighbor.v2 - p_curr_to_neighbor.v1, p_curr_to_neighbor.v1);
+            if (dist < (npc_half_size + 0.5f))
+            {
+                return false;
+            }
         }
     }
 

@@ -15,7 +15,7 @@ namespace OH
 {
     typedef FIntVector Voxel;
     typedef FTwoVectors Line;
-    void addIfNavigable(Efficient_Octree* p_tree,EO_Node* current, EO_Node* neighbor, TArray<EO_Node* >& outNeighbors, int p_npc_size);
+    void addIfNavigable(Efficient_Octree* p_tree,EO_Node* current, EO_Node* neighbor, TSet<EO_Node* >& outNeighbors, int p_npc_size, bool& p_added_neighbor);
 
     void getLeavesWithinRegion(FBox& region, EO_Node* encompassing_cell, TArray<EO_Node* >& outLeaves);
 

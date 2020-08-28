@@ -80,6 +80,8 @@ class DMAPMODULE_API UMapController : public UActorComponent
     UPROPERTY(EditAnywhere)
         bool m_draw_path_nodes = true;
 
+    /*UPROPERTY(EditAnywhere)
+        bool m_debugging_astar_loop = false;*/
 
     UPROPERTY()
         UMaterialInterface* m_wireframe_material;
@@ -130,6 +132,9 @@ public:
     // load in user requested map
     UFUNCTION(BlueprintCallable, Category = "3d maps")
         void LoadMap(FString p_map_name);
+
+    UFUNCTION(BlueprintCallable, Category = "3d maps")
+        void incrementAStar();
 
     // print out octree
     UFUNCTION(BlueprintCallable, Category = "3d maps")

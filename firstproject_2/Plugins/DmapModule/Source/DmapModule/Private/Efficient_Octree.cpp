@@ -4,6 +4,7 @@
 #include "Efficient_Octree.h"
 #include "HelperFunctions.h"
 #include "EO_Node.hpp"
+#include "OctreeHelpers.h"
 
 #include <assert.h>
 #include <iostream>
@@ -176,16 +177,24 @@ void Efficient_Octree::setDimensions(FIntVector p_dim)
     m_root->m_code = Voxel(m_root->m_box.Min);
 }
 
-TArray<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
+TSet<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_node)
 {
     EO_NodePtr most_recently_added_neighbor = nullptr;
-    TArray<Efficient_Octree::EO_NodePtr> l_neighbors;
+    TSet<Efficient_Octree::EO_NodePtr> l_neighbors;
+
+    bool added_neighbor = false;
+
     auto add_if = [&](EO_NodePtr l_node) 
     {
+        
         // if it exists and we have not added it yet and its not a leaf
-        if (l_node && (l_neighbors.Contains(l_node) == false) /*&& isNavigable(l_node)*/)
-        { 
-                l_neighbors.Add(l_node);
+        if (l_node && (l_neighbors.Contains(l_node) == false))
+        {
+            // if navigable, add either the node itself or its children
+            // if necessary.
+            
+            OH::addIfNavigable(this, p_node, l_node, l_neighbors, m_current_npc_width, added_neighbor);
+                //l_neighbors.Add(l_node);
                 most_recently_added_neighbor = l_node;
         }
     };
@@ -748,6 +757,11 @@ std::vector<std::tuple<unsigned, short>> Efficient_Octree::getLevelsAndIndices(c
     return items;
 }
 
+std::vector<std::tuple<unsigned, short>> Efficient_Octree::getLevelsAndIndices(const TSet<EO_Node*>& p_nodes)
+{
+    return getLevelsAndIndices(p_nodes.Array());
+}
+
 std::vector<std::tuple<unsigned, short>> Efficient_Octree::getAllLvlAndIndices()
 {
     return getLevelsAndIndices(UHelperFunctions::toStdVector(getAllNodes()));
@@ -782,74 +796,3 @@ Efficient_Octree::EO_NodePtr Efficient_Octree::locateRegionCell(Voxel p_min, Vox
     l_level = m_root_level - 1;
     return traverseToLevel(current, l_level, EO_CODE(p_min), z_min_level);
 }
-
-//bool Efficient_Octree::isNavigable(EO_Node* p_neighbor)
-//{
-//
-//    auto our_size = m_current_npc_width;
-//    auto neighbor_size = p_neighbor->getWidth();
-//    if (our_size + VOXEL_SIZE <= neighbor_size)
-//    {
-//        return true;
-//    }
-//
-//    //auto npc_box = createVoxelBox();
-//
-//
-//    //auto our_size = m_current_npc_width;
-//    //auto neighbor_size = p_neighbor->getWidth();
-//
-//    //if (p_neighbor->isLeaf())
-//    //{
-//
-//    //}
-//
-//
-//    //// if n is at least as big as we are,
-//    //// and if it is a leaf, then don't bother going any further down
-//    //// the tree.
-//    //if (our_size <= neighbor_size && p_neighbor->isLeaf() && !p_neighbor->isEmpty())
-//    //{
-//    //    return true;
-//    //}
-//    //else
-//    //{
-//    //    // otherwise we have to do things the hard way and do a region check
-//    //    //create aabb with neighbor as its center pos,
-//    //    //    and use our_size / 2 for extents
-//
-//    //    FBox l_box(p_neighbor->m_box.GetCenter(), FVector{(float)our_size / 2.0f});
-//
-//    //    auto encompassing_cell = locateRegionCell(this->toVoxel(l_box.Min),
-//    //        this->toVoxel(l_box.Max));
-//
-//    //    return checkRegion(l_box, encompassing_cell);
-//    //}
-//
-//}
-//
-//bool Efficient_Octree::checkRegion(FBox p_box, EO_Node* p_curr)
-//{
-//    if (p_curr->isLeaf())
-//    {
-//        auto voxel_box = createVoxelBox(p_curr->m_voxel);
-//        //return is voxel and box.contains(voxel)
-//        return p_curr->isWall() && p_box.Intersect(voxel_box);
-//    }
-//    else
-//    {
-//        for (auto& child : p_curr->m_children)
-//        {
-//            // check box intersection to prune branches early on.
-//            // intersection must take into account that voxels and nodes
-//            // are viewed as if they are the minimum vertex in a box/cell
-//            if (p_box.Intersect(child->m_box) && checkRegion(p_box, child.get()))
-//            {
-//                return false; // hit registered
-//            }
-//        }
-//
-//        return true;
-//    }
-//
-//}

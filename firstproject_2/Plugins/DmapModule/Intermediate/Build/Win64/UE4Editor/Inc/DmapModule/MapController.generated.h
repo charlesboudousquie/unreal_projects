@@ -57,6 +57,14 @@ struct FVector;
 		P_NATIVE_END; \
 	} \
  \
+	DECLARE_FUNCTION(execincrementAStar) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		P_THIS->incrementAStar(); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execLoadMap) \
 	{ \
 		P_GET_PROPERTY(UStrProperty,Z_Param_p_map_name); \
@@ -106,6 +114,14 @@ struct FVector;
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
 		P_THIS->printTree(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execincrementAStar) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		P_THIS->incrementAStar(); \
 		P_NATIVE_END; \
 	} \
  \

@@ -54,7 +54,7 @@ class DMAPMODULE_API UpdateablePriorityQueue
 
 public:
 
-    std::vector<ID> getQueue() { return m_queue; };
+    std::vector<ID> getQueue() const { return m_queue; };
     std::map<ID, Q_POS> getRegister() { return m_register; };
 
     bool isEmpty() { return m_queue.empty(); }

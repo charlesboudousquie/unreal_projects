@@ -168,11 +168,12 @@ public:
     // given some list of nodes, return their indices and levels
     static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const std::vector<EO_Node*>& p_nodes);
     static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const TArray<EO_Node*>& p_nodes);
+    static std::vector<std::tuple<unsigned, short>> getLevelsAndIndices(const TSet<EO_Node*>& p_nodes);
 
     std::vector<std::tuple<unsigned, short>> getAllLvlAndIndices();
 
 
-    TArray<EO_NodePtr> getNeighbors(EO_NodePtr p_node);
+    TSet<EO_NodePtr> getNeighbors(EO_NodePtr p_node);
 
     // synonymous with traverse
     EO_NodePtr getSmallestNode(Voxel p_voxel);
