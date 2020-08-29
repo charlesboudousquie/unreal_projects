@@ -7,6 +7,7 @@
 			"DmapFactory.cpp.obj",
 			"DmapFactoryDragDrop.cpp.obj",
 			"DmapModule.cpp.obj",
+			"Efficient_Octree.cpp.obj",
 			"EO_Node.cpp.obj",
 			"Get3dMapList.cpp.obj",
 			"GridDirection.cpp.obj",
@@ -14,12 +15,11 @@
 			"HelperFunctions.cpp.obj",
 			"JPS_GridDrawer.cpp.obj",
 			"JPS_Solver.cpp.obj",
-			"Octree.cpp.obj",
-			"UpdateablePriorityQueue.cpp.obj",
-			"Efficient_Octree.cpp.obj",
 			"MapController.cpp.obj",
+			"Octree.cpp.obj",
 			"Octree_AStar.cpp.obj",
-			"OctreeHelpers.cpp.obj"
+			"OctreeHelpers.cpp.obj",
+			"UpdateablePriorityQueue.cpp.obj"
 		],
 		"Module.DmapModule.gen.cpp.obj": [
 			"Asteroid.gen.cpp.obj",

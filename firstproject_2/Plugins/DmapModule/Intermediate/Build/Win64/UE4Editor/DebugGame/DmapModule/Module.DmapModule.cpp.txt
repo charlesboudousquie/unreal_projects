@@ -71,12 +71,28 @@ C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Inter
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\Misc/FileHelper.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/DmapModule.cpp
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\DmapModule.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/EO_Node.cpp
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Efficient_Octree.cpp
+c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\Efficient_Octree.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\map
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtree
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\unordered_map
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xhash
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\list
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\functional
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\set
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\HelperFunctions.generated.h
 c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\EO_Node.hpp
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\array
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iterator
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
+c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\OctreeHelpers.h
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/EO_Node.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Get3dMapList.cpp
@@ -91,17 +107,6 @@ C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Sourc
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/GridNode.cpp
 c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\GridNode.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/HelperFunctions.cpp
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\HelperFunctions.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\unordered_map
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xhash
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\list
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\functional
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\set
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtree
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
-C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\HelperFunctions.generated.h
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Components/HierarchicalInstancedStaticMeshComponent.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\HierarchicalInstancedStaticMeshComponent.generated.h
@@ -134,8 +139,6 @@ C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Ed
 c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\engine\classes\kismet\GameplayStaticsTypes.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStaticsTypes.generated.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStatics.generated.h
-c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\Efficient_Octree.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\map
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/JPS_GridDrawer.cpp
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\JPS_GridDrawer.h
 C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\JPS_GridDrawer.generated.h
@@ -171,8 +174,17 @@ C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Ed
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\SoundCue.generated.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
-C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Octree.cpp
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\Octree.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/MapController.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\MapController.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\MapController.generated.h
+c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\Octree_AStar.h
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\Octree_AStar.generated.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Classes\Kismet/KismetMathLibrary.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\Misc/QualifiedFrameTime.h
+C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\KismetMathLibrary.generated.h
+c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\engine\classes\kismet\KismetMathLibrary.inl
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Engine\Public\Engine.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\Misc/MonolithicHeaderBoilerplate.h
 C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\Core\Public\Core.h
@@ -873,10 +885,16 @@ c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\slate\public\Wi
 c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\slate\public\Widgets/Colors/SColorBlock.h
 c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\slate\public\Widgets/Input/SSpinBox.h
 c:\users\boudo\desktop\unreal\unrealengine\engine\source\runtime\slate\public\Widgets/Input/SSlider.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Octree.cpp
+C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Source\DmapModule\Public\Octree.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/Octree_AStar.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/OctreeHelpers.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
 C:/Users/boudo/Documents/Unreal Projects/firstproject_2/Plugins/DmapModule/Source/DmapModule/Private/UpdateablePriorityQueue.cpp
-c:\users\boudo\documents\unreal projects\firstproject_2\plugins\dmapmodule\source\dmapmodule\private\Octree_AStar.h
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Plugins\DmapModule\Intermediate\Build\Win64\UE4Editor\Inc\DmapModule\Octree_AStar.generated.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h

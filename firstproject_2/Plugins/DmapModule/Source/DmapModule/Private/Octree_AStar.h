@@ -35,8 +35,21 @@ public:
         float f{ -1 }, g{ -1 }, h{ -1 };
         EO_Node* parent{ nullptr };
 
-        bool operator()(const Node& lhs, const Node& rhs) const { return lhs.f < rhs.f; }
-        bool operator<(const Node& rhs) const { return this->f < rhs.f; }
+        //bool operator()(const Node& lhs, const Node& rhs) const { return lhs.f < rhs.f; }
+        bool operator<(const Node& rhs) const 
+        {
+            // sort by value
+            if (this->f != rhs.f)
+            {
+                return this->f < rhs.f;
+            }
+            // if same value then sort by pointer
+            else
+            {
+                return this->m_id < rhs.m_id;
+            }
+            
+        }
 
     };
 
