@@ -53,6 +53,8 @@ class Efficient_Octree
     typedef FIntVector Dir;
     typedef FIntVector EO_CODE;
 
+    
+
     enum class BoxComponents
     {
         // Vertices
@@ -137,6 +139,11 @@ class Efficient_Octree
     //bool isNavigable(EO_Node* p_neighbor);
 
 public:
+
+    enum class NeighborType
+    {
+        FACE, EDGE, VERTEX
+    };
 
     static Efficient_Octree& getEO_Tree()
     {

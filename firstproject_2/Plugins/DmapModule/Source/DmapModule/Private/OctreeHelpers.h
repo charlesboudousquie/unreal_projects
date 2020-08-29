@@ -7,15 +7,16 @@
 #include "Containers/Array.h"
 #include "Math/Box.h"
 #include "Math/TwoVectors.h"
+#include "Efficient_Octree.h"
 
 struct EO_Node;
-class Efficient_Octree;
 
 namespace OH
 {
     typedef FIntVector Voxel;
     typedef FTwoVectors Line;
-    void addIfNavigable(Efficient_Octree* p_tree,EO_Node* current, EO_Node* neighbor, TSet<EO_Node* >& outNeighbors, int p_npc_size, bool& p_added_neighbor);
+    void addIfNavigable(Efficient_Octree* p_tree,EO_Node* current, EO_Node* neighbor, 
+        TSet<EO_Node* >& outNeighbors, int p_npc_size, bool& p_added_neighbor, Efficient_Octree::NeighborType p_type);
 
     void getLeavesWithinRegion(FBox& region, EO_Node* encompassing_cell, TArray<EO_Node* >& outLeaves);
 

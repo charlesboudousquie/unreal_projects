@@ -33,7 +33,7 @@ public:
     {
         EO_Node* m_id{ nullptr };
         float f{ -1 }, g{ -1 }, h{ -1 };
-        Node* parent{ nullptr };
+        EO_Node* parent{ nullptr };
 
         bool operator()(const Node& lhs, const Node& rhs) const { return lhs.f < rhs.f; }
         bool operator<(const Node& rhs) const { return this->f < rhs.f; }
@@ -65,8 +65,8 @@ private:
 
     float dist(EO_Node* p_node_A, EO_Node* p_node_B);
 
-    void processNeighbor(Node* p_current, EO_Node* p_neighbor);
-    Node ConstructNode(Node* p_current, EO_Node* p_neighbor);
+    void processNeighbor(const Node& p_current, EO_Node* p_neighbor);
+    Node ConstructNode(const Node& p_current, EO_Node* p_neighbor);
 
 
     Pos getPos(EO_Node* p_node);// { return p_node->m_box.GetCenter(); }
@@ -90,7 +90,8 @@ public:
 
     Path solve(Efficient_Octree* p_tree, EO_Node* p_start, EO_Node* p_goal);
 
-
+    EO_Node* getStart() { return m_start_ptr; }
+    EO_Node* getEnd() { return m_end_ptr; }
 
 
 

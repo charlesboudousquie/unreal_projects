@@ -26,13 +26,13 @@
 			"DmapAsset.gen.cpp.obj",
 			"DmapFactory.gen.cpp.obj",
 			"DmapFactoryDragDrop.gen.cpp.obj",
+			"DmapModule.init.gen.cpp.obj",
 			"Get3dMapList.gen.cpp.obj",
 			"HelperFunctions.gen.cpp.obj",
 			"JPS_GridDrawer.gen.cpp.obj",
 			"JPS_Solver.gen.cpp.obj",
-			"Octree_AStar.gen.cpp.obj",
-			"DmapModule.init.gen.cpp.obj",
-			"MapController.gen.cpp.obj"
+			"MapController.gen.cpp.obj",
+			"Octree_AStar.gen.cpp.obj"
 		]
 	}
 }

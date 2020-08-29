@@ -117,7 +117,7 @@ protected:
 
     void drawPath(const TArray<EO_Node*>& p_nodes);
     void drawOctDebugBox(EO_Node* p_node, FColor p_color);
-    void drawDebugBoxes(const TArray<EO_Node*>& p_nodes);
+    void drawDebugBoxes(const TArray<EO_Node*>& p_nodes, FColor p_color);
 
     // function to handle all other drawing functions in map controller.
     void draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_Node*>& p_path);

@@ -184,7 +184,7 @@ TSet<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_n
 
     bool added_neighbor = false;
 
-    auto add_if = [&](EO_NodePtr l_node) 
+    auto add_if = [&](EO_NodePtr l_node, NeighborType p_type)
     {
         
         // if it exists and we have not added it yet and its not a leaf
@@ -193,7 +193,7 @@ TSet<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_n
             // if navigable, add either the node itself or its children
             // if necessary.
             
-            OH::addIfNavigable(this, p_node, l_node, l_neighbors, m_current_npc_width, added_neighbor);
+            OH::addIfNavigable(this, p_node, l_node, l_neighbors, m_current_npc_width, added_neighbor, p_type);
                 //l_neighbors.Add(l_node);
                 most_recently_added_neighbor = l_node;
         }
@@ -201,36 +201,36 @@ TSet<Efficient_Octree::EO_NodePtr> Efficient_Octree::getNeighbors(EO_NodePtr p_n
 
     FIntVector dir;
 
+    // faces
     for (BC i = BC::L; i <= BC::D; i = static_cast<BC>((int)i + 1))
     {
         dir = g_directions[i];
         if (dir.GetMax() == 1)
         {
-            add_if(getPositiveDirNeighbor(p_node, dir));
+            add_if(getPositiveDirNeighbor(p_node, dir), NeighborType::FACE);
         }
         else
         {
-            add_if(getNegativeDirNeighbor(p_node, dir));
+            add_if(getNegativeDirNeighbor(p_node, dir), NeighborType::FACE);
         }
 
     }
 
-    
+    // vertices
     for (BC i = BC::LFD; i <= BC::LBU; i = static_cast<BC>((int)i + 1))
     {
         dir = g_directions[i];
         auto vertNeighbor = getVertexNeighbor(p_node, dir);
         assert(vertNeighbor->isLeaf());
-        add_if(vertNeighbor);
+        add_if(vertNeighbor, NeighborType::VERTEX);
     }
 
+    // edges
     for (BC i = BC::FD; i <= BC::BU; i = static_cast<BC>((int)i + 1))
     {
         dir = g_directions[i];
-        add_if(getEdgeNeighbor(p_node, dir));
+        add_if(getEdgeNeighbor(p_node, dir), NeighborType::EDGE);
     }
-
-    
 
     return l_neighbors;
 }

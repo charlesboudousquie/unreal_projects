@@ -7,7 +7,8 @@
 #include <cassert>
 #include "Math/UnrealMathUtility.h"
 
-void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* neighbor, TSet<EO_Node*>& outNeighbors, int p_npc_size, bool& p_added_neighbor)
+void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* neighbor,
+    TSet<EO_Node*>& outNeighbors, int p_npc_size, bool& p_added_neighbor, Efficient_Octree::NeighborType p_type)
 {
     float neighbor_size = neighbor->getWidth();
     p_added_neighbor = false;
@@ -26,7 +27,7 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
         if (neighbor_size >= p_npc_size)
         {
             // best case scenario
-            if (neighbor->isEmpty())
+            if (neighbor->isEmpty() && (p_type == Efficient_Octree::NeighborType::FACE))
             {
                 add_if(neighbor);
             }
@@ -61,14 +62,24 @@ void OH::addIfNavigable(Efficient_Octree* p_tree, EO_Node* current, EO_Node* nei
         }
         else
         {
-            // If not, get all leaf neighbors on border and see if they can accomadate us.
-            auto leaves = getBorderLeaves(current, neighbor);
-
-            // Add leaves that can fit us
-            for (auto leaf : leaves)
+            // only bother getting leaves on the border IF the neighbor
+            // was originally a face neighbor.
+            // Vertex and edge neighbors would still require a region check
+            // due to the diagonal nature of their position,
+            // and the subsequent nodes that could get in the way
+            if (p_type == Efficient_Octree::NeighborType::FACE)
             {
-                addIfNavigable(p_tree, current, leaf, outNeighbors, p_npc_size, p_added_neighbor);
+                // If not, get all leaf neighbors on border and see if they can accomadate us.
+                auto leaves = getBorderLeaves(current, neighbor);
+
+                // Add leaves that can fit us
+                for (auto leaf : leaves)
+                {
+                    addIfNavigable(p_tree, current, leaf, outNeighbors, p_npc_size, p_added_neighbor, p_type);
+                }
             }
+
+            
         }
     }
 }
@@ -95,13 +106,21 @@ void OH::getLeavesWithinRegion(FBox& region, EO_Node* encompassing_cell, TArray<
 
 TArray<EO_Node*> OH::getBorderLeaves(EO_Node*us, EO_Node* neighbor)
 {
-    FIntVector dir = getDir(us, neighbor);
+    FVector dir(getDir(us, neighbor));
+    dir /= 2.0f; // don't want cells touching the border to be included
 
-    auto border_begin = FIntVector(us->getCenter()) + compMultiply(dir, FIntVector(us->getExtents()));
+    auto their_min = neighbor->m_box.Min;
+    auto their_max = neighbor->m_box.Max;
+
+    auto our_min = us->m_box.Min;
+    auto our_max = us->m_box.Max;
+
     // extend border box by 1 to get closest leaf cells
-    auto border_end = border_begin + dir;
+    auto border_min = their_min.ComponentMax(our_min + FVector(dir));
+    auto border_max = their_max.ComponentMin(our_max + FVector(dir));
+
     TArray<EO_Node*> leaves_found;
-    FBox region{ FVector(border_begin), FVector(border_end) };
+    FBox region{ FVector(border_min), FVector(border_max) };
     getLeavesWithinRegion(region, neighbor, leaves_found);
     return leaves_found;
 }

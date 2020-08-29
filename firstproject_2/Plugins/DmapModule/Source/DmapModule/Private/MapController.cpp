@@ -290,12 +290,12 @@ void UMapController::drawOctDebugBox(EO_Node* p_node, FColor p_color)
     DrawDebugBox(GetWorld(), p_node->m_box.GetCenter() * m_mesh_scalar, p_node->m_box.GetExtent()* m_mesh_scalar, FQuat::Identity, p_color, true, -1, 0, m_debug_line_width);
 }
 
-void UMapController::drawDebugBoxes(const TArray<EO_Node*>& p_nodes)
+void UMapController::drawDebugBoxes(const TArray<EO_Node*>& p_nodes, FColor p_color)
 {
 
     for (auto& node : p_nodes)
     {
-        drawOctDebugBox(node, FColor::Green);
+        drawOctDebugBox(node, p_color);
     }
 }
 
@@ -341,7 +341,7 @@ void UMapController::unit_Test()
     auto node2 = m_tree->getSmallestNode(Voxel{ 5 });
     auto node3 = m_tree->getSmallestNode(Voxel{ 7,0,0 });
 
-    auto neighbors = m_tree->getNeighbors(node);
+    //auto neighbors = m_tree->getNeighbors(node);
 
     m_oct_solver->setup(m_tree, node, node3);
 
@@ -384,7 +384,7 @@ void UMapController::draw(const TArray<EO_Node*>& p_neighbors, const TArray<EO_N
 
     if (m_draw_debug_boxes)
     {
-        drawDebugBoxes(m_tree->getAllNodes());
+        drawDebugBoxes(m_tree->getAllNodes(), FColor::Green);
     }
 }
 
@@ -410,6 +410,8 @@ void UMapController::setupTree(const TArray<Voxel>& p_data, Voxel p_dimensions, 
 
 void UMapController::incrementAStar()
 {
+    FlushPersistentDebugLines(GetWorld());
+
     m_oct_solver->incrementAlgorithmLoop();
     if (m_oct_solver->isDone())
     {
@@ -428,6 +430,13 @@ void UMapController::incrementAStar()
             }
         }
 
+        // erase beginning and end nodes from list
+        if (all_nodes.find(m_oct_solver->getStart()) != all_nodes.end()) { all_nodes.erase(m_oct_solver->getStart()); }
+        if (all_nodes.find(m_oct_solver->getEnd()) != all_nodes.end()) { all_nodes.erase(m_oct_solver->getEnd()); }
+
+        drawOctDebugBox(m_oct_solver->getStart(), FColor::Green);
+        drawOctDebugBox(m_oct_solver->getEnd(), FColor::Red);
+
         std::vector<EO_Node*> explored_nodes;
         for (auto element : all_nodes)
         {
@@ -444,7 +453,9 @@ void UMapController::incrementAStar()
             return p.m_id;
         });
 
-        drawDebugBoxes(UHelperFunctions::toTArray(frontier_nodes));
+        drawDebugBoxes(UHelperFunctions::toTArray(frontier_nodes), FColor::Blue);
+
+        drawLeaves();
     }
 
 
