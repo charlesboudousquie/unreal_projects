@@ -16,11 +16,12 @@ TArray<FString> UGet3dMapList::getList()
 
 	const UClass* Class = UDmapAsset::StaticClass();
 	
-	FName name = *(Class->GetName());
+	//FName name = *(Class->GetName());
+    FTopLevelAssetPath classPath = Class->GetClassPathName();
 
 	TArray<FString> assetNames;
 
-	if (m_module.Get().GetAssetsByClass(name, assetData))
+	if (m_module.Get().GetAssetsByClass(classPath, assetData))
 	{
 
 		for (const auto& asset : assetData)

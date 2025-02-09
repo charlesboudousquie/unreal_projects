@@ -134,10 +134,11 @@ void UMapController::LoadMap(FString p_map_name)
 
     TArray<FAssetData> AssetData;
     const UClass* Class = UDmapAsset::StaticClass();
-    auto l_class_name = Class->GetName();
+    //auto l_class_name = Class->GetName();
+    FTopLevelAssetPath l_class_name = Class->GetClassPathName();
 
     // if asset typeexists
-    if (l_registry.GetAssetsByClass(*l_class_name, AssetData))
+    if (l_registry.GetAssetsByClass(l_class_name, AssetData))
     {
         // convert to name
         FName l_map_name(*p_map_name);
