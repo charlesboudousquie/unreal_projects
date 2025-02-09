@@ -6,6 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "firstproject_2HUD.generated.h"
 
+class UTexture2D;
+
 UCLASS()
 class Afirstproject_2HUD : public AHUD
 {

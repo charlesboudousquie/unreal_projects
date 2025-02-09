@@ -11,7 +11,11 @@ public class DmapModule : ModuleRules
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
-			}
+                "Runtime/Engine/Public",
+        "Runtime/Engine/Classes",
+        "Runtime/CoreUObject/Public",
+        "Runtime/InputCore/Classes"
+            }
 			);
 				
 		
@@ -27,6 +31,9 @@ public class DmapModule : ModuleRules
 			{
 				"Core",
 				// ... add other public dependencies that you statically link with here ...
+                "Engine",
+               "InputCore",
+                "UMG",  // If you're using UI elements
 			}
 			);
 			
@@ -40,6 +47,9 @@ public class DmapModule : ModuleRules
 				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
                 //"UnrealEd"
+                "UMG",
+        "ApplicationCore",
+        "Projects",
             }
 			);
 		

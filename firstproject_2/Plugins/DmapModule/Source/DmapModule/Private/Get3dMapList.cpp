@@ -3,9 +3,9 @@
 
 #include "Get3dMapList.h"
 #include "Modules/ModuleManager.h"
-#include "AssetRegistryModule.h"
+#include "AssetRegistry/AssetRegistryModule.h"
 #include "DmapAsset.h"
-#include "AssetData.h"
+#include "AssetRegistry/AssetData.h"
 
 TArray<FString> UGet3dMapList::getList()
 {
