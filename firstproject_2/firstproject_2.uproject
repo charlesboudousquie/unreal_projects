@@ -16,7 +16,7 @@
 	"Plugins": [
 		{
 			"Name": "MeshEditor",
-			"Enabled": true
+			"Enabled": false
 		},
 		{
 			"Name": "ModelingToolsEditorMode",
@@ -24,7 +24,7 @@
 		},
 		{
 			"Name": "StaticMeshEditorExtension",
-			"Enabled": true
+			"Enabled": false
 		},
 		{
 			"Name": "WebBrowserWidget",

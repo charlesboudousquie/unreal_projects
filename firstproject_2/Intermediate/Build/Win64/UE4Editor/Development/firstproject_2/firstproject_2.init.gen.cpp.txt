@@ -1,3 +1,0 @@
-C:\Users\boudo\Documents\Unreal Projects\firstproject_2\Intermediate\Build\Win64\UE4Editor\Development\firstproject_2\Definitions.firstproject_2.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
-C:\Users\boudo\Desktop\unreal\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
