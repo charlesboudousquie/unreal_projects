@@ -13,22 +13,26 @@
 			]
 		}
 	],
-	"Plugins": [
-		{
-			"Name": "MeshEditor",
-			"Enabled": false
-		},
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true
-		},
-		{
-			"Name": "StaticMeshEditorExtension",
-			"Enabled": false
-		},
-		{
-			"Name": "WebBrowserWidget",
-			"Enabled": true
-		}
-	]
+  "Plugins": [
+    {
+      "Name": "XRBase",
+      "Enabled": true
+    },
+    {
+      "Name": "MeshEditor",
+      "Enabled": false
+    },
+    {
+      "Name": "ModelingToolsEditorMode",
+      "Enabled": true
+    },
+    {
+      "Name": "StaticMeshEditorExtension",
+      "Enabled": false
+    },
+    {
+      "Name": "WebBrowserWidget",
+      "Enabled": true
+    }
+  ]
 }

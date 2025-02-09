@@ -102,7 +102,8 @@ void UHelperFunctions::drawNode(const DrawInfo& p_info, EO_Node* p_node)
     }
 
     FTransform l_transform(rotator, center, FVector{ size / mesh_extents.X });
-    auto instance_id = p_info.m_mesh->AddInstanceWorldSpace(l_transform);
+    //auto instance_id = p_info.m_mesh->AddInstanceWorldSpace(l_transform);
+    auto instance_id = p_info.m_mesh->AddInstance(l_transform, true);
 }
 
 void UHelperFunctions::drawInstances(const DrawInfo& p_info)

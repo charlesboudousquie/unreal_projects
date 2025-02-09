@@ -281,7 +281,8 @@ void UMapController::drawPath(const TArray<EO_Node*>& p_nodes)
 
         // x axis should be forward vector
         FTransform l_transform(rot, center, FVector{ scale / mesh_extents.X,m_debug_line_width,m_debug_line_width });
-        auto instance_id = hier_mesh->AddInstanceWorldSpace(l_transform);
+        //auto instance_id = hier_mesh->AddInstanceWorldSpace(l_transform);
+        auto instance_id = hier_mesh->AddInstance(l_transform, true);
     }
 }
 

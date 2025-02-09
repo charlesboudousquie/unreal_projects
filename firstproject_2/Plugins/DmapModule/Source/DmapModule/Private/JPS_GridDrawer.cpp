@@ -184,7 +184,8 @@ void UJPS_GridDrawer::drawCell(FVector p_pos, UHierarchicalInstancedStaticMeshCo
     auto center = p_pos;// p_box.GetCenter();
     //auto extents = p_box.GetExtent();
     FTransform l_transform(rotator, center, FVector{ m_grid_scalar / bounds.X });
-    auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
+    //auto instance_id = p_mesh->AddInstanceWorldSpace(l_transform);
+    auto instance_id = p_mesh->AddInstance(l_transform, true);
 }
 
 FVector UJPS_GridDrawer::transformCell(const FIntPoint & p_grid_pos)
