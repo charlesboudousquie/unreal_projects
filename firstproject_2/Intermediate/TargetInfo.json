@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "firstproject_2",
-			"Path": "C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Source\\firstproject_2.Target.cs",
+			"Path": "..\\Source\\firstproject_2.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "firstproject_2Editor",
-			"Path": "C:\\Users\\boudo\\Documents\\Unreal Projects\\firstproject_2\\Source\\firstproject_2Editor.Target.cs",
+			"Path": "..\\Source\\firstproject_2Editor.Target.cs",
 			"Type": "Editor"
 		}
 	]
